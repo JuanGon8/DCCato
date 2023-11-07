@@ -71,9 +71,9 @@
                                                 <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
                                                 <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                             </div> -->
-                                            <div class=" form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                            <div class=" form-group d-flex align-items-center justify-content-center mt-4 mb-0">
                                                 <!-- <a class="small" href="password.html">Forgot Password?</a> -->
-                                                <button type="submit" class="btn greenbtn btn-block">Iniciar sesión</button>
+                                                <button type="submit" class="btn greenbtn">Iniciar sesión</button>
                                             </div>
                                         </form>
                                     </div>
