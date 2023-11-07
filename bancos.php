@@ -59,8 +59,10 @@ include 'navbar.php';
         <script src="datatables/Select-1.7.0/js/dataTables.select.min.js"></script>
         <script src="datatables/StateRestore-1.3.0/js/dataTables.stateRestore.min.js"></script>
         <script src="datatables/StateRestore-1.3.0/js/stateRestore.bootstrap5.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script src="main.js"></script>
+        <script src="btn.js"></script>
         <div class="container-fluid px-4">
             <h1 class="mt-4">Bancos</h1>
             <ol class="breadcrumb mb-4">
@@ -100,10 +102,10 @@ include 'navbar.php';
                                     <?php while ($row = $resultado6->fetch_assoc()) { ?>
                                         <tr id="row_<?php echo $row['id']; ?>">
                                             <td class="tdh">
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">
+                                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">
                                                     <i class="fa-solid fa-pencil"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-danger" onclick="eliminarRegistro(<?php echo $row['id']; ?>)">
+                                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarRegistro(<?php echo $row['id']; ?>)">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
                                                 <div class="modal modal-lg fade" id="exampleModal_<?php echo $row['id']; ?>" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">

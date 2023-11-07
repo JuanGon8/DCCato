@@ -91,11 +91,11 @@ include 'navbar.php';
 					<div class="row">
 						<div class="col">
 							<label for="telefono">Teléfono <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números"></i></label>
-							<input class="form-control" type="text" name="telefono" maxlength="10" pattern="[0-9]">
+							<input class="form-control" type="text" name="telefono" maxlength="10">
 						</div>
 						<div class="col">
 							<label for="edad">Edad <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números"></i></label>
-							<input class="form-control" type="text" name="edad" maxlength="2" pattern="[0-9]{2}">
+							<input class="form-control" type="text" name="edad" maxlength="2">
 						</div>
 						<div class="col">
 							<label for="direccion">Dirección</label>
@@ -120,7 +120,7 @@ include 'navbar.php';
 					<div class="row">
 						<div class="col-2">
 							<label for="antiguedad">Antigüedad <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números"></i></label>
-							<input class="form-control" type="text" name="antiguedad" maxlength="2" pattern="[0-9]">
+							<input class="form-control" type="text" name="antiguedad" maxlength="2">
 						</div>
 						<div class="col">
 							<label for="motivo_salida">Motivo de Salida</label>
@@ -174,7 +174,7 @@ include 'navbar.php';
 										<tr id="row_<?php echo $row['id']; ?>">
 											<td class="tdh"></td>
 											<td class="tdh">
-												<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">
+												<button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">
 													<i class="fa-solid fa-pencil"></i>
 												</button>
 												<button type="button" class="btn btn-danger" onclick="eliminarRegistro(<?php echo $row['id']; ?>)">
@@ -315,7 +315,7 @@ include 'navbar.php';
 										<tr id="row_<?php echo $row['id']; ?>">
 											<td class="tdh"></td>
 											<td>
-												<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">
+												<button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">
 													<i class="fa-solid fa-pencil"></i>
 												</button>
 												<div class="modal modal-lg fade" id="exampleModal_<?php echo $row['id']; ?>" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">

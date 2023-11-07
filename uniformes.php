@@ -96,7 +96,7 @@ include 'navbar.php';
                                 <tr id="row_<?php echo $row['codigo']; ?>">
                                     <td class="tdh"></td>
                                     <td class="tdh">
-                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['codigo']; ?>">
+                                        <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['codigo']; ?>">
                                             <i class="fa-solid fa-pencil"></i>
                                         </button>
                                         <!-- <button class="delete-button" onclick="deleteRow(<?php echo $row['codigo']; ?>)">

@@ -387,10 +387,13 @@ include 'navbar.php';
 												</button> -->
 											</td>
 											<td class="d-flex justify-content-center">
-												<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['codigo']; ?>">
+											<button type="button" class="btn btn-outline-info btn-sm" onclick="moverRepse(<?php echo $row['codigo']; ?>)" title="Mover a REPSE">
+                                                    <i class="fa-solid fa-arrow-right"></i>
+                                                </button>
+												<button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['codigo']; ?>">
 													<i class="fa-solid fa-pencil"></i>
 												</button>
-												<button type="button" class="btn btn-danger" onclick="eliminarRegistro(<?php echo $row['codigo']; ?>)">
+												<button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarRegistro(<?php echo $row['codigo']; ?>)">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
 												<div class="modal modal-lg fade" id="exampleModal_<?php echo $row['codigo']; ?>" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -759,7 +762,7 @@ include 'navbar.php';
 												</button> -->
 											</td>
 											<td class="d-flex justify-content-center">
-												<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['codigo']; ?>">
+												<button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['codigo']; ?>">
 													<i class="fa-solid fa-pencil"></i>
 												</button>
 												<div class="modal modal-lg fade" id="exampleModal_<?php echo $row['codigo']; ?>" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1244,5 +1247,23 @@ include 'navbar.php';
     // Asignar la fecha y hora actual al campo de entrada oculto
     document.getElementById("hora_registro").value = fechaHoraActual;
   });
+</script>
+<script>
+function moverRepse(codigo) {
+    console.log("codigo: " + codigo);
+
+    if (confirm("¿Estás seguro de que deseas mover este registro?")) {
+        // Realizar una solicitud AJAX para ejecutar el archivo PHP 'mover_repse.php'
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "mover.php?codigo=" + codigo, true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Registro movido con éxito, puedes realizar alguna acción adicional si es necesario
+                alert('Registros movidos a departamento_repse.');
+            }
+        };
+        xhr.send();
+    }
+}
 </script>
 

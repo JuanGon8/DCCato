@@ -36,7 +36,7 @@ $hora_registro = $_POST['hora_registro'];
 
 //SE DESVALIDA NSS RFC
 
-$consulta_existente = "SELECT codigo, rfc, curp, nss FROM reclutamiento WHERE curp = '$curp' OR codigo = '$codigo'";
+$consulta_existente = "SELECT codigo, curp FROM reclutamiento WHERE curp = '$curp' OR codigo = '$codigo'";
 $resultado = $conn->query($consulta_existente);
 
 if ($resultado->num_rows > 0) {
@@ -47,17 +47,17 @@ if ($resultado->num_rows > 0) {
         $mensajes[] = "El código ya existe en la base de datos.";
     }
 
-    if ($filas['rfc'] == $rfc) {
-        $mensajes[] = "El RFC ingresado ya existe en la base de datos.";
-    }
+    // if ($filas['rfc'] == $rfc) {
+    //     $mensajes[] = "El RFC ingresado ya existe en la base de datos.";
+    // }
 
     if ($filas['curp'] == $curp) {
         $mensajes[] = "El CURP ingresado ya existe en la base de datos.";
     }
 
-    if ($filas['nss'] == $nss) {
-        $mensajes[] = "El NSS ingresado ya existe en la base de datos.";
-    }
+    // if ($filas['nss'] == $nss) {
+    //     $mensajes[] = "El NSS ingresado ya existe en la base de datos.";
+    // }
 
     // Mostrar alerta de error con mensajes específicos
     $mensaje = implode(" ", $mensajes);

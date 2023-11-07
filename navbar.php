@@ -19,6 +19,10 @@
 	$resultado9 = $mysqli->query($sql9);
 	$sql10 = "SELECT codigo, ap_pat, ap_mat, nombre, puesto, camisa, pantalon, gorra, cor_mando, fornitura, impermeable, lampara, bata FROM reclutamiento WHERE puesto IN ('VIGILANTE', 'SUPERVISOR DE VIGILANCIA', 'GERENTE VIGILANCIA', 'CAPITAN', 'GERENTE LIMPIEZA', 'SUPERVISOR DE LIMPIEZA', 'AFANADOR')";
 	$resultado10 = $mysqli->query($sql10);
+    $sql1 = "SELECT * FROM repse";
+	$resultado11 = $mysqli->query($sql1);
+    $sql2 = "SELECT * FROM reclutamiento_repse";
+	$resultado12 = $mysqli->query($sql2);
 
 	$tipo_usuario = $_SESSION['tipo_usuario'];
     $depto = $_SESSION['depto'];
@@ -93,7 +97,7 @@
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="control_expedientes.php"><i class="fa-solid fa-check"></i>&nbsp; Control de expedientes</a>
                                             <a class="nav-link" href="uniformes.php"><i class="fa-solid fa-person-military-rifle"></i>&nbsp;    Uniformes</a>
-                                            <a class="nav-link" href="uniformes.php"><i class="fa-solid fa-person-military-rifle"></i>&nbsp;    REPSE</a>
+                                            <a class="nav-link" href="repse.php"><i class="fa-solid fa-hammer"></i>&nbsp;    REPSE</a>
                                         </nav>
                                     </div>
                             <?php } ?>

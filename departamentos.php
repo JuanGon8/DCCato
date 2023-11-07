@@ -98,11 +98,14 @@ include 'navbar.php';
                                     <?php while ($row = $resultado5->fetch_assoc()) { ?>
                                         <tr id="row_<?php echo $row['id']; ?>">
                                             <td class="tdh">
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">
+                                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">
                                                     <i class="fa-solid fa-pencil"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-danger" onclick="eliminarRegistro(<?php echo $row['id']; ?>)">
+                                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarRegistro(<?php echo $row['id']; ?>)">
                                                     <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-outline-info btn-sm" onclick="moverRepse(<?php echo $row['id']; ?>)" title="Mover a REPSE">
+                                                    <i class="fa-solid fa-arrow-right"></i>
                                                 </button>
                                                 <div class="modal modal-lg fade" id="exampleModal_<?php echo $row['id']; ?>" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
@@ -145,24 +148,42 @@ include 'navbar.php';
     </main>
 </div>
 <script>
-   function eliminarRegistro(id) {
+    function eliminarRegistro(id) {
+        console.log("id: " + id);
+
+        if (confirm("¿Estás seguro de que deseas eliminar este registro?")) {
+            // Realizar una solicitud AJAX para eliminar el registro
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "eliminar_dep.php?id=" + id, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
+                    // Por ejemplo, eliminar la fila de la tabla
+                    var button = event.target;
+                    var row = button.parentElement.parentElement.parentElement; // Ajusta la navegación DOM para llegar a la fila de la tabla
+                    row.remove();
+                }
+            };
+            xhr.send();
+            window.location.href = "departamentos.php";
+        }
+    }
+</script>
+<script>
+function moverRepse(id) {
     console.log("id: " + id);
 
-    if (confirm("¿Estás seguro de que deseas eliminar este registro?")) {
-        // Realizar una solicitud AJAX para eliminar el registro
+    if (confirm("¿Estás seguro de que deseas mover este registro?")) {
+        // Realizar una solicitud AJAX para ejecutar el archivo PHP 'mover_repse.php'
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "eliminar_dep.php?id=" + id, true);
+        xhr.open("GET", "mover_repse.php?id=" + id, true);
         xhr.onload = function() {
             if (xhr.status === 200) {
-                // Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
-                // Por ejemplo, eliminar la fila de la tabla
-                var button = event.target;
-                var row = button.parentElement.parentElement.parentElement; // Ajusta la navegación DOM para llegar a la fila de la tabla
-                row.remove();
+                // Registro movido con éxito, puedes realizar alguna acción adicional si es necesario
+                alert('Registros movidos a departamento_repse.');
             }
         };
         xhr.send();
-        window.location.href = "departamentos.php";
     }
 }
 </script>

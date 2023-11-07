@@ -98,10 +98,10 @@ include 'navbar.php';
                                     <?php while ($row = $resultado4->fetch_assoc()) { ?>
                                         <tr id="row_<?php echo $row['ubicaciont']; ?>">
                                         <td class="tdh">
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">
+                                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">
                                                     <i class="fa-solid fa-pencil"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-danger" onclick="eliminarRegistro(<?php echo $row['id']; ?>)">
+                                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarRegistro(<?php echo $row['id']; ?>)">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
                                                 <div class="modal modal-lg fade" id="exampleModal_<?php echo $row['id']; ?>" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
