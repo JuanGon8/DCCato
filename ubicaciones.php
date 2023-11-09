@@ -97,7 +97,7 @@ include 'navbar.php';
                                 <tbody>
                                     <?php while ($row = $resultado4->fetch_assoc()) { ?>
                                         <tr id="row_<?php echo $row['ubicaciont']; ?>">
-                                        <td class="tdh">
+                                            <td class="tdh">
                                                 <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">
                                                     <i class="fa-solid fa-pencil"></i>
                                                 </button>
@@ -145,24 +145,24 @@ include 'navbar.php';
     </main>
 </div>
 <script>
-   function eliminarRegistro(id) {
-    console.log("id: " + id);
+    function eliminarRegistro(id) {
+        console.log("id: " + id);
 
-    if (confirm("¿Estás seguro de que deseas eliminar este registro?")) {
-        // Realizar una solicitud AJAX para eliminar el registro
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "eliminar_ubi.php?id=" + id, true);
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                // Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
-                // Por ejemplo, eliminar la fila de la tabla
-                var button = event.target;
-                var row = button.parentElement.parentElement.parentElement; // Ajusta la navegación DOM para llegar a la fila de la tabla
-                row.remove();
-            }
-        };
-        xhr.send();
-        window.location.href = "ubicaciones.php";
+        if (confirm("¿Estás seguro de que deseas eliminar este registro?")) {
+            // Realizar una solicitud AJAX para eliminar el registro
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "eliminar_ubi.php?id=" + id, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
+                    // Por ejemplo, eliminar la fila de la tabla
+                    var button = event.target;
+                    var row = button.parentElement.parentElement.parentElement; // Ajusta la navegación DOM para llegar a la fila de la tabla
+                    row.remove();
+                }
+            };
+            xhr.send();
+            window.location.href = "ubicaciones.php";
+        }
     }
-}
 </script>

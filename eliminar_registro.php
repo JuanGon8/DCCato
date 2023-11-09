@@ -17,13 +17,13 @@ if ($conn->connect_error) {
 $codigo = $_GET['codigo'];
 
 // Prepara y ejecuta la consulta SQL para mover el registro a la tabla "reclutamiento_baja"
-$sql = "INSERT INTO reclutamiento_baja SELECT * FROM reclutamiento WHERE codigo = ?";
+$sql = "INSERT INTO reclutamiento_baja SELECT codigo, fecha_alta, ap_pat, ap_mat, nombre, ubicacion, salario_diario, sbc, departamento, turno, nss, rfc, curp, sexo, fecha_nac, puesto, entidad, cp, estado_civil, e_banco, n_ecuenta, suc_epago, imss_pat FROM reclutamiento WHERE codigo = ?";
 if ($stmt = $conn->prepare($sql)) {
     $stmt->bind_param("i", $codigo); // "i" indica un entero (cambia si el campo no es un entero)
     
     if ($stmt->execute()) {
         // Registro movido con éxito
-        echo "Registro movido a la tabla reclutamiento_baja con éxito. window.location.href = 'bajas.php';";
+        echo "Registro movido a la tabla reclutamiento_baja con éxito.";
     } else {
         echo "Error al mover el registro: " . $stmt->error;
     }

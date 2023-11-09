@@ -385,7 +385,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $('#example2').DataTable({
+  var table = $('#example2').DataTable({
     language: {
       "buttons":{
         "colvis": "Ocultar / Mostrar",
@@ -402,6 +402,8 @@ $(document).ready(function() {
     },
     responsive: true,
     dom: 'QBfrtilp',
+    pageLength: 10,  // Establece el número de registros a mostrar inicialmente a 20
+    order: [[2, 'desc']],
     // select: {
     //   style: 'os',
     //   info: false

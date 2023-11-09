@@ -104,9 +104,6 @@ include 'navbar.php';
                                                 <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarRegistro(<?php echo $row['id']; ?>)">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-outline-info btn-sm" onclick="moverRepse(<?php echo $row['id']; ?>)" title="Mover a REPSE">
-                                                    <i class="fa-solid fa-arrow-right"></i>
-                                                </button>
                                                 <div class="modal modal-lg fade" id="exampleModal_<?php echo $row['id']; ?>" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
