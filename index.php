@@ -40,8 +40,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>DCCato</title>
-		<link rel="icon" type="image/x-icon" href="assets/img/dccato-ico.png">
+        <title>DCSVM</title>
+		<link rel="icon" type="image/x-icon" href="assets/img/DCSVM.png">
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
@@ -55,7 +55,7 @@
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg ">
                                     <div class="card-header">
-                                    <img class="logoindex" src="assets/img/DDCatoGreen.png" alt="">   
+                                    <img class="logoindex" src="assets/img/DCSVM.png" alt="">   
                                     <h3 class="text-center font-weight-light my-4">Bienvenido</h3></div>
                                     <div class="card-body">
                                         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -71,10 +71,10 @@
                                                 <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
                                                 <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                             </div> -->
-                                            <div class=" form-group d-flex align-items-center justify-content-center mt-4 mb-0">
-                                                <!-- <a class="small" href="password.html">Forgot Password?</a> -->
-                                                <button type="submit" class="btn greenbtn">Iniciar sesión</button>
-                                            </div>
+                                            <div class="form-group d-flex justify-content-between mt-4 mb-0">
+                                        <button type="submit" class="btn greenbtn">Iniciar sesión</button>
+                                        <a href="../Alta-de-reportes-SVM/index.php" class="btn greenbtn">Reportes</a>
+                                    </div>
                                         </form>
                                     </div>
                                     <!-- <div class="card-footer text-center py-3">

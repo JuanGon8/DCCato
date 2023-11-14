@@ -11297,11 +11297,13 @@ th{
 }
 #particles-js{
   position:fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  z-index: -1;
-  background-color: #1e7e34;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: -1;
+    background: rgb(0,76,25);
+    background: radial-gradient(circle, rgba(0,76,25,1) 37%, rgba(0,143,47,1) 100%);
+    background-size: cover;
 }
 .logoindex{
   width: 100%;

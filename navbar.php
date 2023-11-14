@@ -36,8 +36,8 @@ $depto = $_SESSION['depto'];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>DCCato</title>
-    <link rel="icon" type="image/x-icon" href="assets/img/dccato-ico.png">
+    <title>DCSVM</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/DCSVM.png">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -54,7 +54,7 @@ $depto = $_SESSION['depto'];
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 ml-2" style="margin-left: 15px;" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
 
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="registro_nominas.php"><img src="assets/img/dccato.png" class="logonav" alt=""></a>
+        <a class="navbar-brand ps-3" href="registro_nominas.php"><img src="assets/img/dcsvmb.png" class="logonav" alt=""></a>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
