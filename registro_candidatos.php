@@ -499,3 +499,36 @@ include 'navbar.php';
     }
 }
 </script>
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(e) {
+            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+            
+            // Guarda una referencia al formulario para usarla dentro de la función de éxito
+            var form = $(this);
+
+            // Realiza la solicitud AJAX
+            $.ajax({
+                type: 'POST',
+                url: 'guardar_informacion2.php',
+                data: form.serialize(), // Serializa los datos del formulario
+                success: function(response) {
+                    // Muestra SweetAlert2 en caso de éxito
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Empleado registrado exitosamente',
+                        showConfirmButton: false,
+                        timer: 1500  // Cierra automáticamente después de 1.5 segundos
+                    });
+
+                    // Puedes agregar más lógica aquí según la respuesta del servidor
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>

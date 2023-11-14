@@ -148,24 +148,38 @@ include 'navbar.php';
     function eliminarRegistro(id) {
         console.log("id: " + id);
 
-        if (confirm("¿Estás seguro de que deseas eliminar este registro?")) {
-            // Realizar una solicitud AJAX para eliminar el registro
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "eliminar_dep.php?id=" + id, true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
-                    // Por ejemplo, eliminar la fila de la tabla
-                    var button = event.target;
-                    var row = button.parentElement.parentElement.parentElement; // Ajusta la navegación DOM para llegar a la fila de la tabla
-                    row.remove();
-                }
-            };
-            xhr.send();
-            window.location.href = "departamentos.php";
-        }
+        Swal.fire({
+            title: "¿Estás seguro de que deseas eliminar este departamento?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Realizar una solicitud AJAX para eliminar el registro
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "eliminar_dep.php?id=" + id, true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        // Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
+                        // Por ejemplo, eliminar la fila de la tabla
+                        Swal.fire({
+                            title: "Registro eliminado exitosamente",
+                            icon: "success",
+                            timerProgressBar: true,
+                            timer: 2000  // Timer set to 2 seconds
+                        });
+                        var button = event.target;
+                        var row = button.parentElement.parentElement.parentElement; // Ajusta la navegación DOM para llegar a la fila de la tabla
+                        row.remove();
+                    }
+                };
+                xhr.send();
+            }
+        });
     }
 </script>
+
 <script>
 function moverRepse(id) {
     console.log("id: " + id);
@@ -183,4 +197,37 @@ function moverRepse(id) {
         xhr.send();
     }
 }
+</script>
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(e) {
+            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+            
+            // Guarda una referencia al formulario para usarla dentro de la función de éxito
+            var form = $(this);
+
+            // Realiza la solicitud AJAX
+            $.ajax({
+                type: 'POST',
+                url: 'guardar_departamento.php',
+                data: form.serialize(), // Serializa los datos del formulario
+                success: function(response) {
+                    // Muestra SweetAlert2 en caso de éxito
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Departamento registrado exitosamente',
+                        showConfirmButton: false,
+                        timer: 1500  // Cierra automáticamente después de 1.5 segundos
+                    });
+
+                    // Puedes agregar más lógica aquí según la respuesta del servidor
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
 </script>

@@ -60,7 +60,6 @@ include 'navbar.php';
 		<script src="https://cdn.datatables.net/staterestore/1.3.0/js/dataTables.stateRestore.min.js"></script>
 		<script src="https://cdn.datatables.net/staterestore/1.3.0/js/stateRestore.bootstrap5.min.js"></script>
 
-
 		<script src="main.js"></script>
 		<div class="container-fluid px-4">
 			<h1 class="mt-4">Registro nóminas</h1>
@@ -1194,23 +1193,39 @@ include 'navbar.php';
 	function eliminarRegistro(codigo) {
 		console.log("codigo: " + codigo);
 
-		if (confirm("¿Estás seguro de que deseas eliminar este registro?")) {
-			// Realizar una solicitud AJAX para eliminar el registro
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "eliminar_registro.php?codigo=" + codigo, true);
-			xhr.onload = function() {
-				if (xhr.status === 200) {
-					// Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
-					// Por ejemplo, eliminar la fila de la tabla
-					var button = event.target;
-					var row = button.parentElement.parentElement.parentElement; // Ajusta la navegación DOM para llegar a la fila de la tabla
-					row.remove();
-				}
-			};
-			xhr.send();
-		}
+		Swal.fire({
+			title: "¿Estás seguro de que deseas eliminar este empleado?",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonText: "Sí, eliminar",
+			cancelButtonText: "Cancelar"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				// Realizar una solicitud AJAX para eliminar el registro
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "eliminar_registro.php?codigo=" + codigo, true);
+				xhr.onload = function() {
+					if (xhr.status === 200) {
+						// Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
+						// Por ejemplo, eliminar la fila de la tabla
+						Swal.fire({
+							title: "Registro eliminado exitosamente",
+							icon: "success",
+							timerProgressBar: true,
+							timer: 2000  // Timer set to 2 seconds
+						});
+						var button = event.target;
+						var row = button.parentElement.parentElement.parentElement; // Ajusta la navegación DOM para llegar a la fila de la tabla
+						row.remove();
+					}
+				};
+				xhr.send();
+			}
+		});
 	}
 </script>
+
+
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
 		// Obtener la fecha y hora actual
@@ -1249,20 +1264,73 @@ include 'navbar.php';
 	});
 </script>
 <script>
-	function moverRepse(codigo) {
-		console.log("codigo: " + codigo);
+    function moverRepse(codigo) {
+        console.log("codigo: " + codigo);
 
-		if (confirm("¿Estás seguro de que deseas mover este registro?")) {
-			// Realizar una solicitud AJAX para ejecutar el archivo PHP 'mover_repse.php'
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "mover.php?codigo=" + codigo, true);
-			xhr.onload = function() {
-				if (xhr.status === 200) {
-					// Registro movido con éxito, puedes realizar alguna acción adicional si es necesario
-					alert('Registros movidos a departamento_repse.');
-				}
-			};
-			xhr.send();
-		}
-	}
+        // Utiliza SweetAlert2 en lugar de confirm
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¿Estás seguro de que deseas agregar a este empleado a REPSE?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, moverlo',
+			cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Realizar una solicitud AJAX para ejecutar el archivo PHP 'mover_repse.php'
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "mover.php?codigo=" + codigo, true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        // Registro movido con éxito, puedes realizar alguna acción adicional si es necesario
+                        // Utiliza SweetAlert2 en lugar de alert
+                        Swal.fire({
+                            title: "¡Éxito!",
+                            text: "El empleado se agregó a REPSE",
+                            icon: "success",
+							timerProgressBar: true,
+							timer: 2000  // Timer set to 2 seconds
+						}
+                        );
+                    }
+                };
+                xhr.send();
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(e) {
+            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+            
+            // Guarda una referencia al formulario para usarla dentro de la función de éxito
+            var form = $(this);
+
+            // Realiza la solicitud AJAX
+            $.ajax({
+                type: 'POST',
+                url: 'guardar_informacion.php',
+                data: form.serialize(), // Serializa los datos del formulario
+                success: function(response) {
+                    // Muestra SweetAlert2 en caso de éxito
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Empleado registrado exitosamente',
+                        showConfirmButton: false,
+                        timer: 1500  // Cierra automáticamente después de 1.5 segundos
+                    });
+
+                    // Puedes agregar más lógica aquí según la respuesta del servidor
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
 </script>
