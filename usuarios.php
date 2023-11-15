@@ -68,69 +68,81 @@ include 'navbar.php';
                 <li class="breadcrumb-item active">Reportes</li>
         </div>
         <div class="card mx-4 mb-4">
-        <div class="card mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                <table width="100%">
-                                    <tr>
-                                        <td width="25%" valign="top"> <!-- Esto hace que la celda ocupe la mitad de la tabla -->
-                                            <form method="POST" action="guardar_usuario.php" enctype="multipart/form-data">
-                                                <div class="row">
-                                                    <div class="col-11">
-                                                        <label for="nombre">Nombre</label>
-                                                        <input class="form-control inputwidth" type="text" name="nombre" required><br>
-                                                        <label for="usuario">Usuario</label>
-                                                        <input class="form-control inputwidth" type="text" name="usuario" required><br>
-                                                        <label for="password">Contraseña</label>
-                                                        <input class="form-control inputwidth" type="password" name="password" required><br>
-                                                        <label for="tipo_usuario">Nivel de usuario</label>
-                                                        <input class="form-control inputwidth" type="text" name="tipo_usuario" required>
-                                                    </div>
+            <div class="card mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%" valign="top"> <!-- Esto hace que la celda ocupe la mitad de la tabla -->
+                                    <form method="POST" action="guardar_usuario.php" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-11">
+                                                <label for="nombre">Nombre</label>
+                                                <input class="form-control inputwidth" type="text" name="nombre" required><br>
+                                                <label for="usuario">Usuario</label>
+                                                <input class="form-control inputwidth" type="text" name="usuario" required><br>
+                                                <label for="password">Contraseña</label>
+                                                <input class="form-control inputwidth" type="password" name="password" required><br>
+                                                <div class="form-group">
+                                                    <label for="depto">Departamento</label>
+                                                    <select name="depto" id="depto" class="form-select" required>
+                                                        <option selected disabled value="">Elige una opción</option>
+                                                        <option value="Almacén">Almacén</option>
+                                                        <option value="Recursos humanos">Recursos humanos</option>
+                                                        <option value="Sistemas">Sistemas</option>
+                                                        <!-- <option value="Nocturno">Nocturno</option> -->
+                                                    </select> <br>
                                                 </div>
-                                                <br>
-                                                <div id="liveAlertPlaceholder"></div>
-                                                <input type="submit" value="Guardar" class="btn btn-primary col-4 submitbutton" id="liveAlertBtn">
-                                            </form>
-                                        </td>
-                                        <td width="60%"> <!-- Esto hace que la celda ocupe la otra mitad de la tabla -->
-                                            <div class="table-responsive">
-                                                <table class="table table-striped table-bordered" id="example6" width="100%" cellspacing="0">
-                                                    <thead class="table-dark">
-                                                        <tr>
-                                                            <!-- <th>Acciones</th> -->
-                                                            
-                                                            <th>ID</th>
-                                                            <th>Nivel de usuario</th>
-                                                            <th>Nombre</th>
-                                                            <th>Usuario</th>
-                                                            <th>Contraseña</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php while($row = $resultado8->fetch_assoc()) { ?>
-                                                            <tr id="row_<?php echo $row['id']; ?>">
-                                                            <!-- <td align="center">
+                                                <label for="tipo_usuario">Nivel de usuario</label>
+                                                <input class="form-control inputwidth" type="text" name="tipo_usuario" required>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="liveAlertPlaceholder"></div>
+                                        <input type="submit" value="Guardar" class="btn btn-primary col-4 submitbutton" id="liveAlertBtn">
+                                    </form>
+                                </td>
+                                <td width="60%"> <!-- Esto hace que la celda ocupe la otra mitad de la tabla -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered" id="example6" width="100%" cellspacing="0">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <!-- <th>Acciones</th> -->
+
+                                                    <th>ID</th>
+                                                    <th>Nivel de usuario</th>
+                                                    <th>Nombre</th>
+                                                    <th>Departamento</th>
+                                                    <th>Usuario</th>
+                                                    <th>Contraseña</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php while ($row = $resultado8->fetch_assoc()) { ?>
+                                                    <tr id="row_<?php echo $row['id']; ?>">
+                                                        <!-- <td align="center">
                                                                     <button class="delete-button" onclick="deleteRow(<?php echo $row['id']; ?>)">
                                                                         <i class="fas fa-trash"></i>
                                                                     </button>
                                                                 </td> -->
-                                                                <td><?php echo $row['id']; ?></td>
-                                                                <td><?php echo $row['tipo_usuario']; ?></td>
-                                                                <td><?php echo $row['nombre']; ?></td>
-                                                                <td><?php echo $row['usuario']; ?></td>
-                                                                <td><?php echo $row['password']; ?></td>
-                                                                
-                                                            </tr>
-                                                        <?php } ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                </div>
-                            </div>
-                        </div>
+                                                        <td><?php echo $row['id']; ?></td>
+                                                        <td><?php echo $row['tipo_usuario']; ?></td>
+                                                        <td><?php echo $row['nombre']; ?></td>
+                                                        <td><?php echo $row['depto']; ?></td>
+                                                        <td><?php echo $row['usuario']; ?></td>
+                                                        <td><?php echo $row['password']; ?></td>
+
+                                                    </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 </div>

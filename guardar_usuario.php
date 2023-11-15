@@ -12,6 +12,7 @@ $usuario = $_POST['usuario'];
 $password = $_POST['password'];
 $nombre = $_POST['nombre'];
 $tipo_usuario = $_POST['tipo_usuario'];
+$depto = $_POST['depto'];
 
 // Validar si la consulta ya existe en la base de datos
 $consulta_existente = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
@@ -25,8 +26,8 @@ if ($resultado->num_rows > 0) {
     $password_hashed = sha1($password);
 
     // Preparar la consulta SQL para insertar los datos
-    $sql = "INSERT INTO usuarios (usuario, password, nombre, tipo_usuario)
-            VALUES ('$usuario', '$password_hashed', '$nombre', '$tipo_usuario')";
+    $sql = "INSERT INTO usuarios (usuario, password, nombre, tipo_usuario, depto)
+            VALUES ('$usuario', '$password_hashed', '$nombre', '$tipo_usuario', '$depto')";
             
     // Ejecutar la consulta y verificar si se guardaron los datos
     if ($conn->query($sql) === TRUE) {

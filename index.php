@@ -16,21 +16,28 @@
             $pass_c = sha1($password);
 
             if ($password_bd == $pass_c) {
-              $_SESSION['id'] = $row['id'];
-              $_SESSION['nombre'] = $row['nombre'];
-              $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
-              $_SESSION['depto'] = $row['depto'];
-              header("Location: registro_nominas.php");
-          } else {
-              echo '<div class="alert alert-danger" role="alert" id="login-alert" style="width: 300px; 
-              margin-top: 10px; margin-bottom: 0px; margin-left: auto; margin-right: auto;
-               text-align: center;">La contraseña no coincide</div>';
-          }
-    }else{
-      echo '<div class="alert alert-danger" role="alert" id="login-alert" style="width: 300px; margin: 30px auto 0; text-align: center;">El usuario ingresado no existe</div>';
+                $_SESSION['id'] = $row['id'];
+                $_SESSION['nombre'] = $row['nombre'];
+                $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
+                $_SESSION['depto'] = $row['depto'];
+
+                if ($_SESSION['depto'] == 'Sistemas') {
+                    header("Location: reportes.php");
+                } elseif ($_SESSION['depto'] == 'Recursos humanos') {
+                    header("Location: registro_candidatos.php");
+                } else {
+                    header("Location: registro_nominas.php");
+                }
+            } else {
+                echo '<div class="alert alert-danger" role="alert" id="login-alert" style="width: 300px; margin-top: 10px; margin-bottom: 0px; margin-left: auto; margin-right: auto; text-align: center;">La contraseña no coincide</div>';
+            }
+        } else {
+            echo '<div class="alert alert-danger" role="alert" id="login-alert" style="width: 300px; margin: 30px auto 0; text-align: center;">El usuario ingresado no existe</div>';
+        }
     }
-  }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
