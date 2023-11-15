@@ -154,7 +154,7 @@ $depto = $_SESSION['depto'];
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="bajas.php"><i class="fa-solid fa-delete-left"></i> &nbsp;Bajas</a>
                                     <a class="nav-link" href="usuarios.php"><i class="fa-solid fa-user"></i> &nbsp;Usuarios</a>
-                                    <a class="nav-link" href="reportes.php"><i class="fa-solid fa-user"></i> &nbsp;Reportes</a>
+                                    <a class="nav-link" href="reportes.php"><i class="fa-solid fa-book"></i> &nbsp;Reportes</a>
                                 </nav>
                             </div>
                         <?php } ?>
@@ -163,7 +163,7 @@ $depto = $_SESSION['depto'];
                 <div class="sb-sidenav-footer">
                     <div class="small">Sesión iniciada como:</div>
                     <?php echo $_SESSION['nombre']; ?> <br>
-                    <span class="badge bg-secondary color-white">V 2.0</span>
+                    <span class="badge bg-secondary color-white">V 2.1</span>
                 </div>
             </nav>
         </div>
