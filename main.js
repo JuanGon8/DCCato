@@ -431,9 +431,9 @@ $(document).ready(function() {
         titleAttr: 'Exportar a Excel',
         className: 'btn btn-success',
         exportOptions: {
-           columns: ':not(.acciones):visible',
-          // Excluir la primera columna ("Acciones")
-        }
+          columns: ':not(.acciones):gt(0):lt(25)'
+          // Excluir la primera columna (Acciones) y seleccionar las columnas 2 a 25
+      }
       },
       {
         extend: 'pdfHtml5',
