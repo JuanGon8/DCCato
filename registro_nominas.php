@@ -1320,8 +1320,14 @@ include 'navbar.php';
                         icon: 'success',
                         title: 'Éxito',
                         text: 'Empleado registrado exitosamente',
-                        showConfirmButton: false,
-                        timer: 1500  // Cierra automáticamente después de 1.5 segundos
+                        showConfirmButton: true, // Muestra el botón de confirmación
+                        confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+                    }).then((result) => {
+                        // Si el usuario hace clic en el botón "Aceptar"
+                        if (result.isConfirmed) {
+                            // Recarga la página
+                            location.reload();
+                        }
                     });
 
                     // Puedes agregar más lógica aquí según la respuesta del servidor
