@@ -23,6 +23,8 @@ $sql1 = "SELECT * FROM repse";
 $resultado11 = $mysqli->query($sql1);
 $sql2 = "SELECT * FROM reclutamiento_repse";
 $resultado12 = $mysqli->query($sql2);
+$sql3 = "SELECT * FROM alta_reportes";
+$resultado13 = $mysqli->query($sql3);
 
 $tipo_usuario = $_SESSION['tipo_usuario'];
 $depto = $_SESSION['depto'];
@@ -152,6 +154,7 @@ $depto = $_SESSION['depto'];
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="bajas.php"><i class="fa-solid fa-delete-left"></i> &nbsp;Bajas</a>
                                     <a class="nav-link" href="usuarios.php"><i class="fa-solid fa-user"></i> &nbsp;Usuarios</a>
+                                    <a class="nav-link" href="reportes.php"><i class="fa-solid fa-user"></i> &nbsp;Reportes</a>
                                 </nav>
                             </div>
                         <?php } ?>
