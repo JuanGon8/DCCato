@@ -431,7 +431,7 @@ $(document).ready(function() {
         titleAttr: 'Exportar a Excel',
         className: 'btn btn-success',
         exportOptions: {
-          columns: ':not(.acciones):gt(0):lt(25)'
+          columns: ':not(.acciones)'
           // Excluir la primera columna (Acciones) y seleccionar las columnas 2 a 25
       }
       },
@@ -868,6 +868,90 @@ $(document).ready(function() {
         "logicAnd": "Y",
         "logicOr": "O",
       },
+    }
+  });
+});
+
+$(document).ready(function() {
+  $('#example6').DataTable({
+    language: {
+      "buttons":{
+        "colvis": "Ocultar / Mostrar",
+        "colvisRestore": "Restablecer filtros"
+      },
+      select:{
+        rows: {
+          _: "Seleccionó %d filas",
+          0: "Click a row to select it",
+          1: "Seleccionó 1 fila"
+      }
+      },
+      url: "https://cdn.datatables.net/plug-ins/1.10.18/i18n/Spanish.json", // Enlace al archivo de idioma en español
+    },
+    responsive: true,
+    dom: 'QBfrtilp',
+    order: [[2, 'desc']],
+    // Fecha con formato dd/mm/yyyy
+
+    // Botones de excel, pdf e impresión
+    buttons: [
+      {
+        extend: 'colvis',
+        postfixButtons: [ 'colvisRestore', 'colvisGroup']
+      },
+      {
+        extend: 'excelHtml5',
+        text: '<i class="fas fa-file-excel"></i> ',
+        titleAttr: 'Exportar a Excel',
+        className: 'btn btn-success',
+        exportOptions: {
+          columns: ':not(.acciones):visible',
+          // Excluir la primera columna ("Acciones")
+          
+        }
+      },
+      {
+        extend: 'pdfHtml5',
+        text: '<i class="fas fa-file-pdf"></i> ',
+        titleAttr: 'Exportar a PDF',
+        className: 'btn btn-danger',
+      },
+      {
+        extend: 'print',
+        text: '<i class="fa fa-print"></i> ',
+        titleAttr: 'Imprimir',
+        className: 'btn btn-info'
+      },
+    ],
+    // Inicializa el SearchBuilder
+    searchBuilder: {
+      conditions: {
+        // Configura una condición para el rango de fechas
+        'date-range': {
+          id: 'date-range',
+          name: 'Fecha',
+          inputs: ['from', 'to'],
+          value: function(input) {
+            return input[0] + ' to ' + input[1];
+          },
+          isInputValid: function(input) {
+            return (input.length === 2) && (input[0] !== '') && (input[1] !== '');
+          },
+        }
+      },
+      i18n: {
+        // Configura el idioma del SearchBuilder en español
+        "add": "Filtrar",
+        "button": {
+          "0": "Borrar Todo",
+        },
+        "title": {
+          0: "Condiciones",
+        },
+        "logicAnd": "Y",
+        "logicOr": "O",
+      },
+      
     }
   });
 });

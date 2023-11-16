@@ -70,7 +70,7 @@ include 'navbar.php';
 
 			<!-- Formulario -->
 			<?php if ($tipo_usuario == 1 || $tipo_usuario == 2 || $tipo_usuario == 3 || $tipo_usuario == 4) { ?>
-				<form method="POST" action="guardar_informacion.php" enctype="multipart/form-data">
+				<form method="POST" action="guardar_informacion.php" enctype="multipart/form-data" id="guardar">
 					<input type="hidden" name="nombreu" id="nombreu" value="<?php echo $_SESSION['nombre']; ?>">
 					<input type="hidden" name="hora_registro" id="hora_registro">
 
@@ -404,7 +404,7 @@ include 'navbar.php';
 																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 															</div>
 															<div class="modal-body">
-																<form method="POST" action="update.php" enctype="multipart/form-data">
+																<form method="POST" action="update.php" enctype="multipart/form-data" id="update">
 																	<div class="row">
 																		<input type="hidden" name="codigo" value="<?php echo $row['codigo']; ?>">
 																		<div class="col">
@@ -1303,7 +1303,7 @@ include 'navbar.php';
 </script>
 <script>
     $(document).ready(function() {
-        $('form').submit(function(e) {
+        $('#guardar').submit(function(e) {
             e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
             
             // Guarda una referencia al formulario para usarla dentro de la función de éxito
@@ -1340,3 +1340,43 @@ include 'navbar.php';
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('#update').submit(function(e) {
+            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+            
+            // Guarda una referencia al formulario para usarla dentro de la función de éxito
+            var form = $(this);
+
+            // Realiza la solicitud AJAX
+            $.ajax({
+                type: 'POST',
+                url: 'update.php',
+                data: form.serialize(), // Serializa los datos del formulario
+                success: function(response) {
+                    // Muestra SweetAlert2 en caso de éxito
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Empleado registrado exitosamente',
+                        showConfirmButton: true, // Muestra el botón de confirmación
+                        confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+                    }).then((result) => {
+                        // Si el usuario hace clic en el botón "Aceptar"
+                        if (result.isConfirmed) {
+                            // Recarga la página
+                            location.reload();
+                        }
+                    });
+
+                    // Puedes agregar más lógica aquí según la respuesta del servidor
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
