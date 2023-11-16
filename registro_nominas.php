@@ -176,11 +176,11 @@ include 'navbar.php';
 						</div>
 						<div class="col">
 							<label for="nss">NSS <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números"></i></label>
-							<input class="form-control" type="text" name="nss" required maxlength="11" pattern="[0-9]{11}">
+							<input class="form-control" type="text" name="nss"  maxlength="11" pattern="[0-9]{11}">
 						</div>
 						<div class="col">
 							<label for="rfc">RFC <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
-							<input class="form-control" type="text" name="rfc" required maxlength="13" pattern="[A-Z0-9]{13}">
+							<input class="form-control" type="text" name="rfc"  maxlength="13" pattern="[A-Z0-9]{13}">
 						</div>
 						<div class="col">
 							<label for="curp">CURP <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
