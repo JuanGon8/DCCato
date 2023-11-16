@@ -873,7 +873,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $('#example6').DataTable({
+  $('#exampler').DataTable({
     language: {
       "buttons":{
         "colvis": "Ocultar / Mostrar",
@@ -890,7 +890,7 @@ $(document).ready(function() {
     },
     responsive: true,
     dom: 'QBfrtilp',
-    order: [[2, 'desc']],
+    order: [[6, 'desc']],
     // Fecha con formato dd/mm/yyyy
 
     // Botones de excel, pdf e impresión

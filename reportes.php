@@ -70,7 +70,7 @@ include 'navbar.php';
         <div class="card mx-4 mb-4">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered" id="example6" width="100%" cellspacing="0">
+                    <table class="table table-striped table-bordered" id="exampler" width="100%" cellspacing="0">
                         <thead class="table-dark">
                             <tr class="tdh">
                                 <th class="acciones">Más información</th>
