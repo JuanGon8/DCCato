@@ -1358,7 +1358,7 @@ include 'navbar.php';
                     Swal.fire({
                         icon: 'success',
                         title: 'Éxito',
-                        text: 'Empleado registrado exitosamente',
+                        text: 'Empleado actualizado exitosamente',
                         showConfirmButton: true, // Muestra el botón de confirmación
                         confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
                     }).then((result) => {
