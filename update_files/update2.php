@@ -24,6 +24,7 @@ $ine = isset($_POST['ine']) ? "1" : "0";
 $car_rec = isset($_POST['car_rec']) ? "1" : "0";
 $ant_pen = isset($_POST['ant_pen']) ? "1" : "0";
 $alta_imss = isset($_POST['alta_imss']) ? "1" : "0";
+$tbanco = isset($_POST['tbanco']) ? "1" : "0";
 
 
 
@@ -38,7 +39,8 @@ $sql = "UPDATE reclutamiento SET
         ine = '$ine',
         car_rec = '$car_rec',
         ant_pen = '$ant_pen',
-        alta_imss = '$alta_imss'
+        alta_imss = '$alta_imss',
+        tbanco = '$tbanco'
         WHERE codigo = '$codigo'";
 
 

@@ -79,6 +79,8 @@ include 'navbar.php';
                                 <th>Apellido paterno</th>
                                 <th>Apellido materno</th>
                                 <th>Nombre</th>
+                                <th>RFC</th>
+                                <th>CURP</th>
                                 <th>Contrato firmado</th>
                                 <th>Acta de nacimiento</th>
                                 <th>NSS</th>
@@ -89,6 +91,7 @@ include 'navbar.php';
                                 <th>Carta de recomendación</th>
                                 <th>Antecedentes no penales</th>
                                 <th>Alta ante IMSS</th>
+                                <th>Banco</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -205,7 +208,17 @@ include 'navbar.php';
                                                                         </label>
                                                                     </div>
                                                                 </div>
-                                                            </div> <br>
+                                                            </div> 
+                                                            <div class="row">
+                                                            <div class="col">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" id="tbanco" name="tbanco" <?php echo $row['tbanco'] ? 'checked' : ''; ?>>
+                                                                        <label class="form-check-label" for="tbanco">
+                                                                            Banco
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div><br>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                                                 <input type="submit" value="Guardar" class="btn btn-primary submitbutton" id="liveAlertBtn">
@@ -219,9 +232,11 @@ include 'navbar.php';
                                     <td><?php echo $row['ap_pat']; ?></td>
                                     <td><?php echo $row['ap_mat']; ?></td>
                                     <td><?php echo $row['nombre']; ?></td>
+                                    <td><?php echo $row['rfc']; ?></td>
+                                    <td><?php echo $row['curp']; ?></td>
                                     <?php
                                     // Arreglo con los nombres de las columnas en tu base de datos
-                                    $columnNames = array('contrato', 'acta_nac', 'ine', 'nsss', 'car_mil', 'com_doc', 'com_estu', 'car_rec', 'ant_pen', 'alta_imss');
+                                    $columnNames = array('contrato', 'acta_nac', 'ine', 'nsss', 'car_mil', 'com_doc', 'com_estu', 'car_rec', 'ant_pen', 'alta_imss', 'tbanco');
 
                                     foreach ($columnNames as $columnName) {
                                         $value = $row[$columnName];
