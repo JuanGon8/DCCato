@@ -27,7 +27,7 @@ $hora_registro = $_POST['hora_registro'];
 
 // Preparar la consulta SQL
 $sql = "INSERT INTO candidatos (nombres, primer_apellido, segundo_apellido, telefono, edad, moto, ultimo_empleo, antiguedad, motivo_salida, puesto_aplicado, estats, comentarios, direccion, nombreu, hora_registro)
-        VALUES ('$nombres', '$primer_apellido', '$segundo_apellido', '$telefono', '$edad', '$moto', '$ultimo_empleo', '$antiguedad', '$motivo_salida', '$puesto_aplicado', '$estats', '$comentarios', '$direccion', '$nombreu')";
+        VALUES ('$nombres', '$primer_apellido', '$segundo_apellido', '$telefono', '$edad', '$moto', '$ultimo_empleo', '$antiguedad', '$motivo_salida', '$puesto_aplicado', '$estats', '$comentarios', '$direccion', '$nombreu', '$hora_registro')";
 
 // Ejecutar la consulta y verificar si se guardaron los datos
 if ($conn->query($sql) === TRUE) {

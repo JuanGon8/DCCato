@@ -221,3 +221,43 @@ include 'navbar.php';
     // Establecer la fecha y hora actual como el valor del input
     inputFechaHora.value = formattedDate;
 </script>
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(e) {
+            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+            
+            // Guarda una referencia al formulario para usarla dentro de la función de éxito
+            var form = $(this);
+
+            // Realiza la solicitud AJAX
+            $.ajax({
+                type: 'POST',
+                url: './update_files/updater.php',
+                data: form.serialize(), // Serializa los datos del formulario
+                success: function(response) {
+                    // Muestra SweetAlert2 en caso de éxito
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Reporte actualizado exitosamente',
+                        showConfirmButton: true, // Muestra el botón de confirmación
+                        confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+                    }).then((result) => {
+                        // Si el usuario hace clic en el botón "Aceptar"
+                        if (result.isConfirmed) {
+                            // Recarga la página
+                            location.reload();
+                        }
+                    });
+
+                    // Puedes agregar más lógica aquí según la respuesta del servidor
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+

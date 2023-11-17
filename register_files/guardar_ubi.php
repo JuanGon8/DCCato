@@ -19,7 +19,7 @@ if ($resultado->num_rows > 0) {
     echo "<script>alert('La consulta ya existe en la base de datos.'); window.location.href = 'ubicaciones.php';</script>";
 } else {
     // Preparar la consulta SQL para insertar los datos
-    $sql = "INSERT INTO ubicaciones (ubicaciont, nombreu)
+    $sql = "INSERT INTO ubicaciones (ubicaciont, nombreu, hora_registro)
             VALUES ('$ubicaciont', '$nombreu', '$hora_registro')";
             
     // Ejecutar la consulta y verificar si se guardaron los datos

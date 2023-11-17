@@ -70,7 +70,7 @@ include 'navbar.php';
             <table width="100%">
                 <tr>
                     <td width="25%" valign="top"> <!-- Esto hace que la celda ocupe la mitad de la tabla -->
-                        <form method="POST" action="guardar_ubi.php" enctype="multipart/form-data">
+                        <form method="POST" action="guardar_ubi.php" enctype="multipart/form-data" id="guardar">
                             <input type="hidden" name="nombreu" id="nombreu" value="<?php echo $_SESSION['nombre']; ?>">
                             <input type="hidden" name="hora_registro" id="hora_registro">
                             <div class="row">
@@ -158,7 +158,7 @@ include 'navbar.php';
             if (result.isConfirmed) {
                 // Realizar una solicitud AJAX para eliminar el registro
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", "eliminar_ubi.php?id=" + id, true);
+                xhr.open("GET", "./delete-files/eliminar_ubi.php?id=" + id, true);
                 xhr.onload = function () {
                     if (xhr.status === 200) {
                         // Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
@@ -181,7 +181,7 @@ include 'navbar.php';
 </script>
 <script>
     $(document).ready(function() {
-        $('form').submit(function(e) {
+        $('#guardar').submit(function(e) {
             e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
             
             // Guarda una referencia al formulario para usarla dentro de la función de éxito
@@ -190,7 +190,7 @@ include 'navbar.php';
             // Realiza la solicitud AJAX
             $.ajax({
                 type: 'POST',
-                url: 'guardar_ubi.php',
+                url: './register_files/guardar_ubi.php',
                 data: form.serialize(), // Serializa los datos del formulario
                 success: function(response) {
                     // Muestra SweetAlert2 en caso de éxito
@@ -212,3 +212,43 @@ include 'navbar.php';
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(e) {
+            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+            
+            // Guarda una referencia al formulario para usarla dentro de la función de éxito
+            var form = $(this);
+
+            // Realiza la solicitud AJAX
+            $.ajax({
+                type: 'POST',
+                url: './update_files/update_u.php',
+                data: form.serialize(), // Serializa los datos del formulario
+                success: function(response) {
+                    // Muestra SweetAlert2 en caso de éxito
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Ubicación actualizada exitosamente',
+                        showConfirmButton: true, // Muestra el botón de confirmación
+                        confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+                    }).then((result) => {
+                        // Si el usuario hace clic en el botón "Aceptar"
+                        if (result.isConfirmed) {
+                            // Recarga la página
+                            location.reload();
+                        }
+                    });
+
+                    // Puedes agregar más lógica aquí según la respuesta del servidor
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+

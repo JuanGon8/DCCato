@@ -29,14 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "UPDATE alta_reportes SET asignado='$asignado', diagnostico_t='$diagnostico_t', tipo_servicio='$tipo_servicio', hora_concluido='$hora_concluido', estado='$estado', materiales='$materiales' WHERE folio=$folio";
 
     if ($conn->query($sql) === TRUE) {
-        // Redirigir a la página principal o mostrar un mensaje de éxito
-        header("Location: reportes.php");
-        exit();
+        echo "<script>alert('Los datos se guardaron correctamente.'); window.location.href = 'registro_candidatos.php';</script>";
     } else {
-        // Mostrar un mensaje de error
-        echo "Error al actualizar el registro: " . $conn->error;
+        echo "Error al actualizar la información: " . $conn->error;
     }
-
     // Cerrar la conexión
     $conn->close();
 } else {

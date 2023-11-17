@@ -404,7 +404,7 @@ include 'navbar.php';
 																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 															</div>
 															<div class="modal-body">
-																<form method="POST" action="update.php" enctype="multipart/form-data" id="update">
+																<form method="POST" action="/update_files/update.php" enctype="multipart/form-data" id="update">
 																	<div class="row">
 																		<input type="hidden" name="codigo" value="<?php echo $row['codigo']; ?>">
 																		<div class="col">
@@ -1203,7 +1203,7 @@ include 'navbar.php';
 			if (result.isConfirmed) {
 				// Realizar una solicitud AJAX para eliminar el registro
 				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "eliminar_registro.php?codigo=" + codigo, true);
+				xhr.open("GET", "./delete-files/eliminar_registro.php?codigo=" + codigo, true);
 				xhr.onload = function() {
 					if (xhr.status === 200) {
 						// Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
@@ -1312,7 +1312,7 @@ include 'navbar.php';
             // Realiza la solicitud AJAX
             $.ajax({
                 type: 'POST',
-                url: 'guardar_informacion.php',
+                url: './register_files/guardar_informacion.php',
                 data: form.serialize(), // Serializa los datos del formulario
                 success: function(response) {
                     // Muestra SweetAlert2 en caso de éxito
@@ -1342,7 +1342,7 @@ include 'navbar.php';
 </script>
 <script>
     $(document).ready(function() {
-        $('#update').submit(function(e) {
+        $('form').submit(function(e) {
             e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
             
             // Guarda una referencia al formulario para usarla dentro de la función de éxito
@@ -1351,7 +1351,7 @@ include 'navbar.php';
             // Realiza la solicitud AJAX
             $.ajax({
                 type: 'POST',
-                url: 'update.php',
+                url: './update_files/update.php',
                 data: form.serialize(), // Serializa los datos del formulario
                 success: function(response) {
                     // Muestra SweetAlert2 en caso de éxito
