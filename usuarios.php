@@ -68,8 +68,7 @@ include 'navbar.php';
                 <li class="breadcrumb-item active">Reportes</li>
         </div>
         <div class="card mx-4 mb-4">
-            <div class="card mb-4">
-                <div class="card">
+            <div class="card">
                     <div class="card-body">
                         <table width="100%">
                             <tr>
@@ -142,7 +141,6 @@ include 'navbar.php';
                         </table>
                     </div>
                 </div>
-            </div>
         </div>
     </main>
 </div>
