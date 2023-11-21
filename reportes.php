@@ -146,6 +146,7 @@ include 'navbar.php';
                                                                             <option value="Revisión">Revisión</option>
                                                                             <option value="Soporte">Soporte</option>
                                                                             <option value="Configuración">Configuración</option>
+                                                                            <option value="Instalación">Instalación</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
