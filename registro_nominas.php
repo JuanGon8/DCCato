@@ -176,11 +176,11 @@ include 'navbar.php';
 						</div>
 						<div class="col">
 							<label for="nss">NSS <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números"></i></label>
-							<input class="form-control" type="text" name="nss"  maxlength="11" pattern="[0-9]{11}">
+							<input class="form-control" type="text" name="nss" maxlength="11" pattern="[0-9]{11}">
 						</div>
 						<div class="col">
 							<label for="rfc">RFC <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
-							<input class="form-control" type="text" name="rfc"  maxlength="13" pattern="[A-Z0-9]{13}">
+							<input class="form-control" type="text" name="rfc" maxlength="13" pattern="[A-Z0-9]{13}">
 						</div>
 						<div class="col">
 							<label for="curp">CURP <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
@@ -244,37 +244,38 @@ include 'navbar.php';
 							<label for="entidad">Entidad federativa de nacimiento</label>
 							<select name="entidad" id="entidad" class="form-select" required>
 								<option selected disabled value="">Elige una opción</option>
-								<option value="AGS">AGUASCALIENTES</option>
-								<option value="BC">BAJA CALIFORNIA</option>
-								<option value="BCS">BAJA CALIFORNIA SUR</option>
-								<option value="CAMP">CAMPECHE</option>
-								<option value="CHIS">CHIAPAS</option>
-								<option value="CHIH">CHIHUAHUA</option>
-								<option value="COAH">COAHUILA</option>
-								<option value="COL">COLIMA</option>
-								<option value="DGO">DURANGO</option>
-								<option value="GTO">GUANAJUATO</option>
-								<option value="GRO">GUERRERO</option>
-								<option value="HGO">HIDALGO</option>
-								<option value="JAL">JALISCO</option>
-								<option value="MEX">MÉXICO</option>
-								<option value="MICH">MICHOACÁN</option>
-								<option value="MOR">MORELOS</option>
-								<option value="NAY">NAYARIT</option>
-								<option value="NL">NUEVO LEÓN</option>
-								<option value="OAX">OAXACA</option>
-								<option value="PUE">PUEBLA</option>
-								<option value="QRO">QUERÉTARO</option>
-								<option value="QRoo">QUINTANA ROO</option>
-								<option value="SLP">SAN LUIS POTOSÍ</option>
-								<option value="SIN">SINALOA</option>
-								<option value="SON">SONORA</option>
-								<option value="TAB">TABASCO</option>
-								<option value="TAM">TAMAULIPAS</option>
-								<option value="TLAX">TLAXCALA</option>
-								<option value="VER">VERACRUZ</option>
-								<option value="YUC">YUCATÁN</option>
-								<option value="ZAC">ZACATECAS</option>>
+								<option value="AGUASCALIENTES">AGUASCALIENTES</option>
+								<option value="BAJA CALIFORNIA">BAJA CALIFORNIA</option>
+								<option value="BAJA CALIFORNIA SUR">BAJA CALIFORNIA SUR</option>
+								<option value="CAMPECHE">CAMPECHE</option>
+								<option value="CHIAPAS">CHIAPAS</option>
+								<option value="CHIHUAHUA">CHIHUAHUA</option>
+								<option value="COAHUILA">COAHUILA</option>
+								<option value="COLIMA">COLIMA</option>
+								<option value="DURANGO">DURANGO</option>
+								<option value="GUANAJUATO">GUANAJUATO</option>
+								<option value="GUERRERO">GUERRERO</option>
+								<option value="HIDALGO">HIDALGO</option>
+								<option value="JALISCO">JALISCO</option>
+								<option value="MÉXICO">MÉXICO</option>
+								<option value="MICHOACÁN">MICHOACÁN</option>
+								<option value="MORELOS">MORELOS</option>
+								<option value="NAYARIT">NAYARIT</option>
+								<option value="NUEVO LEÓN">NUEVO LEÓN</option>
+								<option value="OAXACA">OAXACA</option>
+								<option value="PUEBLA">PUEBLA</option>
+								<option value="QUERÉTARO">QUERÉTARO</option>
+								<option value="QUINTANA ROO">QUINTANA ROO</option>
+								<option value="SAN LUIS POTOSÍ">SAN LUIS POTOSÍ</option>
+								<option value="SINALOA">SINALOA</option>
+								<option value="SONORA">SONORA</option>
+								<option value="TABASCO">TABASCO</option>
+								<option value="TAMAULIPAS">TAMAULIPAS</option>
+								<option value="TLAXCALA">TLAXCALA</option>
+								<option value="VERACRUZ">VERACRUZ</option>
+								<option value="YUCATÁN">YUCATÁN</option>
+								<option value="ZACATECAS">ZACATECAS</option>
+
 							</select>
 						</div>
 						<div class="col">
@@ -1212,7 +1213,7 @@ include 'navbar.php';
 							title: "Registro eliminado exitosamente",
 							icon: "success",
 							timerProgressBar: true,
-							timer: 2000  // Timer set to 2 seconds
+							timer: 2000 // Timer set to 2 seconds
 						});
 						var button = event.target;
 						var row = button.parentElement.parentElement.parentElement; // Ajusta la navegación DOM para llegar a la fila de la tabla
@@ -1264,119 +1265,117 @@ include 'navbar.php';
 	});
 </script>
 <script>
-    function moverRepse(codigo) {
-        console.log("codigo: " + codigo);
+	function moverRepse(codigo) {
+		console.log("codigo: " + codigo);
 
-        // Utiliza SweetAlert2 en lugar de confirm
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: "¿Estás seguro de que deseas agregar a este empleado a REPSE?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, moverlo',
+		// Utiliza SweetAlert2 en lugar de confirm
+		Swal.fire({
+			title: '¿Estás seguro?',
+			text: "¿Estás seguro de que deseas agregar a este empleado a REPSE?",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sí, moverlo',
 			cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Realizar una solicitud AJAX para ejecutar el archivo PHP 'mover_repse.php'
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "mover.php?codigo=" + codigo, true);
-                xhr.onload = function () {
-                    if (xhr.status === 200) {
-                        // Registro movido con éxito, puedes realizar alguna acción adicional si es necesario
-                        // Utiliza SweetAlert2 en lugar de alert
-                        Swal.fire({
-                            title: "¡Éxito!",
-                            text: "El empleado se agregó a REPSE",
-                            icon: "success",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				// Realizar una solicitud AJAX para ejecutar el archivo PHP 'mover_repse.php'
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "mover.php?codigo=" + codigo, true);
+				xhr.onload = function() {
+					if (xhr.status === 200) {
+						// Registro movido con éxito, puedes realizar alguna acción adicional si es necesario
+						// Utiliza SweetAlert2 en lugar de alert
+						Swal.fire({
+							title: "¡Éxito!",
+							text: "El empleado se agregó a REPSE",
+							icon: "success",
 							timerProgressBar: true,
-							timer: 2000  // Timer set to 2 seconds
+							timer: 2000 // Timer set to 2 seconds
+						});
+					}
+				};
+				xhr.send();
+			}
+		});
+	}
+</script>
+<script>
+	$(document).ready(function() {
+		$('#guardar').submit(function(e) {
+			e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+
+			// Guarda una referencia al formulario para usarla dentro de la función de éxito
+			var form = $(this);
+
+			// Realiza la solicitud AJAX
+			$.ajax({
+				type: 'POST',
+				url: './register_files/guardar_informacion.php',
+				data: form.serialize(), // Serializa los datos del formulario
+				success: function(response) {
+					// Muestra SweetAlert2 en caso de éxito
+					Swal.fire({
+						icon: 'success',
+						title: 'Éxito',
+						text: 'Empleado registrado exitosamente',
+						showConfirmButton: true, // Muestra el botón de confirmación
+						confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+					}).then((result) => {
+						// Si el usuario hace clic en el botón "Aceptar"
+						if (result.isConfirmed) {
+							// Recarga la página
+							location.reload();
 						}
-                        );
-                    }
-                };
-                xhr.send();
-            }
-        });
-    }
+					});
+
+					// Puedes agregar más lógica aquí según la respuesta del servidor
+					console.log(response);
+				},
+				error: function(error) {
+					console.log(error);
+				}
+			});
+		});
+	});
 </script>
 <script>
-    $(document).ready(function() {
-        $('#guardar').submit(function(e) {
-            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
-            
-            // Guarda una referencia al formulario para usarla dentro de la función de éxito
-            var form = $(this);
+	$(document).ready(function() {
+		$('form').submit(function(e) {
+			e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
 
-            // Realiza la solicitud AJAX
-            $.ajax({
-                type: 'POST',
-                url: './register_files/guardar_informacion.php',
-                data: form.serialize(), // Serializa los datos del formulario
-                success: function(response) {
-                    // Muestra SweetAlert2 en caso de éxito
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Éxito',
-                        text: 'Empleado registrado exitosamente',
-                        showConfirmButton: true, // Muestra el botón de confirmación
-                        confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
-                    }).then((result) => {
-                        // Si el usuario hace clic en el botón "Aceptar"
-                        if (result.isConfirmed) {
-                            // Recarga la página
-                            location.reload();
-                        }
-                    });
+			// Guarda una referencia al formulario para usarla dentro de la función de éxito
+			var form = $(this);
 
-                    // Puedes agregar más lógica aquí según la respuesta del servidor
-                    console.log(response);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        });
-    });
+			// Realiza la solicitud AJAX
+			$.ajax({
+				type: 'POST',
+				url: './update_files/update.php',
+				data: form.serialize(), // Serializa los datos del formulario
+				success: function(response) {
+					// Muestra SweetAlert2 en caso de éxito
+					Swal.fire({
+						icon: 'success',
+						title: 'Éxito',
+						text: 'Empleado actualizado exitosamente',
+						showConfirmButton: true, // Muestra el botón de confirmación
+						confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+					}).then((result) => {
+						// Si el usuario hace clic en el botón "Aceptar"
+						if (result.isConfirmed) {
+							// Recarga la página
+							location.reload();
+						}
+					});
+
+					// Puedes agregar más lógica aquí según la respuesta del servidor
+					console.log(response);
+				},
+				error: function(error) {
+					console.log(error);
+				}
+			});
+		});
+	});
 </script>
-<script>
-    $(document).ready(function() {
-        $('form').submit(function(e) {
-            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
-            
-            // Guarda una referencia al formulario para usarla dentro de la función de éxito
-            var form = $(this);
-
-            // Realiza la solicitud AJAX
-            $.ajax({
-                type: 'POST',
-                url: './update_files/update.php',
-                data: form.serialize(), // Serializa los datos del formulario
-                success: function(response) {
-                    // Muestra SweetAlert2 en caso de éxito
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Éxito',
-                        text: 'Empleado actualizado exitosamente',
-                        showConfirmButton: true, // Muestra el botón de confirmación
-                        confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
-                    }).then((result) => {
-                        // Si el usuario hace clic en el botón "Aceptar"
-                        if (result.isConfirmed) {
-                            // Recarga la página
-                            location.reload();
-                        }
-                    });
-
-                    // Puedes agregar más lógica aquí según la respuesta del servidor
-                    console.log(response);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        });
-    });
-</script>
-
