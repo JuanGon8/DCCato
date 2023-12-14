@@ -401,7 +401,7 @@ $(document).ready(function() {
       url: "https://cdn.datatables.net/plug-ins/1.10.18/i18n/Spanish.json", // Enlace al archivo de idioma en español
     },
     responsive: true,
-    dom: 'QBfrtilp',
+    
     pageLength: 10,  // Establece el número de registros a mostrar inicialmente a 20
     order: [[2, 'desc']],
     // select: {
@@ -527,10 +527,13 @@ $(document).ready(function() {
         "deleteTitle": "Eliminar regla de filtrado",
       },
     },
+    "processing": true,
+              "serverSide": true,
+              "sAjaxSource": "ServerSide/serversideUsuarios.php",
     // Define el formato de la columna de fecha
     columnDefs: [
       {
-        targets: [3, 16],
+        targets: [1, 14],
         render: function(data, type, row) {
           if (type === 'display') {
             var date = new Date(data);
