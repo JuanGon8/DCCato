@@ -259,23 +259,23 @@ include 'navbar.php';
 								<option value="GUERRERO">GUERRERO</option>
 								<option value="HIDALGO">HIDALGO</option>
 								<option value="JALISCO">JALISCO</option>
-								<option value="MÉXICO">MÉXICO</option>
-								<option value="MICHOACÁN">MICHOACÁN</option>
+								<option value="MEXICO">MÉXICO</option>
+								<option value="MICHOACAN">MICHOACÁN</option>
 								<option value="MORELOS">MORELOS</option>
 								<option value="NAYARIT">NAYARIT</option>
-								<option value="NUEVO LEÓN">NUEVO LEÓN</option>
+								<option value="NUEVO LEON">NUEVO LEÓN</option>
 								<option value="OAXACA">OAXACA</option>
 								<option value="PUEBLA">PUEBLA</option>
-								<option value="QUERÉTARO">QUERÉTARO</option>
+								<option value="QUERETARO">QUERÉTARO</option>
 								<option value="QUINTANA ROO">QUINTANA ROO</option>
-								<option value="SAN LUIS POTOSÍ">SAN LUIS POTOSÍ</option>
+								<option value="SAN LUIS POTOSI">SAN LUIS POTOSÍ</option>
 								<option value="SINALOA">SINALOA</option>
 								<option value="SONORA">SONORA</option>
 								<option value="TABASCO">TABASCO</option>
 								<option value="TAMAULIPAS">TAMAULIPAS</option>
 								<option value="TLAXCALA">TLAXCALA</option>
 								<option value="VERACRUZ">VERACRUZ</option>
-								<option value="YUCATÁN">YUCATÁN</option>
+								<option value="YUCATAN">YUCATÁN</option>
 								<option value="ZACATECAS">ZACATECAS</option>
 
 							</select>
@@ -347,6 +347,7 @@ include 'navbar.php';
 			<?php } ?><br>
 
 			<div class="card mb-4">
+
 				<h4 class="m-3">Exportar empleados</h4>
 				<form class="form-inline d-flex m-3" id="exportForm">
 					<div class="row align-items-center">
@@ -376,7 +377,6 @@ include 'navbar.php';
 							<table class="table table-striped table-bordered table-hover table-responsive align-middle table-sm" id="example2" width="100%" cellspacing="0">
 								<thead class="table-dark">
 									<tr class="tdh">
-
 										<th>Código</th>
 										<th>Fecha de alta</th>
 										<th>Apellido paterno</th>
@@ -408,11 +408,9 @@ include 'navbar.php';
 					<!-- Tabla usuario 3  -->
 					<?php if ($tipo_usuario == 3) { ?>
 						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover table-responsive align-middle table-sm" id="example3" width="100%" cellspacing="0">
+							<table class="table table-striped table-bordered table-hover table-responsive align-middle table-sm" id="example2" width="100%" cellspacing="0">
 								<thead class="table-dark">
 									<tr class="tdh">
-										<th class="acciones">Mostrar información</th>
-										<th class="acciones">Acciones</th>
 										<th>Código</th>
 										<th>Fecha de alta</th>
 										<th>Apellido paterno</th>
@@ -438,346 +436,15 @@ include 'navbar.php';
 										<th>Registro patronal del IMSS</th>
 									</tr>
 								</thead>
-								<tbody>
-									<?php while ($row = $resultado2->fetch_assoc()) { ?>
-										<tr id="row_<?php echo $row['codigo']; ?>">
-											<td class="tdh">
-												<!-- <button class="delete-button" onclick="deleteRow(<?php echo $row['codigo']; ?>)">
-													<i class="fas fa-trash"></i>
-												</button> -->
-											</td>
-											<td class="d-flex justify-content-center">
-												<button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['codigo']; ?>">
-													<i class="fa-solid fa-pencil"></i>
-												</button>
-												<div class="modal modal-lg fade" id="exampleModal_<?php echo $row['codigo']; ?>" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													<div class="modal-dialog modal-dialog-centered">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-															</div>
-															<div class="modal-body">
-																<form method="POST" action="update.php" enctype="multipart/form-data">
-																	<div class="row">
-																		<input type="hidden" name="codigo" value="<?php echo $row['codigo']; ?>">
-																		<div class="col">
-																			<label for="fecha_alta">Fecha de alta</label>
-																			<input type="date" id="fechaActual3" value="<?php echo $row['fecha_alta']; ?>" min="1920-01-01" name="fecha_alta">
-																		</div>
-																		<div class="col">
-																			<label for="ap_pat">Apellido paterno</label>
-																			<input class="form-control" type="text" name="ap_pat" required maxlength="30" value="<?php echo $row['ap_pat']; ?>">
-																		</div>
-																		<div class="col">
-																			<label for="ap_mat">Apellido materno</label>
-																			<input class="form-control" type="text" name="ap_mat" required maxlength="30" value="<?php echo $row['ap_mat']; ?>">
-																		</div>
-																	</div> <br>
-																	<div class="row">
-																		<div class="col">
-																			<label for="nombre">Nombre</label>
-																			<input class="form-control" type="text" name="nombre" required maxlength="40" value="<?php echo $row['nombre']; ?>">
-																		</div>
-																		<div class="col">
-																			<label for="ubicacion">Tipo de periodo</label>
-																			<select name="ubicacion" id="ubicacion" class="form-select" required>
-																				<option selected value="<?php echo $row['ubicacion']; ?>"><?php echo $row['ubicacion']; ?></option>
-																				<?php
-																				// Conexión a la base de datos (debes configurar tus propias credenciales)
-																				$conexion = new mysqli("localhost", "root", "", "sistema");
-
-																				// Verificar si la conexión es exitosa
-																				if ($conexion->connect_error) {
-																					die("Error de conexión: " . $conexion->connect_error);
-																				}
-
-																				// Consulta SQL para obtener los datos de la tabla "ubicaciones"
-																				$consulta = "SELECT ubicaciont FROM ubicaciones";
-
-																				// Ejecutar la consulta
-																				$resultado = $conexion->query($consulta);
-
-																				// Recorrer los resultados y generar opciones en el select
-																				while ($fila = $resultado->fetch_assoc()) {
-																					echo '<option value="' . $fila['ubicaciont'] . '">' . $fila['ubicaciont'] . '</option>';
-																				}
-
-																				// Cerrar la conexión a la base de datos
-																				$conexion->close();
-																				?>
-																			</select>
-																		</div>
-																		<div class="col">
-																			<label for="salario_diario">Salario diario</label>
-																			<input class="form-control" type="text" name="salario_diario" required maxlength="10" pattern="[0-9]+\.[0-9]+" value="<?php echo $row['salario_diario']; ?>">
-																		</div>
-																	</div> <br>
-																	<div class="row">
-																		<div class="col">
-																			<label for="sbc">SBC</label>
-																			<input class="form-control" type="text" name="sbc" required maxlength="10" pattern="[0-9]+\.[0-9]+" value="<?php echo $row['sbc']; ?>">
-																		</div>
-																		<div class="col">
-																			<div class="form-group">
-																				<label for="departamento">Departamento</label>
-																				<select name="departamento" id="departamento" class="form-select" required>
-																					<option selected value="<?php echo $row['departamento']; ?>"><?php echo $row['departamento']; ?></option>
-																					<?php
-																					// Conexión a la base de datos (debes configurar tus propias credenciales)
-																					$conexion = new mysqli("localhost", "root", "", "sistema");
-
-																					// Verificar si la conexión es exitosa
-																					if ($conexion->connect_error) {
-																						die("Error de conexión: " . $conexion->connect_error);
-																					}
-
-																					// Consulta SQL para obtener los datos de la tabla "ubicaciones"
-																					$consulta = "SELECT departamentot FROM departamento";
-
-																					// Ejecutar la consulta
-																					$resultado = $conexion->query($consulta);
-
-																					// Recorrer los resultados y generar opciones en el select
-																					while ($fila = $resultado->fetch_assoc()) {
-																						echo '<option value="' . $fila['departamentot'] . '">' . $fila['departamentot'] . '</option>';
-																					}
-
-																					// Cerrar la conexión a la base de datos
-																					$conexion->close();
-																					?>
-																				</select>
-																			</div>
-																		</div>
-																		<div class="col">
-																			<div class="form-group">
-																				<label for="turno">Turno de trabajo</label>
-																				<select name="turno" id="turno" class="form-select" required>
-																					<option selected value="<?php echo $row['turno']; ?>"><?php echo $row['turno']; ?></option>
-																					<option value="Matutino">Matutino</option>
-																					<option value="Matutino limpieza">Matutino limpieza</option>
-																					<option value="Matutino vigilancia">Matutino vigilancia</option>
-																					<option value="Nocturno">Nocturno</option>
-																				</select>
-																			</div>
-																		</div>
-																	</div> <br>
-																	<div class="row">
-																		<div class="col">
-																			<label for="nss">NSS <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números"></i></label>
-																			<input class="form-control" type="text" name="nss" required maxlength="11" pattern="[0-9]{11}" value="<?php echo $row['nss']; ?>">
-																		</div>
-																		<div class="col">
-																			<label for="rfc">RFC <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
-																			<input class="form-control" type="text" name="rfc" required maxlength="13" pattern="[A-Z0-9]{13}" value="<?php echo $row['rfc']; ?>">
-																		</div>
-																		<div class="col">
-																			<label for="curp">CURP <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
-																			<input class="form-control" type="text" name="curp" required maxlength="18" pattern="[A-Z0-9]{18}" value="<?php echo $row['curp']; ?>">
-																		</div>
-																	</div> <br>
-																	<div class="row">
-																		<div class="col">
-																			<div class="form-group">
-																				<label for="sexo">Sexo</label>
-																				<select name="sexo" id="sexo" class="form-select" required>
-																					<option selected value="<?php echo $row['sexo']; ?>"><?php echo $row['sexo']; ?></option>
-																					<option value="M">Masculino</option>
-																					<option value="F">Femenino</option>
-																				</select>
-																			</div>
-																		</div>
-																		<div class="col">
-																			<label for="fecha_nac">Fecha de nacimiento</label>
-																			<input type="date" id="fechaActual4" value="<?php echo $row['fecha_nac']; ?>" min="1920-01-01" name="fecha_nac">
-																		</div>
-																		<div class="col">
-																			<div class="form-group">
-																				<label for="puesto">Puesto</label>
-																				<select name="puesto" id="puesto" class="form-select" required>
-																					<option selected value="<?php echo $row['puesto']; ?>"><?php echo $row['puesto']; ?></option>
-																					<option value="AFANADOR">AFANADOR</option>
-																					<option value="ASESOR DE VENTAS">ASESOR DE VENTAS</option>
-																					<option value="ASISTENTE DE DIRECCION">ASISTENTE DE DIRECCION</option>
-																					<option value="ATENCION A CLIENTES">ATENCION A CLIENTES</option>
-																					<option value="AUX ADMINISTRATIVO REPSE">AUX ADMINISTRATIVO REPSE</option>
-																					<option value="AUX ADMINISTRATIVO VIGILANCIA">AUX ADMINISTRATIVO VIGILANCIA</option>
-																					<option value="AUX CUENTAS POR COBRAR">AUX CUENTAS POR COBRAR</option>
-																					<option value="AUX FACTURACION Y COBRANZA">AUX FACTURACION Y COBRANZA</option>
-																					<option value="AUX RECLUTAMIENTO Y SELECCIÓN">AUX RECLUTAMIENTO Y SELECCIÓN</option>
-																					<option value="CABALLERANGO">CABALLERANGO</option>
-																					<option value="CAPITAN">CAPITAN</option>
-																					<option value="CENTRALISTA">CENTRALISTA</option>
-																					<option value="CHOFER DE DIRECCION">CHOFER DE DIRECCION</option>
-																					<option value="CONTADOR GENERAL">CONTADOR GENERAL</option>
-																					<option value="CONTADORA">CONTADORA</option>
-																					<option value="DILIGENCIERO">DILIGENCIERO</option>
-																					<option value="ENCARGADO">ENCARGADO</option>
-																					<option value="ENCARGADO DE ALMACEN">ENCARGADO DE ALMACEN</option>
-																					<option value="ENCARGADO DE SISTEMAS">ENCARGADO DE SISTEMAS</option>
-																					<option value="GERENTE GENERAL">GERENTE GENERAL</option>
-																					<option value="GERENTE LIMPIEZA">GERENTE LIMPIEZA</option>
-																					<option value="GERENTE VIGILANCIA">GERENTE VIGILANCIA</option>
-																					<option value="JARDINERO">JARDINERO</option>
-																					<option value="MARINERO">MARINERO</option>
-																					<option value="NOMINISTA">NOMINISTA</option>
-																					<option value="PRACTICANTE">PRACTICANTE</option>
-																					<option value="SUPERVISOR DE LIMPIEZA">SUPERVISOR DE LIMPIEZA</option>
-																					<option value="SUPERVISOR DE VIGILANCIA">SUPERVISOR DE VIGILANCIA</option>
-																					<option value="TECNICO INSTALADOR">TECNICO INSTALADOR</option>
-																					<option value="VIGILANTE">VIGILANTE</option>
-																				</select>
-																			</div>
-																		</div>
-																	</div> <br>
-																	<div class="row">
-																		<div class="col">
-																			<label for="entidad">Entidad federativa de nacimiento</label>
-																			<select name="entidad" id="entidad" class="form-select" required>
-																				<option selected value="<?php echo $row['entidad']; ?>"><?php echo $row['entidad']; ?></option>
-																				<option value="AGS">AGUASCALIENTES</option>
-																				<option value="BC">BAJA CALIFORNIA</option>
-																				<option value="BCS">BAJA CALIFORNIA SUR</option>
-																				<option value="CAMP">CAMPECHE</option>
-																				<option value="CHIS">CHIAPAS</option>
-																				<option value="CHIH">CHIHUAHUA</option>
-																				<option value="COAH">COAHUILA</option>
-																				<option value="COL">COLIMA</option>
-																				<option value="DGO">DURANGO</option>
-																				<option value="GTO">GUANAJUATO</option>
-																				<option value="GRO">GUERRERO</option>
-																				<option value="HGO">HIDALGO</option>
-																				<option value="JAL">JALISCO</option>
-																				<option value="MEX">MÉXICO</option>
-																				<option value="MICH">MICHOACÁN</option>
-																				<option value="MOR">MORELOS</option>
-																				<option value="NAY">NAYARIT</option>
-																				<option value="NL">NUEVO LEÓN</option>
-																				<option value="OAX">OAXACA</option>
-																				<option value="PUE">PUEBLA</option>
-																				<option value="QRO">QUERÉTARO</option>
-																				<option value="QRoo">QUINTANA ROO</option>
-																				<option value="SLP">SAN LUIS POTOSÍ</option>
-																				<option value="SIN">SINALOA</option>
-																				<option value="SON">SONORA</option>
-																				<option value="TAB">TABASCO</option>
-																				<option value="TAM">TAMAULIPAS</option>
-																				<option value="TLAX">TLAXCALA</option>
-																				<option value="VER">VERACRUZ</option>
-																				<option value="YUC">YUCATÁN</option>
-																				<option value="ZAC">ZACATECAS</option>>
-																			</select>
-																		</div>
-																		<div class="col">
-																			<label for="cp">Código postal</label>
-																			<input class="form-control" type="text" name="cp" required maxlength="5" pattern="[0-9]{5}" value="<?php echo $row['cp']; ?>">
-																		</div>
-																		<div class="col">
-																			<div class="form-group">
-																				<label for="estado_civil">Estado civil</label>
-																				<select name="estado_civil" id="estado_civil" class="form-select" required>
-																					<option selected value="<?php echo $row['estado_civil']; ?>"><?php echo $row['estado_civil']; ?></option>
-																					<option value="S">Soltero</option>
-																					<option value="C">Casado</option>
-																				</select>
-																			</div>
-																		</div>
-																	</div> <br>
-																	<div class="row">
-																		<div class="col">
-																			<div class="form-group">
-																				<label for="e_banco">Banco para pago electrónico</label>
-																				<select name="e_banco" id="e_banco" class="form-select">
-																					<option selected value="<?php echo $row['e_banco']; ?>"><?php echo $row['e_banco']; ?></option>
-																					<?php
-																					// Conexión a la base de datos (debes configurar tus propias credenciales)
-																					$conexion = new mysqli("localhost", "root", "", "sistema");
-
-																					// Verificar si la conexión es exitosa
-																					if ($conexion->connect_error) {
-																						die("Error de conexión: " . $conexion->connect_error);
-																					}
-
-																					// Consulta SQL para obtener los datos de las columnas c_banco y n_banco de la tabla "bancos"
-																					$consulta = "SELECT c_banco, n_banco FROM bancos";
-
-																					// Ejecutar la consulta
-																					$resultado = $conexion->query($consulta);
-
-																					// Recorrer los resultados y generar opciones en el select
-																					while ($fila = $resultado->fetch_assoc()) {
-																						echo '<option value="' . $fila['c_banco'] . '">' . $fila['n_banco'] . '</option>';
-																					}
-
-																					// Cerrar la conexión a la base de datos
-																					$conexion->close();
-																					?>
-
-																				</select>
-																			</div>
-																		</div>
-																		<div class="col">
-																			<label for="n_ecuenta">Núm. de cuenta para pago elec.</label>
-																			<input class="form-control" type="text" name="n_ecuenta" maxlength="18" pattern="[0-9]{}" value="<?php echo $row['n_ecuenta']; ?>">
-																		</div>
-																		<div class="col">
-																			<label for="suc_epago">Sucursal para pago electrónico</label>
-																			<input class="form-control" type="text" name="suc_epago" maxlength="30" value="<?php echo $row['suc_epago']; ?>">
-																		</div>
-																	</div> <br>
-																	<div class="row">
-																		<div class="col-4">
-																			<label for="imss_pat">Registro patronal del IMSS</label>
-																			<input class="form-control" type="text" name="imss_pat" required maxlength="11" pattern="[A-Z0-9]{11}" value="<?php echo $row['imss_pat']; ?>">
-																		</div>
-																	</div>
-																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-																		<input type="submit" value="Guardar" class="btn btn-primary submitbutton" id="liveAlertBtn">
-																	</div>
-																</form>
-															</div>
-														</div>
-													</div>
-												</div>
-
-											</td>
-											<td class="tdh"><?php echo $row['codigo']; ?></td>
-											<td><?php echo $row['fecha_alta']; ?></td>
-											<td><?php echo $row['ap_pat']; ?></td>
-											<td><?php echo $row['ap_mat']; ?></td>
-											<td><?php echo $row['nombre']; ?></td>
-											<td><?php echo $row['ubicacion']; ?></td>
-											<td><?php echo $row['salario_diario']; ?></td>
-											<td><?php echo $row['sbc']; ?></td>
-											<td><?php echo $row['departamento']; ?></td>
-											<td><?php echo $row['turno']; ?></td>
-											<td><?php echo $row['nss']; ?></td>
-											<td><?php echo $row['rfc']; ?></td>
-											<td><?php echo $row['curp']; ?></td>
-											<td><?php echo $row['sexo']; ?></td>
-											<td><?php echo $row['fecha_nac']; ?></td>
-											<td><?php echo $row['puesto']; ?></td>
-											<td><?php echo $row['entidad']; ?></td>
-											<td><?php echo $row['cp']; ?></td>
-											<td><?php echo $row['estado_civil']; ?></td>
-											<td><?php echo $row['e_banco']; ?></td>
-											<td><?php echo $row['n_ecuenta']; ?></td>
-											<td><?php echo $row['suc_epago']; ?></td>
-											<td><?php echo $row['imss_pat']; ?></td>
-										</tr>
-									<?php } ?>
-								</tbody>
 							</table>
 						</div>
 					<?php } ?>
 					<!-- Tabla usuario 4 y 5-->
 					<?php if ($tipo_usuario == 4 || $tipo_usuario == 5) { ?>
 						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover table-responsive align-middle table-sm" id="example3" width="100%" cellspacing="0">
+							<table class="table table-striped table-bordered table-hover table-responsive align-middle table-sm" id="example2" width="100%" cellspacing="0">
 								<thead class="table-dark">
 									<tr class="tdh">
-										<th class="acciones">Mostrar información</th>
 										<th>Código</th>
 										<th>Fecha de alta</th>
 										<th>Apellido paterno</th>
@@ -803,40 +470,6 @@ include 'navbar.php';
 										<th>Registro patronal del IMSS</th>
 									</tr>
 								</thead>
-								<tbody>
-									<?php while ($row = $resultado2->fetch_assoc()) { ?>
-										<tr id="row_<?php echo $row['codigo']; ?>">
-											<td class="tdh">
-												<!-- <button class="delete-button" onclick="deleteRow(<?php echo $row['codigo']; ?>)">
-													<i class="fas fa-trash"></i>
-												</button> -->
-											</td>
-											<td class="tdh"><?php echo $row['codigo']; ?></td>
-											<td><?php echo $row['fecha_alta']; ?></td>
-											<td><?php echo $row['ap_pat']; ?></td>
-											<td><?php echo $row['ap_mat']; ?></td>
-											<td><?php echo $row['nombre']; ?></td>
-											<td><?php echo $row['ubicacion']; ?></td>
-											<td><?php echo $row['salario_diario']; ?></td>
-											<td><?php echo $row['sbc']; ?></td>
-											<td><?php echo $row['departamento']; ?></td>
-											<td><?php echo $row['turno']; ?></td>
-											<td><?php echo $row['nss']; ?></td>
-											<td><?php echo $row['rfc']; ?></td>
-											<td><?php echo $row['curp']; ?></td>
-											<td><?php echo $row['sexo']; ?></td>
-											<td><?php echo $row['fecha_nac']; ?></td>
-											<td><?php echo $row['puesto']; ?></td>
-											<td><?php echo $row['entidad']; ?></td>
-											<td><?php echo $row['cp']; ?></td>
-											<td><?php echo $row['estado_civil']; ?></td>
-											<td><?php echo $row['e_banco']; ?></td>
-											<td><?php echo $row['n_ecuenta']; ?></td>
-											<td><?php echo $row['suc_epago']; ?></td>
-											<td><?php echo $row['imss_pat']; ?></td>
-										</tr>
-									<?php } ?>
-								</tbody>
 							</table>
 						</div>
 					<?php } ?>
@@ -845,275 +478,3 @@ include 'navbar.php';
 		</div>
 	</main>
 </div>
-<script>
-	window.onload = function() {
-		var fecha = new Date(); // Fecha actual
-		var mes = fecha.getMonth() + 1; // Obteniendo mes
-		var dia = fecha.getDate(); // Obteniendo día
-		var ano = fecha.getFullYear(); // Obteniendo año
-		if (dia < 10)
-			dia = '0' + dia; // Agrega cero si es menor de 10
-		if (mes < 10)
-			mes = '0' + mes; // Agrega cero si es menor de 10
-		document.getElementById('fechaActual1').value = ano + "-" + mes + "-" + dia;
-		document.getElementById('fechaActual2').value = ano + "-" + mes + "-" + dia;
-		document.getElementById('fechaActual3').value = ano + "-" + mes + "-" + dia;
-		document.getElementById('fechaActual4').value = ano + "-" + mes + "-" + dia;
-	}
-</script>
-<script>
-	const selects = document.querySelectorAll("select");
-
-	selects.forEach(select => {
-		select.addEventListener("change", function() {
-			if (this.value === "") {
-				this.setCustomValidity("Debes seleccionar una opción válida");
-			} else {
-				this.setCustomValidity("");
-			}
-		});
-	});
-</script>
-<script>
-	function eliminarRegistro(codigo) {
-		console.log("codigo: " + codigo);
-
-		Swal.fire({
-			title: "¿Estás seguro de que deseas eliminar este empleado?",
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonText: "Sí, eliminar",
-			cancelButtonText: "Cancelar"
-		}).then((result) => {
-			if (result.isConfirmed) {
-				// Realizar una solicitud AJAX para eliminar el registro
-				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "./delete-files/eliminar_registro.php?codigo=" + codigo, true);
-				xhr.onload = function() {
-					if (xhr.status === 200) {
-						// Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
-						// Por ejemplo, eliminar la fila de la tabla
-						Swal.fire({
-							title: "Registro eliminado exitosamente",
-							icon: "success",
-							timerProgressBar: true,
-							timer: 2000 // Timer set to 2 seconds
-						});
-						var button = event.target;
-						var row = button.parentElement.parentElement.parentElement; // Ajusta la navegación DOM para llegar a la fila de la tabla
-						row.remove();
-					}
-				};
-				xhr.send();
-			}
-		});
-	}
-</script>
-
-
-<script>
-	document.addEventListener("DOMContentLoaded", function() {
-		// Obtener la fecha y hora actual
-		var now = new Date();
-
-		// Obtener día, mes, año, hora, minuto y segundo
-		var dia = now.getDate();
-		var mes = now.getMonth() + 1; // Los meses comienzan en 0, por lo que sumamos 1
-		var anio = now.getFullYear();
-		var horas = now.getHours();
-		var minutos = now.getMinutes();
-		var segundos = now.getSeconds();
-
-		// Formatear los valores para asegurarse de que siempre tengan 2 dígitos
-		if (dia < 10) {
-			dia = "0" + dia;
-		}
-		if (mes < 10) {
-			mes = "0" + mes;
-		}
-		if (horas < 10) {
-			horas = "0" + horas;
-		}
-		if (minutos < 10) {
-			minutos = "0" + minutos;
-		}
-		if (segundos < 10) {
-			segundos = "0" + segundos;
-		}
-
-		// Crear una cadena con la fecha y hora completa
-		var fechaHoraActual = anio + "-" + mes + "-" + dia + " " + horas + ":" + minutos + ":" + segundos;
-
-		// Asignar la fecha y hora actual al campo de entrada oculto
-		document.getElementById("hora_registro").value = fechaHoraActual;
-	});
-</script>
-<script>
-	function moverRepse(codigo) {
-		console.log("codigo: " + codigo);
-
-		// Utiliza SweetAlert2 en lugar de confirm
-		Swal.fire({
-			title: '¿Estás seguro?',
-			text: "¿Estás seguro de que deseas agregar a este empleado a REPSE?",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Sí, moverlo',
-			cancelButtonText: 'Cancelar'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				// Realizar una solicitud AJAX para ejecutar el archivo PHP 'mover_repse.php'
-				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "mover.php?codigo=" + codigo, true);
-				xhr.onload = function() {
-					if (xhr.status === 200) {
-						// Registro movido con éxito, puedes realizar alguna acción adicional si es necesario
-						// Utiliza SweetAlert2 en lugar de alert
-						Swal.fire({
-							title: "¡Éxito!",
-							text: "El empleado se agregó a REPSE",
-							icon: "success",
-							timerProgressBar: true,
-							timer: 2000 // Timer set to 2 seconds
-						});
-					}
-				};
-				xhr.send();
-			}
-		});
-	}
-</script>
-<script>
-	$(document).ready(function() {
-		$('#guardar').submit(function(e) {
-			e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
-
-			// Guarda una referencia al formulario para usarla dentro de la función de éxito
-			var form = $(this);
-
-			// Realiza la solicitud AJAX
-			$.ajax({
-				type: 'POST',
-				url: './register_files/guardar_informacion.php',
-				data: form.serialize(), // Serializa los datos del formulario
-				success: function(response) {
-					// Muestra SweetAlert2 en caso de éxito
-					Swal.fire({
-						icon: 'success',
-						title: 'Éxito',
-						text: 'Empleado registrado exitosamente',
-						showConfirmButton: true, // Muestra el botón de confirmación
-						confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
-					}).then((result) => {
-						// Si el usuario hace clic en el botón "Aceptar"
-						if (result.isConfirmed) {
-							// Recarga la página
-							location.reload();
-						}
-					});
-
-					// Puedes agregar más lógica aquí según la respuesta del servidor
-					console.log(response);
-				},
-				error: function(error) {
-					console.log(error);
-				}
-			});
-		});
-	});
-</script>
-<script>
-	$(document).ready(function() {
-		$('form').submit(function(e) {
-			e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
-
-			// Guarda una referencia al formulario para usarla dentro de la función de éxito
-			var form = $(this);
-
-			// Realiza la solicitud AJAX
-			$.ajax({
-				type: 'POST',
-				url: './update_files/update.php',
-				data: form.serialize(), // Serializa los datos del formulario
-				success: function(response) {
-					// Muestra SweetAlert2 en caso de éxito
-					Swal.fire({
-						icon: 'success',
-						title: 'Éxito',
-						text: 'Empleado actualizado exitosamente',
-						showConfirmButton: true, // Muestra el botón de confirmación
-						confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
-					}).then((result) => {
-						// Si el usuario hace clic en el botón "Aceptar"
-						if (result.isConfirmed) {
-							// Recarga la página
-							location.reload();
-						}
-					});
-
-					// Puedes agregar más lógica aquí según la respuesta del servidor
-					console.log(response);
-				},
-				error: function(error) {
-					console.log(error);
-				}
-			});
-		});
-	});
-</script>
-<script>
-    function formatDate(date) {
-        const options = {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        };
-        return new Date(date).toLocaleDateString('es-ES', options);
-    }
-
-    function exportData() {
-        var fecha1 = document.getElementById("fecha1").value;
-        var fecha2 = document.getElementById("fecha2").value;
-
-        // Realizar petición AJAX a PHP con las fechas seleccionadas
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                // Procesar la respuesta del servidor (puede variar según la estructura de tus datos)
-                var data = JSON.parse(xhr.responseText);
-
-                // Ejemplo de cómo construir el contenido del archivo Excel
-                var content = [
-                    ['Código', 'Fecha de alta', 'Apellido paterno', 'Apellido materno', 'Nombre', 'Tipo de periodo', 'Salario diario', 'SBC', 'Departamento', 'Turno de trabajo', 'Num seguridad social', 'RFC', 'CURP', 'Sexo', 'Fecha de nacimiento', 'Puesto', 'Entidad federativa de nacimiento', 'CP', 'Estado Civil', 'Banco para pago electrónico', 'Numero de cuenta para pago electrónico', 'Sucursal para pago electrónico', 'Registro patronal del IMSS']
-                ];
-
-                data.forEach(function (row) {
-                    // Formatear el código agregando ceros a la izquierda
-                    var codigoFormateado = String(row.codigo).padStart(5, '0');
-
-                    content.push([
-                        codigoFormateado,
-                        formatDate(row.fecha_alta), // Formatear fecha_alta
-                        row.ap_pat, row.ap_mat, row.nombre, row.ubicacion, row.salario_diario, row.sbc, row.departamento,
-                        row.turno, row.nss, row.rfc, row.curp, row.sexo, formatDate(row.fecha_nac), // Formatear fecha_nac 
-                        row.puesto, row.entidad, row.cp,
-                        row.estado_civil,
-                        row.e_banco, row.n_ecuenta, row.suc_epago, row.imss_pat
-                    ]);
-                });
-
-                // Crear un libro de Excel
-                var ws = XLSX.utils.aoa_to_sheet(content);
-                var wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "Empleados");
-
-                // Descargar el archivo Excel
-                XLSX.writeFile(wb, 'Empleados.xlsx');
-            }
-        };
-        xhr.open("GET", "exportar_excel.php?fecha1=" + fecha1 + "&fecha2=" + fecha2, true);
-        xhr.send();
-    }
-</script>
