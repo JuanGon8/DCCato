@@ -367,8 +367,34 @@ include 'navbar.php';
 					</div>
 				</form>
 
+				<div class="row m-1">
+						<div class="col-md-6">
+							<label for="codigo">Editar empleado <i class="fa-solid fa-circle-exclamation" title="Ingresa el código del empleado a editar"></i></label>
+							<input type="text" id="codigo" class="form-control" style="width: 100px;">
 
-
+							<button class="btn btn-primary mt-2" onclick="openModal()">Editar</button>
+						</div>
+					</div>
+				<!-- Modal -->
+				<div class="modal modal-lg fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<!-- Modal content goes here -->
+				</div>
+				<script>
+					function openModal() {
+						var codigo = $('#codigo').val();
+						$.ajax({
+							type: 'POST',
+							url: 'actualizar.php', // Replace with your server-side script to fetch record
+							data: {
+								codigo: codigo
+							},
+							success: function(response) {
+								$('#editModal').html(response);
+								$('#editModal').modal('show');
+							}
+						});
+					}
+				</script>
 
 				<div class="card-body">
 					<!-- Tabla usuario 1 y 2 -->
@@ -377,6 +403,7 @@ include 'navbar.php';
 							<table class="table table-striped table-bordered table-hover table-responsive align-middle table-sm" id="example2" width="100%" cellspacing="0">
 								<thead class="table-dark">
 									<tr class="tdh">
+										<!-- <th>Acciones</th> -->
 										<th>Código</th>
 										<th>Fecha de alta</th>
 										<th>Apellido paterno</th>
@@ -403,6 +430,9 @@ include 'navbar.php';
 									</tr>
 								</thead>
 							</table>
+							<tbody>
+
+							</tbody>
 						</div>
 					<?php } ?>
 					<!-- Tabla usuario 3  -->
@@ -478,3 +508,79 @@ include 'navbar.php';
 		</div>
 	</main>
 </div>
+<script>
+	function moverRepse(codigo) {
+		console.log("Codigo: " + codigo);
+
+		// Utiliza SweetAlert2 en lugar de confirm
+		Swal.fire({
+			title: '¿Estás seguro?',
+			text: "¿Estás seguro de que deseas agregar a este empleado a REPSE?",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sí, moverlo',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				// Realizar una solicitud AJAX para ejecutar el archivo PHP 'mover_repse.php'
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "mover.php?codigo=" + codigo, true);
+				xhr.onload = function() {
+					if (xhr.status === 200) {
+						// Registro movido con éxito, puedes realizar alguna acción adicional si es necesario
+						// Utiliza SweetAlert2 en lugar de alert
+						Swal.fire({
+							title: "¡Éxito!",
+							text: "El empleado se agregó a REPSE",
+							icon: "success",
+							timerProgressBar: true,
+							timer: 2000 // Timer set to 2 seconds
+						});
+					}
+				};
+				xhr.send();
+			}
+		});
+	}
+</script>
+<script>
+	$(document).ready(function() {
+		$('form').submit(function(e) {
+			e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+
+			// Guarda una referencia al formulario para usarla dentro de la función de éxito
+			var form = $(this);
+
+			// Realiza la solicitud AJAX
+			$.ajax({
+				type: 'POST',
+				url: './update_files/update.php',
+				data: form.serialize(), // Serializa los datos del formulario
+				success: function(response) {
+					// Muestra SweetAlert2 en caso de éxito
+					Swal.fire({
+						icon: 'success',
+						title: 'Éxito',
+						text: 'Empleado actualizado exitosamente',
+						showConfirmButton: true, // Muestra el botón de confirmación
+						confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+					}).then((result) => {
+						// Si el usuario hace clic en el botón "Aceptar"
+						if (result.isConfirmed) {
+							// Recarga la página
+							location.reload();
+						}
+					});
+
+					// Puedes agregar más lógica aquí según la respuesta del servidor
+					console.log(response);
+				},
+				error: function(error) {
+					console.log(error);
+				}
+			});
+		});
+	});
+</script>

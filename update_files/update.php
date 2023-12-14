@@ -64,7 +64,7 @@
             WHERE codigo = '$codigo'"; // Reemplaza "id" por el identificador del registro a actualizar
 
     if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Los datos se guardaron correctamente.'); window.location.href = 'registro_nominas.php';</script>";
+        echo "<script>alert('Los datos se guardaron correctamente.'); window.location.href = '../registro_nominas.php';</script>";
     } else {
         echo "Error al actualizar la información: " . $conn->error;
     }

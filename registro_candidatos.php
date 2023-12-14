@@ -78,7 +78,7 @@ include 'navbar.php';
 							<label for="nombres">Nombres</label>
 							<input class="form-control inputwidth" type="text" name="nombres">
 						</div>
-						<div class="col">
+						<div class="col"> 
 							<label for="primer_apellido">Primer Apellido</label>
 							<input class="form-control" type="text" name="primer_apellido">
 						</div>

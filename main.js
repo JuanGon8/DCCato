@@ -421,7 +421,8 @@ $(document).ready(function () {
         }
         return data;
       }
-    }],
+    },
+  ],
   });
 });
 
