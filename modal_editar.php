@@ -14,21 +14,21 @@
                     </div>
                     <div class="col">
                         <label for="ap_pat">Apellido paterno</label>
-                        <input class="form-control" type="text" name="ap_pat" required maxlength="30" value="<?php echo $row['ap_pat']; ?>">
+                        <input class="form-control" type="text" name="ap_pat"  maxlength="30" value="<?php echo $row['ap_pat']; ?>">
                     </div>
                     <div class="col">
                         <label for="ap_mat">Apellido materno</label>
-                        <input class="form-control" type="text" name="ap_mat" required maxlength="30" value="<?php echo $row['ap_mat']; ?>">
+                        <input class="form-control" type="text" name="ap_mat"  maxlength="30" value="<?php echo $row['ap_mat']; ?>">
                     </div>
                 </div> <br>
                 <div class="row">
                     <div class="col">
                         <label for="nombre">Nombre</label>
-                        <input class="form-control" type="text" name="nombre" required maxlength="40" value="<?php echo $row['nombre']; ?>">
+                        <input class="form-control" type="text" name="nombre"  maxlength="40" value="<?php echo $row['nombre']; ?>">
                     </div>
                     <div class="col">
                         <label for="ubicacion">Tipo de periodo</label>
-                        <select name="ubicacion" id="ubicacion" class="form-select" required>
+                        <select name="ubicacion" id="ubicacion" class="form-select" >
                             <option selected value="<?php echo $row['ubicacion']; ?>"><?php echo $row['ubicacion']; ?></option>
                             <?php
                             // Conexión a la base de datos (debes configurar tus propias credenciales)
@@ -57,18 +57,18 @@
                     </div>
                     <div class="col">
                         <label for="salario_diario">Salario diario</label>
-                        <input class="form-control" type="text" name="salario_diario" required maxlength="10" pattern="[0-9]+\.[0-9]+" value="<?php echo $row['salario_diario']; ?>">
+                        <input class="form-control" type="text" name="salario_diario"  maxlength="10" pattern="[0-9]+\.[0-9]+" value="<?php echo $row['salario_diario']; ?>">
                     </div>
                 </div> <br>
                 <div class="row">
                     <div class="col">
                         <label for="sbc">SBC</label>
-                        <input class="form-control" type="text" name="sbc" required maxlength="10" pattern="[0-9]+\.[0-9]+" value="<?php echo $row['sbc']; ?>">
+                        <input class="form-control" type="text" name="sbc"  maxlength="10" pattern="[0-9]+\.[0-9]+" value="<?php echo $row['sbc']; ?>">
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="departamento">Departamento</label>
-                            <select name="departamento" id="departamento" class="form-select" required>
+                            <select name="departamento" id="departamento" class="form-select" >
                                 <option selected value="<?php echo $row['departamento']; ?>"><?php echo $row['departamento']; ?></option>
                                 <?php
                                 // Conexión a la base de datos (debes configurar tus propias credenciales)
@@ -99,7 +99,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="turno">Turno de trabajo</label>
-                            <select name="turno" id="turno" class="form-select" required>
+                            <select name="turno" id="turno" class="form-select" >
                                 <option selected value="<?php echo $row['turno']; ?>"><?php echo $row['turno']; ?></option>
                                 <option value="Matutino">Matutino</option>
                                 <option value="Matutino limpieza">Matutino limpieza</option>
@@ -112,22 +112,22 @@
                 <div class="row">
                     <div class="col">
                         <label for="nss">NSS <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números"></i></label>
-                        <input class="form-control" type="text" name="nss" required maxlength="11" pattern="[0-9]{11}" value="<?php echo $row['nss']; ?>">
+                        <input class="form-control" type="text" name="nss"  maxlength="11" pattern="[0-9]{11}" value="<?php echo $row['nss']; ?>">
                     </div>
                     <div class="col">
                         <label for="rfc">RFC <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
-                        <input class="form-control" type="text" name="rfc" required maxlength="13" pattern="[A-Z0-9]{13}" value="<?php echo $row['rfc']; ?>">
+                        <input class="form-control" type="text" name="rfc"  maxlength="13" pattern="[A-Z0-9]{13}" value="<?php echo $row['rfc']; ?>">
                     </div>
                     <div class="col">
                         <label for="curp">CURP <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
-                        <input class="form-control" type="text" name="curp" required maxlength="18" pattern="[A-Z0-9]{18}" value="<?php echo $row['curp']; ?>">
+                        <input class="form-control" type="text" name="curp"  maxlength="18" pattern="[A-Z0-9]{18}" value="<?php echo $row['curp']; ?>">
                     </div>
                 </div> <br>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
                             <label for="sexo">Sexo</label>
-                            <select name="sexo" id="sexo" class="form-select" required>
+                            <select name="sexo" id="sexo" class="form-select" >
                                 <option selected value="<?php echo $row['sexo']; ?>"><?php echo $row['sexo']; ?></option>
                                 <option value="M">Masculino</option>
                                 <option value="F">Femenino</option>
@@ -141,7 +141,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="puesto">Puesto</label>
-                            <select name="puesto" id="puesto" class="form-select" required>
+                            <select name="puesto" id="puesto" class="form-select" >
                                 <option selected value="<?php echo $row['puesto']; ?>"><?php echo $row['puesto']; ?></option>
                                 <option value="AFANADOR">AFANADOR</option>
                                 <option value="ASESOR DE VENTAS">ASESOR DE VENTAS</option>
@@ -180,7 +180,7 @@
                 <div class="row">
                     <div class="col">
                         <label for="entidad">Entidad federativa de nacimiento</label>
-                        <select name="entidad" id="entidad" class="form-select" required>
+                        <select name="entidad" id="entidad" class="form-select" >
                             <option selected value="<?php echo $row['entidad']; ?>"><?php echo $row['entidad']; ?></option>
                             <option value="AGS">AGUASCALIENTES</option>
                             <option value="BC">BAJA CALIFORNIA</option>
@@ -217,12 +217,12 @@
                     </div>
                     <div class="col">
                         <label for="cp">Código postal</label>
-                        <input class="form-control" type="text" name="cp" required maxlength="5" pattern="[0-9]{5}" value="<?php echo $row['cp']; ?>">
+                        <input class="form-control" type="text" name="cp"  maxlength="5" pattern="[0-9]{5}" value="<?php echo $row['cp']; ?>">
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="estado_civil">Estado civil</label>
-                            <select name="estado_civil" id="estado_civil" class="form-select" required>
+                            <select name="estado_civil" id="estado_civil" class="form-select" >
                                 <option selected value="<?php echo $row['estado_civil']; ?>"><?php echo $row['estado_civil']; ?></option>
                                 <option value="S">Soltero</option>
                                 <option value="C">Casado</option>
@@ -275,7 +275,7 @@
                 <div class="row">
                     <div class="col-4">
                         <label for="imss_pat">Registro patronal del IMSS</label>
-                        <input class="form-control" type="text" name="imss_pat" required maxlength="11" pattern="[A-Z0-9]{11}" value="<?php echo $row['imss_pat']; ?>">
+                        <input class="form-control" type="text" name="imss_pat"  maxlength="11" pattern="[A-Z0-9]{11}" value="<?php echo $row['imss_pat']; ?>">
                     </div>
                     <div class="col">
 
