@@ -856,3 +856,48 @@ function exportData() {
   xhr.open("GET", "exportar_excel.php?fecha1=" + fecha1 + "&fecha2=" + fecha2, true);
   xhr.send();
 }
+function exportData2() {
+  var cod1 = document.getElementById("cod1").value;
+  var cod2 = document.getElementById("cod2").value;
+  console.log("cod1:", cod1);
+  console.log("cod2:", cod2);
+
+  // Realizar petición AJAX a PHP con las fechas seleccionadas
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      // Procesar la respuesta del servidor (puede variar según la estructura de tus datos)
+      var data = JSON.parse(xhr.responseText);
+
+      // Ejemplo de cómo construir el contenido del archivo Excel
+      var content = [
+        ['Código', 'Fecha de alta', 'Apellido paterno', 'Apellido materno', 'Nombre', 'Tipo de periodo', 'Salario diario', 'SBC parte fija', 'Departamento', 'Turno de trabajo', 'Num seguridad social', 'RFC', 'CURP', 'Sexo', 'Fecha de nacimiento', 'Puesto', 'Entidad federativa de nacimiento', 'CP', 'Estado Civil', 'Banco para pago electrónico', 'Numero de cuenta para pago electrónico', 'Sucursal para pago electrónico', 'Registro patronal del IMSS']
+      ];
+
+      data.forEach(function (row) {
+        // Formatear el código agregando ceros a la izquierda
+        var codigoFormateado = String(row.codigo).padStart(5, '0');
+
+        content.push([
+          codigoFormateado,
+          formatDate(row.fecha_alta), // Formatear fecha_alta
+          row.ap_pat, row.ap_mat, row.nombre, row.ubicacion, row.salario_diario, row.sbc, row.departamento,
+          row.turno, row.nss, row.rfc, row.curp, row.sexo, formatDate(row.fecha_nac), // Formatear fecha_nac 
+          row.puesto, row.entidad, row.cp,
+          row.estado_civil,
+          row.e_banco, row.n_ecuenta, row.suc_epago, row.imss_pat
+        ]);
+      });
+
+      // Crear un libro de Excel
+      var ws = XLSX.utils.aoa_to_sheet(content);
+      var wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Empleados");
+
+      // Descargar el archivo Excel
+      XLSX.writeFile(wb, 'Empleados.xlsx');
+    }
+  };
+  xhr.open("GET", "export_codigo.php?cod1=" + cod1 + "&cod2=" + cod2, true);
+  xhr.send();
+}

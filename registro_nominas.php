@@ -366,6 +366,24 @@ include 'navbar.php';
 						</div>
 					</div>
 				</form>
+				<h4 class="m-3">Exportar empleados por código</h4>
+				<form class="form-inline d-flex m-3" id="exportForm2">
+					<div class="row align-items-center">
+						<div class="col form-group">
+							<label for="cod1" class="mr-2">De</label>
+							<input type="text" id="cod1" name="cod1" class="form-control custom-input" required>
+						</div>
+
+						<div class="col form-group">
+							<label for="cod2" class="mr-2">Hasta</label>
+							<input type="text" id="cod2" name="cod2" class="form-control custom-input" required>
+						</div>
+
+						<div class="col form-group d-flex justify-content-center">
+							<button type="button" class="btn btn-success" onclick="exportData2()">Exportar <i class="fas fa-file-excel"></i></button>
+						</div>
+					</div>
+				</form>
 
 				<div class="row m-1">
 						<div class="col-md-6">
