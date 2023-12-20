@@ -835,9 +835,9 @@ function exportData() {
 
         content.push([
           codigoFormateado,
-          formatDate(row.fecha_alta), // Formatear fecha_alta
+          formatDate(addDay(row.fecha_alta)), // Formatear fecha_alta sumando un día
           row.ap_pat, row.ap_mat, row.nombre, row.ubicacion, row.salario_diario, row.sbc, row.departamento,
-          row.turno, row.nss, row.rfc, row.curp, row.sexo, formatDate(row.fecha_nac), // Formatear fecha_nac 
+          row.turno, row.nss, row.rfc, row.curp, row.sexo, formatDate(addDay(row.fecha_nac)), // Formatear fecha_nac sumando un día
           row.puesto, row.entidad, row.cp,
           row.estado_civil,
           row.e_banco, row.n_ecuenta, row.suc_epago, row.imss_pat
@@ -856,6 +856,7 @@ function exportData() {
   xhr.open("GET", "exportar_excel.php?fecha1=" + fecha1 + "&fecha2=" + fecha2, true);
   xhr.send();
 }
+
 function exportData2() {
   var cod1 = document.getElementById("cod1").value;
   var cod2 = document.getElementById("cod2").value;
@@ -880,14 +881,15 @@ function exportData2() {
 
         content.push([
           codigoFormateado,
-          formatDate(row.fecha_alta), // Formatear fecha_alta
+          formatDate(addDay(row.fecha_alta)), // Formatear fecha_alta sumando un día
           row.ap_pat, row.ap_mat, row.nombre, row.ubicacion, row.salario_diario, row.sbc, row.departamento,
-          row.turno, row.nss, row.rfc, row.curp, row.sexo, formatDate(row.fecha_nac), // Formatear fecha_nac 
+          row.turno, row.nss, row.rfc, row.curp, row.sexo, formatDate(addDay(row.fecha_nac)), // Formatear fecha_nac sumando un día
           row.puesto, row.entidad, row.cp,
           row.estado_civil,
           row.e_banco, row.n_ecuenta, row.suc_epago, row.imss_pat
         ]);
       });
+
 
       // Crear un libro de Excel
       var ws = XLSX.utils.aoa_to_sheet(content);
@@ -900,4 +902,35 @@ function exportData2() {
   };
   xhr.open("GET", "export_codigo.php?cod1=" + cod1 + "&cod2=" + cod2, true);
   xhr.send();
+}
+
+// Función para sumar un día a una fecha
+function addDay(dateString) {
+  var date = new Date(dateString);
+  date.setDate(date.getDate() + 1);
+  return date;
+}
+
+// Función para formatear una fecha
+function formatDate(date) {
+  var dd = date.getDate();
+  var mm = date.getMonth() + 1;
+  var yyyy = date.getFullYear();
+  return dd + '/' + mm + '/' + yyyy;
+}
+
+
+// Función para sumar un día a una fecha
+function addDay2(dateString) {
+  var date = new Date(dateString);
+  date.setDate(date.getDate() + 1);
+  return date;
+}
+
+// Función para formatear una fecha
+function formatDate2(date) {
+  var dd = date.getDate();
+  var mm = date.getMonth() + 1;
+  var yyyy = date.getFullYear();
+  return dd + '/' + mm + '/' + yyyy;
 }
