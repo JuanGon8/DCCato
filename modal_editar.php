@@ -14,21 +14,21 @@
                     </div>
                     <div class="col">
                         <label for="ap_pat">Apellido paterno</label>
-                        <input class="form-control" type="text" name="ap_pat"  maxlength="30" value="<?php echo $row['ap_pat']; ?>">
+                        <input class="form-control" type="text" name="ap_pat" maxlength="30" value="<?php echo $row['ap_pat']; ?>">
                     </div>
                     <div class="col">
                         <label for="ap_mat">Apellido materno</label>
-                        <input class="form-control" type="text" name="ap_mat"  maxlength="30" value="<?php echo $row['ap_mat']; ?>">
+                        <input class="form-control" type="text" name="ap_mat" maxlength="30" value="<?php echo $row['ap_mat']; ?>">
                     </div>
                 </div> <br>
                 <div class="row">
                     <div class="col">
                         <label for="nombre">Nombre</label>
-                        <input class="form-control" type="text" name="nombre"  maxlength="40" value="<?php echo $row['nombre']; ?>">
+                        <input class="form-control" type="text" name="nombre" maxlength="40" value="<?php echo $row['nombre']; ?>">
                     </div>
                     <div class="col">
                         <label for="ubicacion">Tipo de periodo</label>
-                        <select name="ubicacion" id="ubicacion" class="form-select" >
+                        <select name="ubicacion" id="ubicacion" class="form-select">
                             <option selected value="<?php echo $row['ubicacion']; ?>"><?php echo $row['ubicacion']; ?></option>
                             <?php
                             // Conexión a la base de datos (debes configurar tus propias credenciales)
@@ -57,18 +57,18 @@
                     </div>
                     <div class="col">
                         <label for="salario_diario">Salario diario</label>
-                        <input class="form-control" type="text" name="salario_diario"  maxlength="10" pattern="[0-9]+\.[0-9]+" value="<?php echo $row['salario_diario']; ?>">
+                        <input class="form-control" type="text" name="salario_diario" maxlength="10" pattern="[0-9]+\.[0-9]+" value="<?php echo $row['salario_diario']; ?>">
                     </div>
                 </div> <br>
                 <div class="row">
                     <div class="col">
                         <label for="sbc">SBC</label>
-                        <input class="form-control" type="text" name="sbc"  maxlength="10" pattern="[0-9]+\.[0-9]+" value="<?php echo $row['sbc']; ?>">
+                        <input class="form-control" type="text" name="sbc" maxlength="10" pattern="[0-9]+\.[0-9]+" value="<?php echo $row['sbc']; ?>">
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="departamento">Departamento</label>
-                            <select name="departamento" id="departamento" class="form-select" >
+                            <select name="departamento" id="departamento" class="form-select">
                                 <option selected value="<?php echo $row['departamento']; ?>"><?php echo $row['departamento']; ?></option>
                                 <?php
                                 // Conexión a la base de datos (debes configurar tus propias credenciales)
@@ -99,7 +99,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="turno">Turno de trabajo</label>
-                            <select name="turno" id="turno" class="form-select" >
+                            <select name="turno" id="turno" class="form-select">
                                 <option selected value="<?php echo $row['turno']; ?>"><?php echo $row['turno']; ?></option>
                                 <option value="Matutino">Matutino</option>
                                 <option value="Matutino limpieza">Matutino limpieza</option>
@@ -112,22 +112,22 @@
                 <div class="row">
                     <div class="col">
                         <label for="nss">NSS <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números"></i></label>
-                        <input class="form-control" type="text" name="nss"  maxlength="11" pattern="[0-9]{11}" value="<?php echo $row['nss']; ?>">
+                        <input class="form-control" type="text" name="nss" maxlength="11" pattern="[0-9]{11}" value="<?php echo $row['nss']; ?>">
                     </div>
                     <div class="col">
                         <label for="rfc">RFC <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
-                        <input class="form-control" type="text" name="rfc"  maxlength="13" pattern="[A-Z0-9]{13}" value="<?php echo $row['rfc']; ?>">
+                        <input class="form-control" type="text" name="rfc" maxlength="13" pattern="[A-Z0-9]{13}" value="<?php echo $row['rfc']; ?>">
                     </div>
                     <div class="col">
                         <label for="curp">CURP <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
-                        <input class="form-control" type="text" name="curp"  maxlength="18" pattern="[A-Z0-9]{18}" value="<?php echo $row['curp']; ?>">
+                        <input class="form-control" type="text" name="curp" maxlength="18" pattern="[A-Z0-9]{18}" value="<?php echo $row['curp']; ?>">
                     </div>
                 </div> <br>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
                             <label for="sexo">Sexo</label>
-                            <select name="sexo" id="sexo" class="form-select" >
+                            <select name="sexo" id="sexo" class="form-select">
                                 <option selected value="<?php echo $row['sexo']; ?>"><?php echo $row['sexo']; ?></option>
                                 <option value="M">Masculino</option>
                                 <option value="F">Femenino</option>
@@ -141,7 +141,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="puesto">Puesto</label>
-                            <select name="puesto" id="puesto" class="form-select" >
+                            <select name="puesto" id="puesto" class="form-select">
                                 <option selected value="<?php echo $row['puesto']; ?>"><?php echo $row['puesto']; ?></option>
                                 <option value="AFANADOR">AFANADOR</option>
                                 <option value="ASESOR DE VENTAS">ASESOR DE VENTAS</option>
@@ -180,49 +180,49 @@
                 <div class="row">
                     <div class="col">
                         <label for="entidad">Entidad federativa de nacimiento</label>
-                        <select name="entidad" id="entidad" class="form-select" >
+                        <select name="entidad" id="entidad" class="form-select">
                             <option selected value="<?php echo $row['entidad']; ?>"><?php echo $row['entidad']; ?></option>
-                            <option value="AGS">AGUASCALIENTES</option>
-                            <option value="BC">BAJA CALIFORNIA</option>
-                            <option value="BCS">BAJA CALIFORNIA SUR</option>
-                            <option value="CAMP">CAMPECHE</option>
-                            <option value="CHIS">CHIAPAS</option>
-                            <option value="CHIH">CHIHUAHUA</option>
-                            <option value="COAH">COAHUILA</option>
-                            <option value="COL">COLIMA</option>
-                            <option value="DGO">DURANGO</option>
-                            <option value="GTO">GUANAJUATO</option>
-                            <option value="GRO">GUERRERO</option>
-                            <option value="HGO">HIDALGO</option>
-                            <option value="JAL">JALISCO</option>
-                            <option value="MEX">MÉXICO</option>
-                            <option value="MICH">MICHOACÁN</option>
-                            <option value="MOR">MORELOS</option>
-                            <option value="NAY">NAYARIT</option>
-                            <option value="NL">NUEVO LEÓN</option>
-                            <option value="OAX">OAXACA</option>
-                            <option value="PUE">PUEBLA</option>
-                            <option value="QRO">QUERÉTARO</option>
-                            <option value="QRoo">QUINTANA ROO</option>
-                            <option value="SLP">SAN LUIS POTOSÍ</option>
-                            <option value="SIN">SINALOA</option>
-                            <option value="SON">SONORA</option>
-                            <option value="TAB">TABASCO</option>
-                            <option value="TAM">TAMAULIPAS</option>
-                            <option value="TLAX">TLAXCALA</option>
-                            <option value="VER">VERACRUZ</option>
-                            <option value="YUC">YUCATÁN</option>
-                            <option value="ZAC">ZACATECAS</option>>
+                            <option value="AGUASCALIENTES">AGUASCALIENTES</option>
+                            <option value="BAJA CALIFORNIA">BAJA CALIFORNIA</option>
+                            <option value="BAJA CALIFORNIA SUR">BAJA CALIFORNIA SUR</option>
+                            <option value="CAMPECHE">CAMPECHE</option>
+                            <option value="CHIAPAS">CHIAPAS</option>
+                            <option value="CHIHUAHUA">CHIHUAHUA</option>
+                            <option value="COAHUILA">COAHUILA</option>
+                            <option value="COLIMA">COLIMA</option>
+                            <option value="DURANGO">DURANGO</option>
+                            <option value="GUANAJUATO">GUANAJUATO</option>
+                            <option value="GUERRERO">GUERRERO</option>
+                            <option value="HIDALGO">HIDALGO</option>
+                            <option value="JALISCO">JALISCO</option>
+                            <option value="MEXICO">MÉXICO</option>
+                            <option value="MICHOACAN">MICHOACÁN</option>
+                            <option value="MORELOS">MORELOS</option>
+                            <option value="NAYARIT">NAYARIT</option>
+                            <option value="NUEVO LEON">NUEVO LEÓN</option>
+                            <option value="OAXACA">OAXACA</option>
+                            <option value="PUEBLA">PUEBLA</option>
+                            <option value="QUERETARO">QUERÉTARO</option>
+                            <option value="QUINTANA ROO">QUINTANA ROO</option>
+                            <option value="SAN LUIS POTOSI">SAN LUIS POTOSÍ</option>
+                            <option value="SINALOA">SINALOA</option>
+                            <option value="SONORA">SONORA</option>
+                            <option value="TABASCO">TABASCO</option>
+                            <option value="TAMAULIPAS">TAMAULIPAS</option>
+                            <option value="TLAXCALA">TLAXCALA</option>
+                            <option value="VERACRUZ">VERACRUZ</option>
+                            <option value="YUCATAN">YUCATÁN</option>
+                            <option value="ZACATECAS">ZACATECAS</option>
                         </select>
                     </div>
                     <div class="col">
                         <label for="cp">Código postal</label>
-                        <input class="form-control" type="text" name="cp"  maxlength="5" pattern="[0-9]{5}" value="<?php echo $row['cp']; ?>">
+                        <input class="form-control" type="text" name="cp" maxlength="5" pattern="[0-9]{5}" value="<?php echo $row['cp']; ?>">
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="estado_civil">Estado civil</label>
-                            <select name="estado_civil" id="estado_civil" class="form-select" >
+                            <select name="estado_civil" id="estado_civil" class="form-select">
                                 <option selected value="<?php echo $row['estado_civil']; ?>"><?php echo $row['estado_civil']; ?></option>
                                 <option value="S">Soltero</option>
                                 <option value="C">Casado</option>
@@ -275,7 +275,7 @@
                 <div class="row">
                     <div class="col-4">
                         <label for="imss_pat">Registro patronal del IMSS</label>
-                        <input class="form-control" type="text" name="imss_pat"  maxlength="11" pattern="[A-Z0-9]{11}" value="<?php echo $row['imss_pat']; ?>">
+                        <input class="form-control" type="text" name="imss_pat" maxlength="11" pattern="[A-Z0-9]{11}" value="<?php echo $row['imss_pat']; ?>">
                     </div>
                     <div class="col">
 
@@ -290,41 +290,41 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-  $('form').submit(function (e) {
-    e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+    $(document).ready(function() {
+        $('form').submit(function(e) {
+            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
 
-    // Guarda una referencia al formulario para usarla dentro de la función de éxito
-    var form = $(this);
+            // Guarda una referencia al formulario para usarla dentro de la función de éxito
+            var form = $(this);
 
-    // Realiza la solicitud AJAX
-    $.ajax({
-      type: 'POST',
-      url: './update_files/update.php',
-      data: form.serialize(), // Serializa los datos del formulario
-      success: function (response) {
-        // Muestra SweetAlert2 en caso de éxito
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Empleado actualizado exitosamente',
-          showConfirmButton: true, // Muestra el botón de confirmación
-          confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
-        }).then((result) => {
-          // Si el usuario hace clic en el botón "Aceptar"
-          if (result.isConfirmed) {
-            // Recarga la página
-            location.reload();
-          }
+            // Realiza la solicitud AJAX
+            $.ajax({
+                type: 'POST',
+                url: './update_files/update.php',
+                data: form.serialize(), // Serializa los datos del formulario
+                success: function(response) {
+                    // Muestra SweetAlert2 en caso de éxito
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Empleado actualizado exitosamente',
+                        showConfirmButton: true, // Muestra el botón de confirmación
+                        confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+                    }).then((result) => {
+                        // Si el usuario hace clic en el botón "Aceptar"
+                        if (result.isConfirmed) {
+                            // Recarga la página
+                            location.reload();
+                        }
+                    });
+
+                    // Puedes agregar más lógica aquí según la respuesta del servidor
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         });
-
-        // Puedes agregar más lógica aquí según la respuesta del servidor
-        console.log(response);
-      },
-      error: function (error) {
-        console.log(error);
-      }
     });
-  });
-});
 </script>

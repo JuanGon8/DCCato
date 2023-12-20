@@ -277,7 +277,6 @@ include 'navbar.php';
 								<option value="VERACRUZ">VERACRUZ</option>
 								<option value="YUCATAN">YUCATÁN</option>
 								<option value="ZACATECAS">ZACATECAS</option>
-
 							</select>
 						</div>
 						<div class="col">
@@ -386,13 +385,13 @@ include 'navbar.php';
 				</form>
 
 				<div class="row m-1">
-						<div class="col-md-6">
-							<label for="codigo">Editar empleado <i class="fa-solid fa-circle-exclamation" title="Ingresa el código del empleado a editar"></i></label>
-							<input type="text" id="codigo" class="form-control" style="width: 100px;">
+					<div class="col-md-6">
+						<label for="codigo">Editar empleado <i class="fa-solid fa-circle-exclamation" title="Ingresa el código del empleado a editar"></i></label>
+						<input type="text" id="codigo" class="form-control" style="width: 100px;">
 
-							<button class="btn btn-primary mt-2" onclick="openModal()">Editar</button>
-						</div>
+						<button class="btn btn-primary mt-2" onclick="openModal()">Editar</button>
 					</div>
+				</div>
 				<!-- Modal -->
 				<div class="modal modal-lg fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<!-- Modal content goes here -->
