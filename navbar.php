@@ -23,7 +23,7 @@ $sql1 = "SELECT * FROM repse";
 $resultado11 = $mysqli->query($sql1);
 $sql2 = "SELECT * FROM reclutamiento_repse";
 $resultado12 = $mysqli->query($sql2);
-$sql3 = "SELECT * FROM alta_reportes";
+$sql3 = "SELECT * FROM alta_reportes ORDER BY fecha DESC";
 $resultado13 = $mysqli->query($sql3);
 
 $tipo_usuario = $_SESSION['tipo_usuario'];

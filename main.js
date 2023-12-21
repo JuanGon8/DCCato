@@ -526,9 +526,7 @@ $(document).ready(function () {
     },
     responsive: true,
     dom: 'QBfrtilp',
-    order: [
-      [6, 'desc']
-    ],
+    
     // Fecha con formato dd/mm/yyyy
 
     // Botones de excel, pdf e impresión
