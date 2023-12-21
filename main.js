@@ -913,8 +913,8 @@ function addDay(dateString) {
 
 // Función para formatear una fecha
 function formatDate(date) {
-  var dd = date.getDate();
-  var mm = date.getMonth() + 1;
+  var dd = String(date.getDate()).padStart(2, '0');
+  var mm = String(date.getMonth() + 1).padStart(2, '0');
   var yyyy = date.getFullYear();
   return dd + '/' + mm + '/' + yyyy;
 }
