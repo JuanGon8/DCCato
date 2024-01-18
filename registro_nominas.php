@@ -125,13 +125,13 @@ include 'navbar.php';
 						</div>
 						<div class="col">
 							<label for="salario_diario">Salario diario</label>
-							<input class="form-control" type="text" name="salario_diario" required maxlength="10" pattern="[0-9]+\.[0-9]+">
+							<input class="form-control" type="text" name="salario_diario" required maxlength="10">
 						</div>
 					</div><br>
 					<div class="row">
 						<div class="col">
 							<label for="sbc">SBC</label>
-							<input class="form-control" type="text" name="sbc" required maxlength="10" pattern="[0-9]+\.[0-9]+">
+							<input class="form-control" type="text" name="sbc" required maxlength="10">
 						</div>
 						<div class="col">
 							<div class="form-group">
@@ -178,15 +178,15 @@ include 'navbar.php';
 						</div>
 						<div class="col">
 							<label for="nss">NSS <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números"></i></label>
-							<input class="form-control" type="text" name="nss" maxlength="11" pattern="[0-9]{11}">
+							<input class="form-control" type="text" name="nss" maxlength="11">
 						</div>
 						<div class="col">
 							<label for="rfc">RFC <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
-							<input class="form-control" type="text" name="rfc" maxlength="13" pattern="[A-Z0-9]{13}">
+							<input class="form-control" type="text" name="rfc" maxlength="13" >
 						</div>
 						<div class="col">
 							<label for="curp">CURP <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
-							<input class="form-control" type="text" name="curp" required maxlength="18" pattern="[A-Z0-9]{18}">
+							<input class="form-control" type="text" name="curp" required maxlength="18">
 						</div>
 					</div><br>
 					<div class="row">
@@ -211,6 +211,7 @@ include 'navbar.php';
 									<option selected disabled value="">Elige una opción</option>
 									<option value="AFANADOR">AFANADOR</option>
 									<option value="ASESOR DE VENTAS">ASESOR DE VENTAS</option>
+									<option value="AUXILIAR CONTABLE">AUXILIAR CONTABLE</option>
 									<option value="ASISTENTE DE DIRECCION">ASISTENTE DE DIRECCION</option>
 									<option value="ATENCION A CLIENTES">ATENCION A CLIENTES</option>
 									<option value="AUX ADMINISTRATIVO REPSE">AUX ADMINISTRATIVO REPSE</option>
@@ -281,7 +282,7 @@ include 'navbar.php';
 						</div>
 						<div class="col">
 							<label for="cp">Código postal</label>
-							<input class="form-control" type="text" name="cp" required maxlength="5" pattern="[0-9]{5}">
+							<input class="form-control" type="text" name="cp" required maxlength="5">
 						</div>
 						<div class="col">
 							<div class="form-group">
@@ -328,7 +329,7 @@ include 'navbar.php';
 						</div>
 						<div class="col">
 							<label for="n_ecuenta">Número de cuenta para pago electrónico</label>
-							<input class="form-control" type="text" name="n_ecuenta" maxlength="18" pattern="[0-9]{}">
+							<input class="form-control" type="text" name="n_ecuenta" maxlength="18">
 						</div>
 						<div class="col">
 							<label for="suc_epago">Sucursal para pago electrónico</label>
@@ -336,7 +337,7 @@ include 'navbar.php';
 						</div>
 						<div class="col">
 							<label for="imss_pat">Registro patronal del IMSS</label>
-							<input class="form-control" type="text" name="imss_pat" required maxlength="11" pattern="[A-Z0-9]{11}">
+							<input class="form-control" type="text" name="imss_pat" required maxlength="11" >
 						</div>
 					</div>
 					<br>
