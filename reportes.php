@@ -122,6 +122,7 @@ include 'navbar.php';
                                                                             <option value="Antonio D">Antonio D</option>
                                                                             <option value="Juan G">Juan G</option>
                                                                             <option value="Juan P">Juan P</option>
+                                                                            <option value="Gener V">Gener V</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
