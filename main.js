@@ -726,6 +726,7 @@ function moverRepse(codigo) {
   });
 }
 
+
 $(document).ready(function () {
   $('#guardar').submit(function (e) {
     e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
@@ -733,29 +734,54 @@ $(document).ready(function () {
     // Guarda una referencia al formulario para usarla dentro de la función de éxito
     var form = $(this);
 
-    // Realiza la solicitud AJAX
+    // Obtener el valor de CURP del formulario
+    var curp = $('#curp').val(); // Asegúrate de tener un campo con el ID 'curp' en tu formulario
+
+    // Realizar la validación de CURP antes de la solicitud AJAX
     $.ajax({
       type: 'POST',
-      url: './register_files/guardar_informacion.php',
-      data: form.serialize(), // Serializa los datos del formulario
+      url: './register_files/verificar_curp.php',
+      data: { curp: curp }, // Enviar la CURP al servidor para validar
       success: function (response) {
-        // Muestra SweetAlert2 en caso de éxito
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Empleado registrado exitosamente',
-          showConfirmButton: true, // Muestra el botón de confirmación
-          confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
-        }).then((result) => {
-          // Si el usuario hace clic en el botón "Aceptar"
-          if (result.isConfirmed) {
-            // Recarga la página
-            location.reload();
-          }
-        });
+        // Si la CURP ya está registrada, mostrar la alerta y no realizar la solicitud AJAX
+        if (response === 'CURP_EXISTE') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'La CURP ingresada ya existe en la base de datos',
+            showConfirmButton: true,
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          // Si la CURP no está registrada, continuar con la solicitud AJAX
+          $.ajax({
+            type: 'POST',
+            url: './register_files/guardar_informacion.php',
+            data: form.serialize(),
+            success: function (response) {
+              // Muestra SweetAlert2 en caso de éxito
+              Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'Empleado registrado exitosamente',
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar'
+              }).then((result) => {
+                // Si el usuario hace clic en el botón "Aceptar"
+                if (result.isConfirmed) {
+                  // Recarga la página
+                  location.reload();
+                }
+              });
 
-        // Puedes agregar más lógica aquí según la respuesta del servidor
-        console.log(response);
+              // Puedes agregar más lógica aquí según la respuesta del servidor
+              console.log(response);
+            },
+            error: function (error) {
+              console.log(error);
+            }
+          });
+        }
       },
       error: function (error) {
         console.log(error);
@@ -764,43 +790,44 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(function () {
-  $('form').submit(function (e) {
-    e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
 
-    // Guarda una referencia al formulario para usarla dentro de la función de éxito
-    var form = $(this);
+// $(document).ready(function () {
+//   $('form').submit(function (e) {
+//     e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
 
-    // Realiza la solicitud AJAX
-    $.ajax({
-      type: 'POST',
-      url: './update_files/update.php',
-      data: form.serialize(), // Serializa los datos del formulario
-      success: function (response) {
-        // Muestra SweetAlert2 en caso de éxito
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Empleado actualizado exitosamente',
-          showConfirmButton: true, // Muestra el botón de confirmación
-          confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
-        }).then((result) => {
-          // Si el usuario hace clic en el botón "Aceptar"
-          if (result.isConfirmed) {
-            // Recarga la página
-            location.reload();
-          }
-        });
+//     // Guarda una referencia al formulario para usarla dentro de la función de éxito
+//     var form = $(this);
 
-        // Puedes agregar más lógica aquí según la respuesta del servidor
-        console.log(response);
-      },
-      error: function (error) {
-        console.log(error);
-      }
-    });
-  });
-});
+//     // Realiza la solicitud AJAX
+//     $.ajax({
+//       type: 'POST',
+//       url: './update_files/update.php',
+//       data: form.serialize(), // Serializa los datos del formulario
+//       success: function (response) {
+//         // Muestra SweetAlert2 en caso de éxito
+//         Swal.fire({
+//           icon: 'success',
+//           title: 'Éxito',
+//           text: 'Empleado actualizado exitosamente',
+//           showConfirmButton: true, // Muestra el botón de confirmación
+//           confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+//         }).then((result) => {
+//           // Si el usuario hace clic en el botón "Aceptar"
+//           if (result.isConfirmed) {
+//             // Recarga la página
+//             location.reload();
+//           }
+//         });
+
+//         // Puedes agregar más lógica aquí según la respuesta del servidor
+//         console.log(response);
+//       },
+//       error: function (error) {
+//         console.log(error);
+//       }
+//     });
+//   });
+// });
 
 function formatDate(date) {
   const options = {
@@ -824,7 +851,7 @@ function exportData() {
 
       // Ejemplo de cómo construir el contenido del archivo Excel
       var content = [
-        ['Código', 'Fecha de alta', 'Apellido paterno', 'Apellido materno', 'Nombre', 'Tipo de periodo', 'Salario diario', 'SBC parte fija', 'Departamento', 'Turno de trabajo', 'Num seguridad social', 'RFC', 'CURP', 'Sexo', 'Fecha de nacimiento', 'Puesto', 'Entidad federativa de nacimiento', 'CP', 'Estado Civil', 'Banco para pago electrónico', 'Numero de cuenta para pago electrónico', 'Sucursal para pago electrónico', 'Registro patronal del IMSS']
+        ['Código', 'Fecha de alta', 'Apellido paterno', 'Apellido materno', 'Nombre', 'Tipo de periodo', 'Salario diario', 'SBC parte fija', 'Departamento', 'Turno de trabajo', 'Num seguridad social', 'RFC', 'CURP', 'Sexo', 'Fecha de nacimiento', 'Puesto', 'Entidad federativa de nacimiento', 'CP', 'Estado Civil', 'Banco para pago electrónico', 'Numero de cuenta para pago electrónico', 'Sucursal para pago electrónico', 'Registro patronal del IMSS', 'Tipo de contrato', 'Base de cotización', 'Estatus empleado', 'Sindicalizado', 'Tipo de régimen', 'Tipo de prestación']
       ];
 
       data.forEach(function (row) {
@@ -838,7 +865,7 @@ function exportData() {
           row.turno, row.nss, row.rfc, row.curp, row.sexo, formatDate(addDay(row.fecha_nac)), // Formatear fecha_nac sumando un día
           row.puesto, row.entidad, row.cp,
           row.estado_civil,
-          row.e_banco, row.n_ecuenta, row.suc_epago, row.imss_pat
+          row.e_banco, row.n_ecuenta, row.suc_epago, row.imss_pat, row.tipo_contrato, row.base_cot, row.estatus_emp, row.sindicalizado, row.tipo_reg, row.tipo_prest
         ]);
       });
 
@@ -870,7 +897,7 @@ function exportData2() {
 
       // Ejemplo de cómo construir el contenido del archivo Excel
       var content = [
-        ['Código', 'Fecha de alta', 'Apellido paterno', 'Apellido materno', 'Nombre', 'Tipo de periodo', 'Salario diario', 'SBC parte fija', 'Departamento', 'Turno de trabajo', 'Num seguridad social', 'RFC', 'CURP', 'Sexo', 'Fecha de nacimiento', 'Puesto', 'Entidad federativa de nacimiento', 'CP', 'Estado Civil', 'Banco para pago electrónico', 'Numero de cuenta para pago electrónico', 'Sucursal para pago electrónico', 'Registro patronal del IMSS']
+        ['Código', 'Fecha de alta', 'Apellido paterno', 'Apellido materno', 'Nombre', 'Tipo de periodo', 'Salario diario', 'SBC parte fija', 'Departamento', 'Turno de trabajo', 'Num seguridad social', 'RFC', 'CURP', 'Sexo', 'Fecha de nacimiento', 'Puesto', 'Entidad federativa de nacimiento', 'CP', 'Estado Civil', 'Banco para pago electrónico', 'Numero de cuenta para pago electrónico', 'Sucursal para pago electrónico', 'Registro patronal del IMSS', 'Tipo de contrato', 'Base de cotización', 'Estatus empleado', 'Sindicalizado', 'Tipo de régimen', 'Tipo de prestación']
       ];
 
       data.forEach(function (row) {
@@ -884,7 +911,7 @@ function exportData2() {
           row.turno, row.nss, row.rfc, row.curp, row.sexo, formatDate(addDay(row.fecha_nac)), // Formatear fecha_nac sumando un día
           row.puesto, row.entidad, row.cp,
           row.estado_civil,
-          row.e_banco, row.n_ecuenta, row.suc_epago, row.imss_pat
+          row.e_banco, row.n_ecuenta, row.suc_epago, row.imss_pat, row.tipo_contrato, row.base_cot, row.estatus_emp, row.sindicalizado, row.tipo_reg, row.tipo_prest
         ]);
       });
 
