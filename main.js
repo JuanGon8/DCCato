@@ -907,18 +907,18 @@ function exportData2() {
 
       // Ejemplo de cómo construir el contenido del archivo Excel
       var content = [
-        ['Código', 'Fecha de alta', 'Fecha de reingreso','Apellido paterno', 'Apellido materno', 'Nombre', 'Tipo de periodo', 'Salario diario', 'SBC parte fija', 'Departamento', 'Turno de trabajo', 'Num seguridad social', 'RFC', 'CURP', 'Sexo', 'Fecha de nacimiento', 'Puesto', 'Entidad federativa de nacimiento', 'CP', 'Estado Civil', 'Banco para pago electrónico', 'Numero de cuenta para pago electrónico', 'Sucursal para pago electrónico', 'Registro patronal del IMSS', 'Tipo de contrato', 'Base de cotización', 'Estatus empleado', 'Sindicalizado', 'Tipo de régimen', 'Tipo de prestación']
+        ['Código', 'Fecha de alta', 'Fecha de baja','Fecha de reingreso', 'Apellido paterno', 'Apellido materno', 'Nombre', 'Tipo de periodo', 'Salario diario', 'SBC parte fija', 'Departamento', 'Turno de trabajo', 'Num seguridad social', 'RFC', 'CURP', 'Sexo', 'Fecha de nacimiento', 'Puesto', 'Entidad federativa de nacimiento', 'CP', 'Estado Civil', 'Banco para pago electrónico', 'Numero de cuenta para pago electrónico', 'Sucursal para pago electrónico', 'Registro patronal del IMSS', 'Tipo de contrato', 'Base de cotización', 'Estatus empleado', 'Sindicalizado', 'Tipo de régimen', 'Tipo de prestación']
       ];
-
       data.forEach(function (row) {
         // Formatear el código agregando ceros a la izquierda
         var codigoFormateado = String(row.codigo).padStart(5, '0');
 
         content.push([
           codigoFormateado,
-          formatDate(addDay(row.fecha_alta)), row.fecha_reingreso,// Formatear fecha_alta sumando un día
+          formatDate(new Date(addDay(row.fecha_alta))), formatDate(new Date(addDay(row.fecha_baja))),
+          formatDate(new Date(addDay(row.fecha_reingreso))), // Utilizar la fecha de reingreso formateada
           row.ap_pat, row.ap_mat, row.nombre, row.ubicacion, row.salario_diario, row.sbc, row.departamento,
-          row.turno, row.nss, row.rfc, row.curp, row.sexo, formatDate(addDay(row.fecha_nac)), // Formatear fecha_nac sumando un día
+          row.turno, row.nss, row.rfc, row.curp, row.sexo, formatDate(new Date(addDay(row.fecha_nac))),
           row.puesto, row.entidad, row.cp,
           row.estado_civil,
           row.e_banco, row.n_ecuenta, row.suc_epago, row.imss_pat, row.tipo_contrato, row.base_cot, row.estatus_emp, row.sindicalizado, row.tipo_reg, row.tipo_prest
