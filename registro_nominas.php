@@ -62,8 +62,6 @@ include 'navbar.php';
 		<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/date-fns@2.23.0"></script>
 
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 		<script src="main.js"></script>
 		<div class="container-fluid px-4">
 			<h1 class="mt-4">Registro nóminas</h1>
@@ -376,72 +374,177 @@ include 'navbar.php';
 			<?php } ?><br>
 
 			<div class="card mb-4">
+				<div class="row m-2">
+					<h4>Exportar empleados</h4>
+					<div class="col-3">
+						<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+							Exportar empleados por fecha
+						</button>
 
-				<h4 class="m-3">Exportar empleados</h4>
-				<form class="form-inline d-flex m-3" id="exportForm">
-					<div class="row align-items-center">
-						<div class="col form-group">
-							<label for="fecha1" class="mr-2">De</label>
-							<input type="date" id="fecha1" name="fecha1" class="form-control custom-input" required>
-						</div>
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h1 class="modal-title fs-5" id="exampleModalLabel2">Exportar empleados por fecha</h1>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form class="form-inline d-flex m-3" id="exportForm">
+											<div class="row align-items-center">
+												<div class="col form-group">
+													<label for="fecha1" class="mr-2">De</label>
+													<input type="date" id="fecha1" name="fecha1" class="form-control custom-input" required>
+												</div>
 
-						<div class="col form-group">
-							<label for="fecha2" class="mr-2">Hasta</label>
-							<input type="date" id="fecha2" name="fecha2" class="form-control custom-input" required>
-						</div>
+												<div class="col form-group">
+													<label for="fecha2" class="mr-2">Hasta</label>
+													<input type="date" id="fecha2" name="fecha2" class="form-control custom-input" required>
+												</div>
 
-						<div class="col form-group d-flex justify-content-center">
-							<button type="button" class="btn btn-success" onclick="exportData()">Exportar <i class="fas fa-file-excel"></i></button>
+												<div class="col form-group d-flex justify-content-center">
+
+												</div>
+											</div>
+										</form>
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+										<button type="button" class="btn btn-success" onclick="exportData()">Exportar <i class="fas fa-file-excel"></i></button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-				</form>
-				<h4 class="m-3">Exportar empleados por código</h4>
-				<form class="form-inline d-flex m-3" id="exportForm2">
-					<div class="row align-items-center">
-						<div class="col form-group">
-							<label for="cod1" class="mr-2">De</label>
-							<input type="text" id="cod1" name="cod1" class="form-control custom-input" required>
+					<div class="col-3">
+						<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							Exportar empleados por código
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h1 class="modal-title fs-5" id="exampleModalLabel">Exportar empleados por código</h1>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form class="form-inline d-flex m-3" id="exportForm2">
+											<div class="row align-items-center">
+												<div class="col form-group">
+													<label for="cod1" class="mr-2">De</label>
+													<input type="text" id="cod1" name="cod1" class="form-control custom-input" required>
+												</div>
+
+												<div class="col form-group">
+													<label for="cod2" class="mr-2">Hasta</label>
+													<input type="text" id="cod2" name="cod2" class="form-control custom-input" required>
+												</div>
+
+												<div class="col form-group d-flex justify-content-center">
+
+												</div>
+											</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+										<button type="button" class="btn btn-success" onclick="exportData2()">Exportar <i class="fas fa-file-excel"></i></button>
+									</div>
+								</div>
+							</div>
 						</div>
-
-						<div class="col form-group">
-							<label for="cod2" class="mr-2">Hasta</label>
-							<input type="text" id="cod2" name="cod2" class="form-control custom-input" required>
-						</div>
-
-						<div class="col form-group d-flex justify-content-center">
-							<button type="button" class="btn btn-success" onclick="exportData2()">Exportar <i class="fas fa-file-excel"></i></button>
-						</div>
-					</div>
-				</form>
-
-				<div class="row m-1">
-					<div class="col-md-6">
-						<label for="codigo">Editar empleado <i class="fa-solid fa-circle-exclamation" title="Ingresa el código del empleado a editar"></i></label>
-						<input type="text" id="codigo" class="form-control" style="width: 100px;">
-
-						<button class="btn btn-primary mt-2" onclick="openModal()">Editar</button>
 					</div>
 				</div>
-				<!-- Modal -->
-				<div class="modal modal-lg fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<!-- Modal content goes here -->
-				</div>
-				<script>
-					function openModal() {
-						var codigo = $('#codigo').val();
-						$.ajax({
-							type: 'POST',
-							url: 'actualizar.php', // Replace with your server-side script to fetch record
-							data: {
-								codigo: codigo
-							},
-							success: function(response) {
-								$('#editModal').html(response);
-								$('#editModal').modal('show');
+
+				<div class="row">
+					<div class="col-3">
+						<div class="row m-1">
+							<div class="col-md-6">
+								<label for="codigo">Editar empleado <i class="fa-solid fa-circle-exclamation" title="Ingresa el código del empleado a editar"></i></label>
+								<input type="text" id="codigo" class="form-control" style="width: 100px;">
+
+								<button class="btn btn-primary mt-2" onclick="openModal()">Editar</button>
+							</div>
+						</div>
+						<!-- Modal -->
+						<div class="modal modal-lg fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<!-- Modal content goes here -->
+						</div>
+						<script>
+							function openModal() {
+								var codigo = $('#codigo').val();
+								$.ajax({
+									type: 'POST',
+									url: 'actualizar.php', // Replace with your server-side script to fetch record
+									data: {
+										codigo: codigo
+									},
+									success: function(response) {
+										$('#editModal').html(response);
+										$('#editModal').modal('show');
+									}
+								});
 							}
-						});
-					}
-				</script>
+						</script>
+					</div>
+					<div class="col-2">
+						<div class="mb-3">
+							<label for="codigoInput" class="form-label">Código</label>
+							<input type="text" class="form-control" id="codigoInput" placeholder="Ingrese el código">
+						</div>
+
+						<button class="btn btn-danger" onclick="eliminarRegistro()">Eliminar Registro</button>
+						<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+						<script>
+							function eliminarRegistro() {
+								// Obtener el código desde el input
+								var codigo = document.getElementById("codigoInput").value;
+
+								if (!codigo) {
+									alert("Por favor, ingrese un código válido");
+									return;
+								}
+
+								console.log("codigo: " + codigo);
+
+								Swal.fire({
+									title: "¿Estás seguro de que deseas dar de baja a este empleado?",
+									icon: "warning",
+									showCancelButton: true,
+									confirmButtonText: "Sí, eliminar",
+									cancelButtonText: "Cancelar"
+								}).then((result) => {
+									if (result.isConfirmed) {
+										// Realizar una solicitud AJAX para eliminar el registro
+										var xhr = new XMLHttpRequest();
+										xhr.open("GET", "./delete-files/eliminar_registro.php?codigo=" + codigo, true);
+										xhr.onload = function() {
+											if (xhr.status === 200) {
+												// Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario
+												// Por ejemplo, eliminar la fila de la tabla
+												Swal.fire({
+													title: "Registro eliminado exitosamente",
+													icon: "success",
+													timerProgressBar: true,
+													timer: 2000 // Timer set to 2 seconds
+												});
+
+												// Puedes realizar acciones adicionales después de eliminar el registro
+												// Por ejemplo, limpiar el input
+												document.getElementById("codigoInput").value = "";
+											}
+										};
+										xhr.send();
+									}
+								});
+							}
+						</script>
+					</div>
+				</div>
+
 
 				<div class="card-body">
 					<!-- Tabla usuario 1 y 2 -->
@@ -666,23 +769,4 @@ include 'navbar.php';
 			input.setCustomValidity('El CURP no tiene la estructura correcta');
 		}
 	}
-</script>
-<script>
-	$(document).ready(function() {
-		// Agregar campo de búsqueda al select
-		$("#departamento").select2({
-			placeholder: "Buscar departamento",
-			allowClear: true
-		});
-	});
-</script>
-<!-- Agrega esto antes de cerrar el body de tu documento HTML -->
-<script>
-    $(document).ready(function () {
-        // Agregar campo de búsqueda al select
-        $("#puesto").select2({
-            placeholder: "Buscar puesto",
-            allowClear: true
-        });
-    });
 </script>

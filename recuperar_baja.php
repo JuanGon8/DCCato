@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 $codigo = $_GET['codigo'];
 
 // Prepara y ejecuta la consulta SQL para mover el registro a la tabla "reclutamiento_baja"
-$sql = "INSERT INTO reclutamiento SELECT codigo, fecha_alta, ap_pat, ap_mat, nombre, ubicacion, salario_diario, sbc, departamento, turno, nss, rfc, curp, sexo, fecha_nac, puesto, entidad, cp, estado_civil, e_banco, n_ecuenta, suc_epago, imss_pat FROM reclutamiento_baja WHERE codigo = ?";
+$sql = "INSERT INTO reclutamiento SELECT * FROM reclutamiento_baja WHERE codigo = ?";
 if ($stmt = $conn->prepare($sql)) {
     $stmt->bind_param("i", $codigo); // "i" indica un entero (cambia si el campo no es un entero)
     

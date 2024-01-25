@@ -93,6 +93,7 @@ $depto = $_SESSION['depto'];
                             </div>
                             Registro candidatos
                         </a>
+                        <a class="nav-link" href="bajas.php"><i class="fa-solid fa-delete-left"></i> &nbsp;Bajas</a>
 
                         <?php if ($depto == "Recursos humanos" || $depto == "Sistemas") { ?>
                             <div class="sb-sidenav-menu-heading">Recursos humanos</div>
@@ -153,7 +154,7 @@ $depto = $_SESSION['depto'];
                             </a>
                             <div class="collapse" id="collapseAdmin" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="bajas.php"><i class="fa-solid fa-delete-left"></i> &nbsp;Bajas</a>
+                                    
                                     <a class="nav-link" href="usuarios.php"><i class="fa-solid fa-user"></i> &nbsp;Usuarios</a>
                                     <a class="nav-link" href="reportes.php"><i class="fa-solid fa-book"></i> &nbsp;Reportes</a>
                                 </nav>
