@@ -282,7 +282,12 @@
                         <input class="form-control" type="text" name="imss_pat" maxlength="11" pattern="[A-Z0-9]{11}" value="<?php echo $row['imss_pat']; ?>">
                     </div>
                     <div class="col">
-
+                        <label for="estatus_emp">Estatus de empleado</label>
+                        <input class="form-control" type="text" name="estatus_emp" maxlength="1" value="<?php echo $row['estatus_emp']; ?>">
+                    </div>
+                    <div class="col-4">
+                        <label for="fecha_reingreso">Fecha de reingreso</label>
+                        <input class="form-control" type="date" name="fecha_reingreso" value="<?php echo $row['fecha_reingreso']; ?>">
                     </div>
                 </div>
                 <div class="modal-footer">

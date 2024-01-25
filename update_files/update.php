@@ -36,6 +36,8 @@
     $n_ecuenta = $_POST['n_ecuenta'];
     $suc_epago = $_POST['suc_epago'];
     $imss_pat = $_POST['imss_pat'];
+    $estatus_emp = $_POST['estatus_emp'];
+    $fecha_reingreso = $_POST['fecha_reingreso'];
 
     // Realiza la actualización en la base de datos (reemplaza con tu propia consulta SQL)
     $sql = "UPDATE reclutamiento SET
@@ -60,7 +62,9 @@
             e_banco = '$e_banco',
             n_ecuenta = '$n_ecuenta',
             suc_epago = '$suc_epago',
-            imss_pat = '$imss_pat'
+            imss_pat = '$imss_pat',
+            estatus_emp = '$estatus_emp',
+            fecha_reingreso = '$fecha_reingreso'
             WHERE codigo = '$codigo'"; // Reemplaza "id" por el identificador del registro a actualizar
 
     if ($conn->query($sql) === TRUE) {

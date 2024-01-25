@@ -100,6 +100,7 @@ include 'navbar.php';
                                 <th>Sucursal para pago electrónico</th>
                                 <th>Registro patronal del IMSS</th>
                                 <th>Estatus de empleado</th>
+                                <th>Fecha de baja</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -134,6 +135,7 @@ include 'navbar.php';
                                     <td><?php echo $row['suc_epago']; ?></td>
                                     <td><?php echo $row['imss_pat']; ?></td>
                                     <td><?php echo $row['estatus_emp']; ?></td>
+                                    <td><?php echo $row['fecha_baja']; ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>

@@ -40,8 +40,8 @@ $tipo_reg = $_POST['tipo_reg'];
 $tipo_prest = $_POST['tipo_prest'];
 
 // Preparar la consulta SQL para insertar los datos en la tabla "reclutamiento"
-$sql_reclutamiento = "INSERT INTO reclutamiento (fecha_alta, ap_pat, ap_mat, nombre, ubicacion, salario_diario, sbc, departamento, turno, nss, rfc, curp, sexo, fecha_nac, puesto, entidad, cp, estado_civil, e_banco, n_ecuenta, suc_epago, imss_pat, nombreu, hora_registro, tipo_contrato, base_cot, estatus_emp, sindicalizado, tipo_reg, tipo_prest)
-        VALUES ('$fecha_alta', '$ap_pat', '$ap_mat', '$nombre', '$ubicacion', '$salario_diario', '$sbc', '$departamento', '$turno', '$nss', '$rfc', '$curp', '$sexo', '$fecha_nac', '$puesto', '$entidad', '$cp', '$estado_civil', '$e_banco', '$n_ecuenta', '$suc_epago', '$imss_pat', '$nombreu', '$hora_registro', '$tipo_contrato', '$base_cot', '$estatus_emp', '$sindicalizado', '$tipo_reg', '$tipo_prest')";
+$sql_reclutamiento = "INSERT INTO reclutamiento (fecha_alta, ap_pat, ap_mat, nombre, ubicacion, salario_diario, sbc, departamento, turno, nss, rfc, curp, sexo, fecha_nac, puesto, entidad, cp, estado_civil, e_banco, n_ecuenta, suc_epago, imss_pat, nombreu, hora_registro, tipo_contrato, base_cot, estatus_emp, sindicalizado, tipo_reg, tipo_prest, fecha_baja, fecha_reingreso)
+        VALUES ('$fecha_alta', '$ap_pat', '$ap_mat', '$nombre', '$ubicacion', '$salario_diario', '$sbc', '$departamento', '$turno', '$nss', '$rfc', '$curp', '$sexo', '$fecha_nac', '$puesto', '$entidad', '$cp', '$estado_civil', '$e_banco', '$n_ecuenta', '$suc_epago', '$imss_pat', '$nombreu', '$hora_registro', '$tipo_contrato', '$base_cot', '$estatus_emp', '$sindicalizado', '$tipo_reg', '$tipo_prest', '1999-12-31', '1999-12-31')";
 
 // Preparar la consulta SQL para insertar los datos en la tabla "reclutamiento_16340"
 $sql_reclutamiento_16340 = "INSERT INTO reclutamiento_16340 (ap_pat, ap_mat, nombre)

@@ -24,15 +24,15 @@ if ($stmt = $conn->prepare($sql)) {
     if ($stmt->execute()) {
         // Registro movido con éxito
 
-        // Ahora, actualiza el valor de la columna "estatus_emp" a "B" en la tabla "reclutamiento"
-        $updateSql = "UPDATE reclutamiento SET estatus_emp = 'R' WHERE codigo = ?";
+        // Ahora, actualiza el valor de la columna "estatus_emp" a "B" y "fecha_baja" a la fecha actual en la tabla "reclutamiento_baja"
+        $updateSql = "UPDATE reclutamiento SET estatus_emp = 'B', fecha_reingreso = NOW() WHERE codigo = ?";
         if ($updateStmt = $conn->prepare($updateSql)) {
             $updateStmt->bind_param("i", $codigo);
             
             if ($updateStmt->execute()) {
-                echo "Registro movido a la tabla reclutamiento_baja y estatus_emp actualizado a 'B' con éxito.";
+                echo "Registro movido a la tabla reclutamiento_baja, estatus_emp actualizado a 'B' y fecha_baja actualizada con éxito.";
             } else {
-                echo "Error al actualizar el estatus_emp: " . $updateStmt->error;
+                echo "Error al actualizar el estatus_emp y fecha_baja: " . $updateStmt->error;
             }
 
             $updateStmt->close();

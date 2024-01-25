@@ -578,6 +578,8 @@ include 'navbar.php';
 										<th>Sucursal para pago electrónico</th>
 										<th>Registro patronal del IMSS</th>
 										<th>Estatus de empleado</th>
+										<th>Fecha de reingreso</th>
+										<th>Fecha de baja</th>
 									</tr>
 								</thead>
 							</table>
