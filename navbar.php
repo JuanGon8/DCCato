@@ -164,7 +164,7 @@ $depto = $_SESSION['depto'];
                 <div class="sb-sidenav-footer">
                     <div class="small">Sesión iniciada como:</div>
                     <?php echo $_SESSION['nombre']; ?> <br>
-                    <span class="badge bg-secondary color-white">V 2.5</span>
+                    <span class="badge bg-secondary color-white">V 2.7</span>
                 </div>
             </nav>
         </div>

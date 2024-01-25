@@ -1,3 +1,7 @@
+
+<!-- Agrega esto en la sección head de tu documento HTML -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-header">
@@ -112,11 +116,11 @@
                 <div class="row">
                     <div class="col">
                         <label for="nss">NSS <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números"></i></label>
-                        <input class="form-control" type="text" name="nss" maxlength="11" pattern="[0-9]{11}" value="<?php echo $row['nss']; ?>">
+                        <input class="form-control" type="text" name="nss" maxlength="11" value="<?php echo $row['nss']; ?>">
                     </div>
                     <div class="col">
                         <label for="rfc">RFC <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
-                        <input class="form-control" type="text" name="rfc" maxlength="13" pattern="[A-Z0-9]{13}" value="<?php echo $row['rfc']; ?>">
+                        <input class="form-control" type="text" name="rfc" maxlength="13" value="<?php echo $row['rfc']; ?>">
                     </div>
                     <div class="col">
                         <label for="curp">CURP <i class="fa-solid fa-circle-exclamation" title="Este campo solo admite números y letras en mayúsculas"></i></label>
@@ -325,6 +329,25 @@
                     console.log(error);
                 }
             });
+        });
+    });
+</script>
+<script>
+	$(document).ready(function() {
+		// Agregar campo de búsqueda al select
+		$("#departamento").select2({
+			placeholder: "Buscar departamento",
+			allowClear: true
+		});
+	});
+</script>
+<!-- Agrega esto antes de cerrar el body de tu documento HTML -->
+<script>
+    $(document).ready(function () {
+        // Agregar campo de búsqueda al select
+        $("#puesto").select2({
+            placeholder: "Buscar puesto",
+            allowClear: true
         });
     });
 </script>

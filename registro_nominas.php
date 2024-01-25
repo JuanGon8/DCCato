@@ -62,6 +62,8 @@ include 'navbar.php';
 		<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/date-fns@2.23.0"></script>
 
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 		<script src="main.js"></script>
 		<div class="container-fluid px-4">
 			<h1 class="mt-4">Registro nóminas</h1>
@@ -342,29 +344,29 @@ include 'navbar.php';
 						</div>
 						<div class="col">
 							<label for="tipo_contrato">Tipo de contrato</label>
-							<input class="form-control" type="text" name="tipo_contrato"  maxlength="2" readonly value="01">
+							<input class="form-control" type="text" name="tipo_contrato" maxlength="2" readonly value="01">
 						</div>
 					</div><br>
 					<div class="row">
 						<div class="col">
 							<label for="base_cot">Base de cotización</label>
-							<input class="form-control" type="text" name="base_cot"  maxlength="1" readonly value="F">
+							<input class="form-control" type="text" name="base_cot" maxlength="1" readonly value="F">
 						</div>
 						<div class="col">
 							<label for="estatus_emp">Estatus empleado</label>
-							<input class="form-control" type="text" name="estatus_emp"  maxlength="1" readonly value="A">
+							<input class="form-control" type="text" name="estatus_emp" maxlength="1" readonly value="A">
 						</div>
 						<div class="col">
 							<label for="sindicalizado">Sindicalizado</label>
-							<input class="form-control" type="text" name="sindicalizado"  maxlength="1" readonly value="C">
+							<input class="form-control" type="text" name="sindicalizado" maxlength="1" readonly value="C">
 						</div>
 						<div class="col">
 							<label for="tipo_reg">Tipo de régimen</label>
-							<input class="form-control" type="text" name="tipo_reg"  maxlength="02" readonly value="02">
+							<input class="form-control" type="text" name="tipo_reg" maxlength="02" readonly value="02">
 						</div>
 						<div class="col">
 							<label for="tipo_prest">Tipo de prestación</label>
-							<input class="form-control" type="text" name="tipo_prest"  maxlength="6" readonly value="De_Ley">
+							<input class="form-control" type="text" name="tipo_prest" maxlength="6" readonly value="De_Ley">
 						</div>
 					</div>
 					<br>
@@ -631,38 +633,56 @@ include 'navbar.php';
 </script> -->
 <script>
 	function validarYAsignarFecha(input) {
-    // Obtener el valor del input
-    const curp = input.value.toUpperCase();
+		// Obtener el valor del input
+		const curp = input.value.toUpperCase();
 
-    // Expresión regular para validar la estructura del CURP
-    const regexCURP = /^[A-Z]{4}[0-9]{6}[HM]{1}[A-Z0-9]{5}[A-Z0-9]{2}$/;
+		// Expresión regular para validar la estructura del CURP
+		const regexCURP = /^[A-Z]{4}[0-9]{6}[HM]{1}[A-Z0-9]{5}[A-Z0-9]{2}$/;
 
-    // Verificar si el CURP cumple con la estructura correcta
-    if (regexCURP.test(curp)) {
-        // Obtener el año de nacimiento del CURP
-        let anioNacimiento = parseInt('20' + curp.substr(4, 2));
+		// Verificar si el CURP cumple con la estructura correcta
+		if (regexCURP.test(curp)) {
+			// Obtener el año de nacimiento del CURP
+			let anioNacimiento = parseInt('20' + curp.substr(4, 2));
 
-        // Corregir el año si el quinto carácter es un dígito del 3 al 9
-        const quintoCaracter = curp.charAt(4);
-        if (quintoCaracter >= '3' && quintoCaracter <= '9') {
-            anioNacimiento -= 100;
-        }
+			// Corregir el año si el quinto carácter es un dígito del 3 al 9
+			const quintoCaracter = curp.charAt(4);
+			if (quintoCaracter >= '3' && quintoCaracter <= '9') {
+				anioNacimiento -= 100;
+			}
 
-        // Formatear la fecha de nacimiento
-        const fechaNacimiento = anioNacimiento + '-' + curp.substr(6, 2) + '-' + curp.substr(8, 2);
+			// Formatear la fecha de nacimiento
+			const fechaNacimiento = anioNacimiento + '-' + curp.substr(6, 2) + '-' + curp.substr(8, 2);
 
-        // Asignar la fecha de nacimiento al campo correspondiente
-        document.getElementById('fecha_nac').value = fechaNacimiento;
+			// Asignar la fecha de nacimiento al campo correspondiente
+			document.getElementById('fecha_nac').value = fechaNacimiento;
 
-        // Asignar los primeros 10 caracteres del CURP al campo de RFC
-        document.getElementsByName('rfc')[0].value = curp.substr(0, 10);
+			// Asignar los primeros 10 caracteres del CURP al campo de RFC
+			document.getElementsByName('rfc')[0].value = curp.substr(0, 10);
 
-        // CURP válido
-        input.setCustomValidity('');
-    } else {
-        // CURP inválido
-        input.setCustomValidity('El CURP no tiene la estructura correcta');
-    }
-}
-
+			// CURP válido
+			input.setCustomValidity('');
+		} else {
+			// CURP inválido
+			input.setCustomValidity('El CURP no tiene la estructura correcta');
+		}
+	}
+</script>
+<script>
+	$(document).ready(function() {
+		// Agregar campo de búsqueda al select
+		$("#departamento").select2({
+			placeholder: "Buscar departamento",
+			allowClear: true
+		});
+	});
+</script>
+<!-- Agrega esto antes de cerrar el body de tu documento HTML -->
+<script>
+    $(document).ready(function () {
+        // Agregar campo de búsqueda al select
+        $("#puesto").select2({
+            placeholder: "Buscar puesto",
+            allowClear: true
+        });
+    });
 </script>
