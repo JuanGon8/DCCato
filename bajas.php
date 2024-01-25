@@ -99,6 +99,7 @@ include 'navbar.php';
                                 <th>Numero de cuenta para pago electrónico</th>
                                 <th>Sucursal para pago electrónico</th>
                                 <th>Registro patronal del IMSS</th>
+                                <th>Estatus de empleado</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -132,6 +133,7 @@ include 'navbar.php';
                                     <td><?php echo $row['n_ecuenta']; ?></td>
                                     <td><?php echo $row['suc_epago']; ?></td>
                                     <td><?php echo $row['imss_pat']; ?></td>
+                                    <td><?php echo $row['estatus_emp']; ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>

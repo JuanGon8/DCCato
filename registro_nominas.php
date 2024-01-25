@@ -577,6 +577,7 @@ include 'navbar.php';
 										<th>Numero de cuenta para pago electrónico</th>
 										<th>Sucursal para pago electrónico</th>
 										<th>Registro patronal del IMSS</th>
+										<th>Estatus de empleado</th>
 									</tr>
 								</thead>
 							</table>

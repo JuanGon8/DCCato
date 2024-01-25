@@ -23,7 +23,23 @@ if ($stmt = $conn->prepare($sql)) {
     
     if ($stmt->execute()) {
         // Registro movido con éxito
-        echo "Registro movido a la tabla reclutamiento_baja con éxito.";
+
+        // Ahora, actualiza el valor de la columna "estatus_emp" a "B" en la tabla "reclutamiento"
+        $updateSql = "UPDATE reclutamiento_baja SET estatus_emp = 'B' WHERE codigo = ?";
+        if ($updateStmt = $conn->prepare($updateSql)) {
+            $updateStmt->bind_param("i", $codigo);
+            
+            if ($updateStmt->execute()) {
+                echo "Registro movido a la tabla reclutamiento_baja y estatus_emp actualizado a 'B' con éxito.";
+            } else {
+                echo "Error al actualizar el estatus_emp: " . $updateStmt->error;
+            }
+
+            $updateStmt->close();
+        } else {
+            echo "Error en la preparación de la consulta de actualización: " . $conn->error;
+        }
+
     } else {
         echo "Error al mover el registro: " . $stmt->error;
     }
