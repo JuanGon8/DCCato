@@ -59,6 +59,7 @@ include 'navbar.php';
         <script src="datatables/Select-1.7.0/js/dataTables.select.min.js"></script>
         <script src="datatables/StateRestore-1.3.0/js/dataTables.stateRestore.min.js"></script>
         <script src="datatables/StateRestore-1.3.0/js/stateRestore.bootstrap5.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script src="main.js"></script>
         <div class="container-fluid px-4">
@@ -67,6 +68,15 @@ include 'navbar.php';
                 <li class="breadcrumb-item"><a href="">Menú administrador</a></li>
                 <li class="breadcrumb-item active">Reportes</li>
         </div>
+
+        <div style="display: flex;" class="wcanvas">
+            <canvas id="chartAsignado" width="300" height="300"></canvas>
+            <canvas id="chartEstado" width="300" height="300"></canvas>
+        </div>
+
+
+
+
         <div class="card mx-4 mb-4">
             <div class="card-body">
                 <div class="table-responsive">
@@ -227,7 +237,7 @@ include 'navbar.php';
     $(document).ready(function() {
         $('form').submit(function(e) {
             e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
-            
+
             // Guarda una referencia al formulario para usarla dentro de la función de éxito
             var form = $(this);
 
@@ -262,4 +272,48 @@ include 'navbar.php';
         });
     });
 </script>
+<script>
+    // Obtener datos desde PHP
+    fetch('getData.php')
+        .then(response => response.json())
+        .then(data => {
+            // Preparar datos para Chart.js
+            var configuracionGrafica = function (canvasId, data) {
+                var labels = Object.keys(data);
+                var values = Object.values(data);
 
+                // Configurar Chart.js
+                var ctx = document.getElementById(canvasId).getContext('2d');
+                var myPieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: values,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.7)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 206, 86, 0.7)',
+                                'rgba(182, 182, 255, 0.7)', // Lavanda
+                                // 'rgba(75, 0, 130, 0.7)',   // Indigo
+                                'rgba(139, 69, 19, 0.7)',  // Café
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(182, 182, 255, 1)', // Lavanda
+                                // 'rgba(75, 0, 130, 1)',   // Indigo
+                                'rgba(139, 69, 19, 1)',  // Café
+                            ],
+                            borderWidth: 1
+                        }]
+                    }
+                });
+            };
+
+            configuracionGrafica('chartAsignado', data.asignado);
+            configuracionGrafica('chartEstado', data.estado);
+        })
+        .catch(error => console.error('Error al obtener datos:', error));
+</script>
