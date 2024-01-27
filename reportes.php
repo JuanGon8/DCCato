@@ -73,7 +73,7 @@ include 'navbar.php';
             <canvas id="chartAsignado" width="300" height="300"></canvas>
             <canvas id="chartEstado" width="300" height="300"></canvas>
         </div>
-
+        <br>
 
 
 
