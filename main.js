@@ -526,6 +526,9 @@ $(document).ready(function () {
     },
     responsive: true,
     dom: 'QBfrtilp',
+    order: [
+      [2, 'desc']
+    ],
     
     // Fecha con formato dd/mm/yyyy
 
