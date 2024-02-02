@@ -942,6 +942,54 @@ function exportData2() {
   xhr.send();
 }
 
+function exportDataR() {
+  var fecha1r = document.getElementById("fecha1r").value;
+  var fecha2r = document.getElementById("fecha2r").value;
+
+  // Realizar petición AJAX a PHP con las fechas seleccionadas
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      // Procesar la respuesta del servidor (puede variar según la estructura de tus datos)
+      var data = JSON.parse(xhr.responseText);
+
+      // Ejemplo de cómo construir el contenido del archivo Excel
+      var content = [
+        ['Código', 'Fecha de alta', 'Fecha de baja','Fecha de reingreso', 'Apellido paterno', 'Apellido materno', 'Nombre', 'Tipo de periodo', 'Salario diario', 'SBC parte fija', 'Departamento', 'Turno de trabajo', 'Num seguridad social', 'RFC', 'CURP', 'Sexo', 'Fecha de nacimiento', 'Puesto', 'Entidad federativa de nacimiento', 'CP', 'Estado Civil', 'Banco para pago electrónico', 'Numero de cuenta para pago electrónico', 'Sucursal para pago electrónico', 'Registro patronal del IMSS', 'Tipo de contrato', 'Base de cotización', 'Estatus empleado', 'Sindicalizado', 'Tipo de régimen', 'Tipo de prestación']
+      ];
+
+      data.forEach(function (row) {
+        // Formatear el código agregando ceros a la izquierda
+        var codigoFormateado = String(row.codigo).padStart(5, '0');
+
+        // Verificar si la fecha de reingreso está vacía y asignar '31/12/1999' en ese caso
+        var fechaReingresoFormateada = row.fecha_reingreso ? formatDate(new Date(addDay(row.fecha_reingreso))) : '31/12/1999';
+
+        content.push([
+          codigoFormateado,
+          formatDate(new Date(addDay(row.fecha_alta))), formatDate(new Date(addDay(row.fecha_baja))),
+          fechaReingresoFormateada, // Utilizar la fecha de reingreso formateada
+          row.ap_pat, row.ap_mat, row.nombre, row.ubicacion, row.salario_diario, row.sbc, row.departamento,
+          row.turno, row.nss, row.rfc, row.curp, row.sexo, formatDate(new Date(addDay(row.fecha_nac))),
+          row.puesto, row.entidad, row.cp,
+          row.estado_civil,
+          row.e_banco, row.n_ecuenta, row.suc_epago, row.imss_pat, row.tipo_contrato, row.base_cot, row.estatus_emp, row.sindicalizado, row.tipo_reg, row.tipo_prest
+        ]);
+      });
+
+      // Crear un libro de Excel
+      var ws = XLSX.utils.aoa_to_sheet(content);
+      var wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Empleados");
+
+      // Descargar el archivo Excel
+      XLSX.writeFile(wb, 'Empleados.xlsx');
+    }
+  };
+  xhr.open("GET", "exportar_excelReingreso.php?fecha1r=" + fecha1r + "&fecha2r=" + fecha2r, true);
+  xhr.send();
+}
+
 // Función para sumar un día a una fecha
 
 

@@ -457,6 +457,47 @@ include 'navbar.php';
 							</div>
 						</div>
 					</div>
+					<div class="col-3">
+						<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+							Exportar reingresos por fecha
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h1 class="modal-title fs-5" id="exampleModalLabel3">Exportar reingresos por fecha</h1>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form class="form-inline d-flex m-3" id="exportForm">
+											<div class="row align-items-center">
+												<div class="col form-group">
+													<label for="fecha3" class="mr-2">De</label>
+													<input type="date" id="fecha1r" name="fecha1r" class="form-control custom-input" required>
+												</div>
+
+												<div class="col form-group">
+													<label for="fecha4" class="mr-2">Hasta</label>
+													<input type="date" id="fecha2r" name="fecha2r" class="form-control custom-input" required>
+												</div>
+
+												<div class="col form-group d-flex justify-content-center">
+
+												</div>
+											</div>
+										</form>
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+										<button type="button" class="btn btn-success" onclick="exportDataR()">Exportar <i class="fas fa-file-excel"></i></button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<div class="row">
