@@ -623,6 +623,37 @@ include 'navbar.php';
 										<th>Fecha de baja</th>
 									</tr>
 								</thead>
+								<tfoot class="table-dark">
+									<tr class="tdh">
+										<!-- <th>Acciones</th> -->
+										<th>Código</th>
+										<th>Fecha de alta</th>
+										<th>Apellido paterno</th>
+										<th>Apellido materno</th>
+										<th>Nombre</th>
+										<th>Ubicación (Tipo de periodo)</th>
+										<th>Salario diario</th>
+										<th>SBC</th>
+										<th>Departamento</th>
+										<th>Turno de trabajo</th>
+										<th>Num seguridad social</th>
+										<th>RFC</th>
+										<th>CURP</th>
+										<th>Sexo</th>
+										<th>Fecha de nacimiento</th>
+										<th>Puesto</th>
+										<th>Entidad federativa de nacimiento</th>
+										<th>CP</th>
+										<th>Estado Civil</th>
+										<th>Banco para pago electrónico</th>
+										<th>Numero de cuenta para pago electrónico</th>
+										<th>Sucursal para pago electrónico</th>
+										<th>Registro patronal del IMSS</th>
+										<th>Estatus de empleado</th>
+										<th>Fecha de reingreso</th>
+										<th>Fecha de baja</th>
+									</tr>
+					</tfoot>
 							</table>
 							<tbody>
 

@@ -424,6 +424,21 @@ $(document).ready(function () {
     },
   ],
   });
+
+   // Agregar inputs de búsqueda para las columnas 2, 3 y 4 en el tfoot
+   $('#example2 tfoot th').each(function (index) {
+    if (index === 2 || index === 3 || index === 4) {
+        var column = table.column(index);
+        $(this).html('<input type="text" placeholder="Buscar ' + $(this).text() + '" />');
+
+        $('input', this).on('keyup change', function () {
+            if (column.search() !== this.value) {
+                column.search(this.value).draw();
+            }
+        });
+    }
+});
+
 });
 
 $(document).ready(function () {
