@@ -25,7 +25,7 @@ if ($stmt = $conn->prepare($sql)) {
         // Registro movido con éxito
 
         // Ahora, actualiza el valor de la columna "estatus_emp" a "B" y "fecha_baja" a la fecha actual en la tabla "reclutamiento_baja"
-        $updateSql = "UPDATE reclutamiento SET estatus_emp = 'B', fecha_reingreso = NOW() WHERE codigo = ?";
+        $updateSql = "UPDATE reclutamiento SET estatus_emp = 'R', fecha_reingreso = NOW() WHERE codigo = ?";
         if ($updateStmt = $conn->prepare($updateSql)) {
             $updateStmt->bind_param("i", $codigo);
             

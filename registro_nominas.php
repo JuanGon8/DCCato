@@ -84,15 +84,15 @@ include 'navbar.php';
 						</div>
 						<div class="col">
 							<label for="ap_pat">Apellido paterno</label>
-							<input class="form-control" type="text" name="ap_pat" required maxlength="30">
+							<input class="form-control" type="text" name="ap_pat" required maxlength="30" id="ap_pat">
 						</div>
 						<div class="col">
 							<label for="ap_mat">Apellido materno</label>
-							<input class="form-control" type="text" name="ap_mat" required maxlength="30">
+							<input class="form-control" type="text" name="ap_mat" required maxlength="30" id="ap_mat">
 						</div>
 						<div class="col">
 							<label for="nombre">Nombre</label>
-							<input class="form-control" type="text" name="nombre" required maxlength="40">
+							<input class="form-control" type="text" name="nombre" required maxlength="40" id="nombre">
 						</div>
 						<div class="col">
 							<label for="ubicacion">Tipo de periodo</label>
@@ -374,12 +374,24 @@ include 'navbar.php';
 			<?php } ?><br>
 
 			<div class="card mb-4">
+				
 				<div class="row m-2">
 					<h4>Exportar empleados</h4>
+					<div class="dropdown">
+							<button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Exportar...
+							</button>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Por código</a></li>
+								<li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#exampleModal1">Por fecha</a></li>
+								<li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#exampleModal3" >Reingresos por fecha</a></li>
+								
+							</ul>
+						</div>
 					<div class="col-3">
-						<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+						<!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">
 							Exportar empleados por fecha
-						</button>
+						</button> -->
 
 						<!-- Modal -->
 						<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
@@ -418,9 +430,9 @@ include 'navbar.php';
 						</div>
 					</div>
 					<div class="col-3">
-						<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						<!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
 							Exportar empleados por código
-						</button>
+						</button> -->
 
 						<!-- Modal -->
 						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -458,9 +470,9 @@ include 'navbar.php';
 						</div>
 					</div>
 					<div class="col-3">
-						<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+						<!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal3">
 							Exportar reingresos por fecha
-						</button>
+						</button> -->
 
 						<!-- Modal -->
 						<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
@@ -653,7 +665,7 @@ include 'navbar.php';
 										<th>Fecha de reingreso</th>
 										<th>Fecha de baja</th>
 									</tr>
-					</tfoot>
+								</tfoot>
 							</table>
 							<tbody>
 

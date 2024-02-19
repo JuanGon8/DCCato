@@ -747,21 +747,19 @@ function moverRepse(codigo) {
 
 $(document).ready(function () {
   $('#guardar').submit(function (e) {
-    e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+    e.preventDefault();
 
-    // Guarda una referencia al formulario para usarla dentro de la función de éxito
     var form = $(this);
+    var curp = $('#curp').val();
+    var nombre = $('#nombre').val();
+    var ap_pat = $('#ap_pat').val();
+    var ap_mat = $('#ap_mat').val();
 
-    // Obtener el valor de CURP del formulario
-    var curp = $('#curp').val(); // Asegúrate de tener un campo con el ID 'curp' en tu formulario
-
-    // Realizar la validación de CURP antes de la solicitud AJAX
     $.ajax({
       type: 'POST',
       url: './register_files/verificar_curp.php',
-      data: { curp: curp }, // Enviar la CURP al servidor para validar
+      data: { curp: curp },
       success: function (response) {
-        // Si la CURP ya está registrada, mostrar la alerta y no realizar la solicitud AJAX
         if (response === 'CURP_EXISTE') {
           Swal.fire({
             icon: 'error',
@@ -771,28 +769,34 @@ $(document).ready(function () {
             confirmButtonText: 'Aceptar'
           });
         } else {
-          // Si la CURP no está registrada, continuar con la solicitud AJAX
           $.ajax({
             type: 'POST',
             url: './register_files/guardar_informacion.php',
             data: form.serialize(),
             success: function (response) {
-              // Muestra SweetAlert2 en caso de éxito
-              Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: 'Empleado registrado exitosamente',
-                showConfirmButton: true,
-                confirmButtonText: 'Aceptar'
-              }).then((result) => {
-                // Si el usuario hace clic en el botón "Aceptar"
-                if (result.isConfirmed) {
-                  // Recarga la página
-                  location.reload();
+              // Obtener el último valor de la columna "codigo" después de haber registrado el nuevo empleado
+              $.ajax({
+                type: 'GET',
+                url: './register_files/obtener_ultimo_codigo.php',
+                success: function (ultimoCodigo) {
+                  // Mostrar SweetAlert2 en caso de éxito con el nombre y el último código
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'El empleado ' + ap_pat + ' ' + ap_mat + ' ' + nombre +''+ ' con el código ' +''+ ultimoCodigo + ' ha sido registrado exitosamente.',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      location.reload();
+                    }
+                  });
+                },
+                error: function (error) {
+                  console.log(error);
                 }
               });
 
-              // Puedes agregar más lógica aquí según la respuesta del servidor
               console.log(response);
             },
             error: function (error) {
@@ -807,6 +811,8 @@ $(document).ready(function () {
     });
   });
 });
+
+
 
 
 // $(document).ready(function () {
