@@ -788,7 +788,7 @@ $(document).ready(function () {
                     confirmButtonText: 'Aceptar'
                   }).then((result) => {
                     if (result.isConfirmed) {
-                      location.reload();
+                      location.reload(true);
                     }
                   });
                 },

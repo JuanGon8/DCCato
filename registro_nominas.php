@@ -11,6 +11,9 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 include 'navbar.php';
 ?>
 <div id="layoutSidenav_content">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 	<main>
 		<link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 		<link href="https://cdn.datatables.net/autofill/2.6.0/css/autoFill.bootstrap5.css" rel="stylesheet">

@@ -37,6 +37,9 @@ $depto = $_SESSION['depto'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <meta name="author" content="" />
     <title>DCSVM</title>
     <link rel="icon" type="image/x-icon" href="assets/img/DCSVM.png">
