@@ -32,3 +32,10 @@ finally:
     # Cerrar el cursor y la conexión
     cursor.close()
     conexion.close()
+
+# CÓDIGO PARA RESTABLECER AUTOMÁTICAMENTE
+# SET @new_codigo := 16880;
+
+# UPDATE reclutamiento
+# SET codigo = (@new_codigo := @new_codigo + 1)
+# WHERE codigo >= 16881;
