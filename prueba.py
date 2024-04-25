@@ -39,3 +39,8 @@ finally:
 # UPDATE reclutamiento
 # SET codigo = (@new_codigo := @new_codigo + 1)
 # WHERE codigo >= 16881;
+
+
+# REINICIAR AUTOINCREMENTO
+# SELECT MAX(codigo) FROM reclutamiento;
+# ALTER TABLE reclutamiento AUTO_INCREMENT = 16967;
