@@ -441,6 +441,8 @@ $(document).ready(function () {
 
 });
 
+
+
 $(document).ready(function () {
   $('#example6').DataTable({
     language: {

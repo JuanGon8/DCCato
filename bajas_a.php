@@ -62,7 +62,7 @@ include 'navbar.php';
 
         <script src="main.js"></script>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Bajas CATO</h1>
+            <h1 class="mt-4">Bajas Arrendador</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="">Menú administrador</a></li>
                 <li class="breadcrumb-item active">Bajas</li>
@@ -104,11 +104,11 @@ include 'navbar.php';
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while ($row = $resultado7->fetch_assoc()) { ?>
+                            <?php while ($row = $resultado7a->fetch_assoc()) { ?>
 
                                 <tr id="row_<?php echo $row['codigo']; ?>">
                                     <td></td>
-                                    <td class="tdh"><button class="delete-button" onclick="eliminarRegistro(<?php echo $row['codigo']; ?>)">
+                                    <td class="tdh"><button class="delete-button" onclick="eliminarRegistro1(<?php echo $row['codigo']; ?>)">
                                             <i class="fa-solid fa-arrow-rotate-left"></i>
                                         </button></td>
                                     <td><?php echo $row['codigo']; ?></td>
@@ -148,7 +148,7 @@ include 'navbar.php';
 </main>
 </div>
 <script>
-	function eliminarRegistro(codigo) {
+	function eliminarRegistro1(codigo) {
 		console.log("codigo: " + codigo);
 
 		Swal.fire({
@@ -161,7 +161,7 @@ include 'navbar.php';
 			if (result.isConfirmed) {
 				// Realizar una solicitud AJAX para eliminar el registro
 				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "recuperar_baja.php?codigo=" + codigo, true);
+				xhr.open("GET", "recuperar_baja_a.php?codigo=" + codigo, true);
 				xhr.onload = function() {
 					if (xhr.status === 200) {
 						// Registro eliminado con éxito, puedes realizar alguna acción adicional si es necesario

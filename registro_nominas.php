@@ -67,7 +67,7 @@ include 'navbar.php';
 
 		<script src="main.js"></script>
 		<div class="container-fluid px-4">
-			<h1 class="mt-4">Registro nóminas</h1>
+			<h1 class="mt-4">Registro de empleados CATO</h1>
 			<ol class="breadcrumb mb-4">
 				<li class="breadcrumb-item"><a href="">Módiulo de registro</a></li>
 				<li class="breadcrumb-item active">Registro nóminas</li>
@@ -376,7 +376,7 @@ include 'navbar.php';
 				</form>
 			<?php } ?><br>
 
-			<div class="card mb-4">
+			
 				
 				<div class="row m-2">
 					<h4>Exportar empleados</h4>

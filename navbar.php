@@ -13,6 +13,8 @@ $sql6 = "SELECT * FROM bancos";
 $resultado6 = $mysqli->query($sql6);
 $sql7 = "SELECT * FROM reclutamiento_baja";
 $resultado7 = $mysqli->query($sql7);
+$sql7a = "SELECT * FROM reclutamiento_baja_a";
+$resultado7a = $mysqli->query($sql7a);
 $sql8 = "SELECT * FROM usuarios";
 $resultado8 = $mysqli->query($sql8);
 $sql9 = "SELECT * FROM reclutamiento_16340";
@@ -84,19 +86,41 @@ $depto = $_SESSION['depto'];
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Módulos de registro</div>
-                        <a class="nav-link" href="registro_nominas.php">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdmin" aria-expanded="false" aria-controls="collapseAdmin">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-cogs"></i></div>
+                                Registrar nómina
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseAdmin" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="registro_nominas.php"><i class="fa-solid fa-landmark"></i> &nbsp;CATO</a>
+                                    <a class="nav-link" href="registro_arrendador.php"><i class="fa-brands fa-stack-overflow"></i> &nbsp;Arrendador</a>
+                                </nav>
+                            </div>
+                        <!-- <a class="nav-link" href="registro_nominas.php">
                             <div class="sb-nav-link-icon">
                                 <i class="fa-solid fa-landmark"></i>
                             </div>
                             Registro nóminas
-                        </a>
+                        </a> -->
                         <a class="nav-link" href="registro_candidatos.php">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-table"></i>
                             </div>
                             Registro candidatos
                         </a>
-                        <a class="nav-link" href="bajas.php"><i class="fa-solid fa-delete-left"></i> &nbsp;Bajas</a>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdminn" aria-expanded="false" aria-controls="collapseAdmin">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-delete-left"></i></div>
+                                Bajas
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseAdminn" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="bajas.php"><i class="fa-solid fa-trash"></i> &nbsp;Bajas CATO</a>
+                                    <a class="nav-link" href="bajas_a.php"><i class="fa-solid fa-trash-can"></i> &nbsp;Bajas Arrendador</a>
+                                </nav>
+                            </div>
+                        
 
                         <?php if ($depto == "Recursos humanos" || $depto == "Sistemas") { ?>
                             <div class="sb-sidenav-menu-heading">Recursos humanos</div>
