@@ -223,6 +223,7 @@ include 'navbar.php';
 									<option value="AUX CUENTAS POR COBRAR">AUX CUENTAS POR COBRAR</option>
 									<option value="AUX FACTURACION Y COBRANZA">AUX FACTURACION Y COBRANZA</option>
 									<option value="AUX RECLUTAMIENTO Y SELECCIÓN">AUX RECLUTAMIENTO Y SELECCIÓN</option>
+									<option value="AUXILIAR RECURSOS HUMANOS">AUXILIAR RECURSOS HUMANOS</option>
 									<option value="CABALLERANGO">CABALLERANGO</option>
 									<option value="CAPITAN">CAPITAN</option>
 									<option value="CENTRALISTA">CENTRALISTA</option>
