@@ -102,7 +102,7 @@ a[x-apple-data-detectors] {
                       <td align="left" class="es-m-txt-l" style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px"><h1 style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:24px;font-style:normal;font-weight:bold;color:#FFFFFF"><strong>¡Hola <?php echo $nombre; ?>!</strong></h1></td>
                      </tr>
                      <tr>
-                      <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;line-height:21px;color:#FFFFFF;font-size:14px">Se ha generado tu reporte con el número d<span style="font-family:arial, 'helvetica neue', helvetica, sans-serif"><span style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"></span></span>e folio <strong><?php echo $folio; ?></strong> exitosamente</p></td>
+                      <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;line-height:21px;color:#FFFFFF;font-size:14px">Se ha generado tu reporte &nbsp;<span style="font-family:arial, 'helvetica neue', helvetica, sans-serif"><span style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"></span></span>exitosamente.</p></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -116,9 +116,6 @@ a[x-apple-data-detectors] {
                    <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;border-left:1px solid #ffffff;border-right:1px solid #ffffff;border-top:1px solid #ffffff;border-bottom:1px solid #ffffff;border-radius:15px">
                      <tr>
                       <td align="left" class="es-m-txt-l" style="padding:0;Margin:0;padding-top:20px;padding-left:20px;padding-right:20px"><h3 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:20px;font-style:normal;font-weight:normal;color:#FFFFFF">Más detalles</h3></td>
-                     </tr>
-                     <tr>
-                      <td align="left" style="padding:20px;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;line-height:24px;color:#FFFFFF;font-size:14px"><span style="font-size:16px"><b>Número de folio</b></span><br><?php echo $folio; ?></p></td>
                      </tr>
                      <tr>
                       <td align="center" style="padding:0;Margin:0;font-size:0">
@@ -162,7 +159,7 @@ a[x-apple-data-detectors] {
                        </table></td>
                      </tr>
                      <tr>
-                      <td align="left" style="padding:20px;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;line-height:24px;color:#FFFFFF;font-size:14px"><strong><span style="font-size:16px;line-height:24px">Fecha y hora del registrofecha</span></strong><br><?php echo $fecha; ?></p></td>
+                      <td align="left" style="padding:20px;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;line-height:24px;color:#FFFFFF;font-size:14px"><strong><span style="font-size:16px;line-height:24px">Fecha y hora del registro</span></strong><br><?php echo $fecha; ?></p></td>
                      </tr>
                    </table></td>
                  </tr>

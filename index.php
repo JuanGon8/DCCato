@@ -6,7 +6,7 @@
         $usuario = $_POST['usuario'];
         $password = $_POST['password'];
 
-        $sql = "SELECT id, password, nombre, tipo_usuario, depto FROM usuarios WHERE usuario='$usuario'";
+        $sql = "SELECT id, password, nombre, tipo_usuario, depto, puesto FROM usuarios WHERE usuario='$usuario'";
         $resultado = $mysqli->query($sql);
         $num = $resultado->num_rows;
 
@@ -20,11 +20,12 @@
                 $_SESSION['nombre'] = $row['nombre'];
                 $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
                 $_SESSION['depto'] = $row['depto'];
+                $_SESSION['puesto'] = $row['puesto'];          
 
                 if ($_SESSION['depto'] == 'Sistemas') {
                     header("Location: reportes.php");
                 } elseif ($_SESSION['depto'] == 'Recursos humanos') {
-                    header("Location: registro_candidatos.php");
+                    header("Location: reportes.php");
                 } else {
                     header("Location: registro_nominas.php");
                 }
@@ -80,7 +81,7 @@
                                             </div> -->
                                             <div class="form-group d-flex justify-content-between mt-4 mb-0">
                                         <button type="submit" class="btn greenbtn">Iniciar sesión</button>
-                                        <a href="../Alta-de-reportes-SVM/index.php" class="btn greenbtn">Reportes</a>
+                                        <!-- <a href="../Alta-de-reportes-SVM/index.php" class="btn greenbtn">Reportes</a> -->
                                     </div>
                                         </form>
                                     </div>

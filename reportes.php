@@ -6,6 +6,7 @@ if (!isset($_SESSION['id'])) {
     header("Location: index.php");
 }
 $tipo_usuario = $_SESSION['tipo_usuario'];
+$depto = $_SESSION['depto'];
 ?>
 <?php
 include 'navbar.php';
@@ -69,16 +70,135 @@ include 'navbar.php';
                 <li class="breadcrumb-item active">Reportes</li>
         </div>
 
-        <div style="display: flex;" class="wcanvas">
-            <canvas id="chartAsignado" width="300" height="300"></canvas>
-            <canvas id="chartEstado" width="300" height="300"></canvas>
-        </div>
-        <br>
-
-
-
         <div class="card mx-4 mb-4">
             <div class="card-body">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Crear reporte
+                </button>
+                <!-- <button id="generatePdf">Generar PDF</button> -->
+                <SCRipt>
+                    document.getElementById('generatePdf').addEventListener('click', function() {
+  fetch('generatePdf.php')
+    .then(response => response.blob())
+    .then(blob => {
+      // Crea una URL para el blob
+      const url = window.URL.createObjectURL(blob);
+      // Crea un enlace y haz clic en él para descargar el PDF
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'archivo.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    })
+    .catch((error) => console.error(error));
+});
+
+                </SCRipt>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Crear reporte</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="enviar_formulario.php" method="POST" enctype="multipart/form-data" id="formcrearreporte">
+                                    <div class="form-group mb-3">
+                                        <label for="nombre">Nombre</label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="correo_corporativo">Correo Corporativo</label>
+                                        <input type="email" class="form-control" id="correo_corporativo" name="correo_corporativo" required>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="descripcion">Descripción</label>
+                                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="departamento">Departamento</label>
+                                        <select class="form-select" name="departamento" id="departamento" required>
+                                            <option disabled selected value="">Selecciona un departamento</option>
+                                            <option value="Calidad">Calidad</option>
+                                            <option value="Central">Central</option>
+                                            <option value="Cliente externo">Cliente externo</option>
+                                            <option value="Cliente interno">Cliente interno</option>
+                                            <option value="Contabilidad">Contabilidad</option>
+                                            <option value="Cuentas por pagar">Cuentas por pagar</option>
+                                            <option value="Facturación">Facturación</option>
+                                            <option value="Gerencia general">Gerencia general</option>
+                                            <option value="Gerencia general">Gerencia general</option>
+                                            <option value="Gerencia limpieza">Gerencia limpieza</option>
+                                            <option value="Gerencia vigilancia">Gerencia vigilancia</option>
+                                            <option value="Nóminas">Nóminas</option>
+                                            <option value="Público general">Público general</option>
+                                            <option value="REPSE">REPSE</option>
+                                            <option value="Recepción">Recepción</option>
+                                            <option value="Recursos humanos">Recursos humanos</option>
+                                            <option value="Sistemas">Sistemas</option>
+                                            <option value="Ventas">Ventas</option>
+
+                                        </select>
+                                        <div class="invalid-feedback">Por favor, selecciona un departamento.</div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="departamento_receptor">Departamento receptor</label>
+                                        <select class="form-select" name="departamento_receptor" id="departamento_receptor" required>
+                                            <option disabled selected value="">Selecciona un departamento</option>
+                                            <option value="ejecutivocuentaclave@gruposvm.com">Calidad</option>
+                                            <option value="central@gruposvm.com">Central</option>
+                                            <option value="auxiliarcontable@gruposvm.com">Contabilidad</option>
+                                            <option value="cuentasporpagar@gruposvm.com">Cuentas por pagar</option>
+                                            <option value="facturacionvigilancia@gruposvm.com">Facturación</option>
+                                            <option value="gerenciageneral@gruposvm.com">Gerencia general</option>
+                                            <option value="gerenciageneral@gruposvm.com">Gerencia general</option>
+                                            <option value="gerenciaoperativalimpieza@gruposvm.com">Gerencia limpieza</option>
+                                            <option value="gerenciaoperativa@gruposvm.com">Gerencia vigilancia</option>
+                                            <option value="nomina@gruposvm.com">Nóminas</option>
+                                            <option value="repse@gruposvm.com">REPSE</option>
+                                            <option value="recepcion@gruposvm.com">Recepción</option>
+                                            <option value="gerenciarecursoshumanos@gruposvm.com">Recursos humanos</option>
+                                            <option value="sistemas@gruposvm.com">Sistemas</option>
+                                            <option value="ventas@gruposvm.com">Ventas</option>
+                                        </select>
+                                        <div class="invalid-feedback">Por favor, selecciona un departamento receptor.</div>
+                                    </div>
+                                    <?php if ($puesto == "Gerente") { ?>
+                                        <div class="form-group mb-3">
+                                            <label for="prioridad">Prioridad</label>
+                                            <select class="form-select" name="prioridad" id="prioridad" required>
+                                                <option disabled selected value="">Selecciona el tipo de prioridad</option>
+                                                <option value="Alta">Alta</option>
+                                                <option value="Media">Media</option>
+                                                <option value="Baja">Baja</option>
+                                            </select>
+                                        </div>
+                                    <?php } ?>
+                                    <div class="form-group mb-3">
+                                        <label for="fecha">Hora del reporte</label>
+                                        <div class="input-group">
+                                            <input type="datetime-local" class="form-control" id="fecha" name="fecha">
+                                            <button type="button" class="btn btn-secondary" id="btnActualizarHora"><i class="fa-solid fa-arrows-rotate"></i></button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="folio" id="folio" value="" />
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar reporte</button>
+                                    </div>
+
+                                    <!-- <a href="../DCCato/index.php" class="btn greenbtn">Regresar</a> -->
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered" id="exampler" width="100%" cellspacing="0">
                         <thead class="table-dark">
@@ -90,123 +210,251 @@ include 'navbar.php';
                                 <th>Departamento</th>
                                 <th>Descripción</th>
                                 <th>Fecha (alta)</th>
+                                <th>Prioridad</th>
                                 <th>Asignado a</th>
-                                <th>Diagnostico téc</th>
+                                <th>Observaciones</th>
                                 <th>Materiales</th>
                                 <th>Tipo servicio</th>
-                                <th>Hora concluido</th>
                                 <th>Estado</th>
+                                <th>Fecha en proceso</th>
+                                <th>Fecha concluido</th>
+                                <th>Etapa</th>
+                                <th>Tiempo realizado</th>
+                                <th>Evidencia</th>
+                                <th hidden>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while ($row = $resultado13->fetch_assoc()) { ?>
-                                <tr id="row_<?php echo $row['folio']; ?>">
-                                    <td class="tdh"></td>
-                                    <td class="tdh">
-                                        <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['folio']; ?>">
-                                            <i class="fa-solid fa-pencil"></i>
-                                        </button>
-                                        <!-- <button class="delete-button" onclick="deleteRow(<?php echo $row['codigo']; ?>)">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button> -->
+                            <?php while ($row = $resultado13->fetch_assoc()) {
+                                if ($depto === "Sistemas" || $row['departamento'] === $depto) {
+                                    $completado = ($row['estado'] === 'Completado') ? 'completado' : '';
+                            ?>
+                                    <tr id="row_<?php echo $row['folio']; ?>" class="<?php echo $completado; ?>">
+                                        <td class="tdh"></td>
+                                        <td class="tdh">
+                                            <!-- <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['folio']; ?>">
+                                                <i class="fa-solid fa-pencil"></i>
+                                            </button> -->
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal_<?php echo $row['folio']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Editar información</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="POST" action="updater.php" enctype="multipart/form-data">
-                                                            <input type="hidden" name="nombreu" id="nombreu" value="<?php echo $_SESSION['nombre']; ?>">
-                                                            <input type="hidden" name="hora_registro" id="hora_registro">
-                                                            <div class="row">
-                                                                <input type="hidden" name="folio" value="<?php echo $row['folio']; ?>">
-                                                                <div class="col">
-                                                                    <div class="form-group">
-                                                                        <label for="asignado">Asignado a</label>
-                                                                        <select name="asignado" id="moto" class="form-select">
-                                                                            <option selected value="<?php echo $row['asignado']; ?>"><?php echo $row['asignado']; ?></option>
-                                                                            <option value="Antonio D">Antonio D</option>
-                                                                            <option value="Juan G">Juan G</option>
-                                                                            <option value="Juan P">Juan P</option>
-                                                                            <option value="Gener V">Gener V</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <label for="diagnostico_t">Diagnóstico tec</label>
-                                                                    <input class="form-control" type="text" name="diagnostico_t" value="<?php echo $row['diagnostico_t']; ?>">
-                                                                </div>
-                                                                <div class="col">
-                                                                    <label for="materiales">Materiales utilizados</label>
-                                                                    <input class="form-control" type="text" name="materiales" value="<?php echo $row['materiales']; ?>">
-                                                                </div>
-                                                            </div>
-                                                            <br>
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <div class="form-group">
-                                                                        <label for="tipo_servicio">Tipo de servicio</label>
-                                                                        <select name="tipo_servicio" id="moto" class="form-select">
-                                                                            <option selected value="<?php echo $row['tipo_servicio']; ?>"><?php echo $row['tipo_servicio']; ?></option>
-                                                                            <option value="Mantanimiento">Mantanimiento</option>
-                                                                            <option value="Reparación">Reparación</option>
-                                                                            <option value="Revisión">Revisión</option>
-                                                                            <option value="Soporte">Soporte</option>
-                                                                            <option value="Configuración">Configuración</option>
-                                                                            <option value="Instalación">Instalación</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <label for="hora_concluido">Hora concluido</label>
-                                                                    <input type="datetime-local" id="fechaActual1" value="<?php echo $row['hora_concluido']; ?><" min="1920-01-01" name="hora_concluido">
-                                                                </div>
-                                                                <div class="col">
-                                                                    <div class="form-group">
-                                                                        <label for="estado">Estado</label>
-                                                                        <select name="estado" id="moto" class="form-select">
-                                                                            <option selected value="<?php echo $row['estado']; ?>"><?php echo $row['estado']; ?></option>
-                                                                            <option value="Completado">Completado</option>
-                                                                            <option value="Pendiente">Pendiente</option>
-                                                                            <option value="En proceso">En proceso</option>
-                                                                            <option value="No atendido">No atendido</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div><br>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                                <input type="submit" value="Guardar" class="btn btn-primary submitbutton" id="liveAlertBtn">
-                                                            </div>
-
-
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    </td>
-                                    <!-- <th>Asignado a</th>
+                                           
+                                        </td>
+                                        <!-- <th>Asignado a</th>
                                 <th>Diagnostico téc</th>
                                 <th>Tipo servicio</th>
                                 <th>Hora concluido</th>
                                 <th>Estado</th> -->
-                                    <td><?php echo $row['folio']; ?></td>
-                                    <td><?php echo $row['nombre']; ?></td>
-                                    <td><?php echo $row['departamento']; ?></td>
-                                    <td><?php echo $row['descripcion']; ?></td>
-                                    <td><?php echo $row['fecha']; ?></td>
-                                    <td><?php echo $row['asignado']; ?></td>
-                                    <td><?php echo $row['diagnostico_t']; ?></td>
-                                    <td><?php echo $row['materiales']; ?></td>
-                                    <td><?php echo $row['tipo_servicio']; ?></td>
-                                    <td><?php echo $row['hora_concluido']; ?></td>
-                                    <td><?php echo $row['estado']; ?></td>
-                                </tr>
-                            <?php } ?>
+                                        <td><?php echo $row['folio']; ?></td>
+                                        <td><?php echo $row['nombre']; ?></td>
+                                        <td><?php echo $row['departamento']; ?></td>
+                                        <td><?php echo $row['descripcion']; ?></td>
+                                        <td><?php echo $row['fecha']; ?></td>
+                                        <td>
+                                            <?php
+                                            $prioridad = $row['prioridad'];
+                                            if ($prioridad == "Alta") {
+                                                echo '<span class="badge bg-danger">' . $prioridad . '</span>';
+                                            } elseif ($prioridad == "Media") {
+                                                echo '<span class="badge bg-warning text-dark">' . $prioridad . '</span>';
+                                            } elseif ($prioridad == "Baja") {
+                                                echo '<span class="badge bg-success">' . $prioridad . '</span>';
+                                            } else {
+                                                echo '<span class="badge bg-secondary">' . $prioridad . '</span>';
+                                            }
+                                            ?>
+                                        </td>
+
+                                        <td><?php echo $row['asignado']; ?></td>
+                                        <td><?php echo $row['diagnostico_t']; ?></td>
+                                        <td><?php echo $row['materiales']; ?></td>
+                                        <td><?php echo $row['tipo_servicio']; ?></td>
+                                        <td><?php echo $row['estado']; ?></td>
+                                        <td><?php echo $row['fecha_proceso']; ?></td>
+                                        <td><?php echo $row['hora_concluido']; ?></td>
+                                        <td><?php echo $row['estado_g']; ?></td>
+                                        <td>
+                                            <?php
+                                            // Cálculo del tiempo transcurrido
+                                            $fechaInicio = strtotime($row['fecha']);
+                                            $horaConcluido = $row['hora_concluido'] ?? null;
+
+                                            // Verifica si hora_concluido está vacío o no
+                                            if (empty($horaConcluido)) {
+                                                $tiempoTranscurrido = "Sin concluir";
+                                                $badge_color = 'bg-secondary';
+                                            } else {
+                                                $fechaFin = strtotime($horaConcluido);
+
+                                                // Calcula la diferencia en segundos
+                                                $diferencia = $fechaFin - $fechaInicio;
+
+                                                // Calcula días, horas, minutos y segundos
+                                                $dias = floor($diferencia / (60 * 60 * 24));
+                                                $horas = floor(($diferencia % (60 * 60 * 24)) / (60 * 60));
+                                                $minutos = floor(($diferencia % (60 * 60)) / 60);
+                                                $segundos = $diferencia % 60;
+
+                                                // Formatea el tiempo transcurrido
+                                                $tiempoTranscurrido = "{$dias}d {$horas}h {$minutos}m {$segundos}s";
+
+                                                // Determinar el color de la badge según las horas transcurridas y la prioridad
+                                                $horasTranscurridas = $diferencia / (60 * 60);
+                                                if ($row['prioridad'] == "Alta") {
+                                                    if ($horasTranscurridas > 4) {
+                                                        $badge_color = 'bg-danger';
+                                                    } elseif ($horasTranscurridas >= 2 && $horasTranscurridas < 4) {
+                                                        $badge_color = 'bg-warning text-dark';
+                                                    } else {
+                                                        $badge_color = 'bg-success';
+                                                    }
+                                                } elseif ($row['prioridad'] == "Media") {
+                                                    if ($horasTranscurridas > 24) {
+                                                        $badge_color = 'bg-danger';
+                                                    } elseif ($horasTranscurridas >= 12 && $horasTranscurridas < 24) {
+                                                        $badge_color = 'bg-warning text-dark';
+                                                    } else {
+                                                        $badge_color = 'bg-success';
+                                                    }
+                                                } elseif ($row['prioridad'] == "Baja") {
+                                                    if ($horasTranscurridas > 72) {
+                                                        $badge_color = 'bg-danger';
+                                                    } elseif ($horasTranscurridas >= 36 && $horasTranscurridas < 72) {
+                                                        $badge_color = 'bg-warning text-dark';
+                                                    } else {
+                                                        $badge_color = 'bg-success';
+                                                    }
+                                                } else {
+                                                    $badge_color = 'bg-secondary';
+                                                }
+                                            }
+
+                                            // Muestra la badge con el color determinado y el tiempo transcurrido
+                                            echo '<span class="badge ' . $badge_color . '">' . $tiempoTranscurrido . '</span>';
+                                            ?>
+                                        </td>
+                                        <td><button onclick="abrirImagen('<?php echo $row['imagen']; ?>')" class="btn btn-secondary btn-sm">Ver Imagen</button></td>
+                                        <td> <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal_<?php echo $row['folio']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog  modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Editar información</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="POST" enctype="multipart/form-data" id="formenviar">
+                                                                <input type="hidden" name="nombreu" id="nombreu" value="<?php echo $_SESSION['nombre']; ?>">
+                                                                <input type="hidden" name="hora_registro" id="hora_registro">
+                                                                <input type="hidden" name="folio" value="<?php echo $row['folio']; ?>">
+
+                                                                <div class="form-group mb-3">
+                                                                    <label for="asignado">Asignado a</label>
+                                                                    <select name="asignado" id="moto" class="form-select">
+                                                                        <option selected value="<?php echo $row['asignado']; ?>"><?php echo $row['asignado']; ?></option>
+                                                                        <option value="Antonio D">Antonio D</option>
+                                                                        <option value="Juan G">Juan G</option>
+                                                                        <option value="Juan P">Juan P</option>
+                                                                        <option value="Gener V">Gener V</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="diagnostico_t">Observaciones</label>
+                                                                    <textarea class="form-control" type="text" name="diagnostico_t"><?php echo $row['diagnostico_t']; ?></textarea>
+                                                                </div>
+
+                                                                <div class="form-group mb-3">
+                                                                    <label for="materiales">Materiales utilizados</label>
+                                                                    <input class="form-control" type="text" name="materiales" value="<?php echo $row['materiales']; ?>">
+                                                                </div>
+
+                                                                <div class="form-group mb-3">
+                                                                    <label for="tipo_servicio">Tipo de servicio</label>
+                                                                    <select name="tipo_servicio" id="moto" class="form-select">
+                                                                        <option selected value="<?php echo $row['tipo_servicio']; ?>"><?php echo $row['tipo_servicio']; ?></option>
+                                                                        <option value="Mantanimiento">Mantanimiento</option>
+                                                                        <option value="Reparación">Reparación</option>
+                                                                        <option value="Revisión">Revisión</option>
+                                                                        <option value="Soporte">Soporte</option>
+                                                                        <option value="Configuración">Configuración</option>
+                                                                        <option value="Instalación">Instalación</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group mb-3">
+                                                                    <label for="estado">Estado</label>
+                                                                    <select name="estado" id="estado_<?php echo $row['folio']; ?>" class="form-select">
+                                                                        <option selected value="<?php echo $row['estado']; ?>"><?php echo $row['estado']; ?></option>
+                                                                        <option value="Completado">Completado</option>
+                                                                        <option value="En proceso">En proceso</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div id="fecha-container_<?php echo $row['folio']; ?>" class="form-group mb-3" style="display:none;">
+                                                                    <label for="fecha_proceso">Fecha en proceso</label>
+                                                                    <input type="datetime-local" class="form-control" id="fecha_proceso_<?php echo $row['folio']; ?>" name="fecha_proceso" value="<?php echo date('Y-m-d\TH:i', strtotime($row['fecha_proceso'])); ?>">
+                                                                </div>
+                                                                <div id="hora-container_<?php echo $row['folio']; ?>" class="form-group mb-3" style="display:none;">
+                                                                    <label for="hora_concluido">Fecha concluido</label>
+                                                                    <input type="datetime-local" class="form-control" id="hora_concluido_<?php echo $row['folio']; ?>" name="hora_concluido" value="<?php echo date('Y-m-d\TH:i', strtotime($row['hora_concluido'])); ?>">
+                                                                </div>
+                                                                <script>
+                                                                    $(document).ready(function() {
+                                                                        function toggleContainers(folio) {
+                                                                            if ($('#estado_' + folio).val() === 'En proceso') {
+                                                                                $('#fecha-container_' + folio).show();
+                                                                                $('#hora-container_' + folio).hide();
+                                                                                $('#hora_concluido_' + folio).val('');
+                                                                            } else if ($('#estado_' + folio).val() === 'Completado') {
+                                                                                $('#fecha-container_' + folio).show();
+                                                                                $('#hora-container_' + folio).show();
+                                                                            } else {
+                                                                                $('#fecha-container_' + folio).hide();
+                                                                                $('#hora-container_' + folio).hide();
+                                                                                $('#fecha_proceso_' + folio).val('');
+                                                                                $('#hora_concluido_' + folio).val('');
+                                                                            }
+                                                                        }
+
+                                                                        // Inicializar contenedores según el estado inicial
+                                                                        toggleContainers(<?php echo $row['folio']; ?>);
+
+                                                                        // Cambiar contenedores al cambiar el estado
+                                                                        $('#estado_<?php echo $row['folio']; ?>').change(function() {
+                                                                            toggleContainers(<?php echo $row['folio']; ?>);
+                                                                        });
+                                                                    });
+                                                                </script>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="correo_corporativo" hidden>Correo corporativo</label>
+                                                                    <input class="form-control" type="hidden" name="correo_corporativo" value="<?php echo $row['correo_corporativo']; ?>">
+                                                                </div>
+
+                                                                <div class="form-group mb-3">
+                                                                    <label for="file">Subir imagen</label>
+                                                                    <input type="file" name="file" class="form-control">
+                                                                </div>
+
+
+                                                                <?php if ($puesto == "Gerente") { ?>
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="estado_g">Etapa</label>
+                                                                        <select class="form-select" name="estado_g" id="estado_g" required>
+                                                                            <option disabled selected value="">Selecciona la etapa</option>
+                                                                            <option value="Activo">Activo</option>
+                                                                            <option value="Finalizado">Finalizado</option>
+                                                                        </select>
+                                                                    </div>
+                                                                <?php } ?>
+
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                    <input type="submit" value="Guardar" class="btn btn-primary submitbutton" id="liveAlertBtn" name="submit">
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div></td>
+                                    </tr>
+                            <?php }
+                            } ?>
                         </tbody>
                     </table>
 
@@ -235,17 +483,23 @@ include 'navbar.php';
 </script>
 <script>
     $(document).ready(function() {
-        $('form').submit(function(e) {
+        $('#formenviar').submit(function(e) {
             e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
 
             // Guarda una referencia al formulario para usarla dentro de la función de éxito
             var form = $(this);
 
+            // Crea un objeto FormData para enviar datos de formulario y archivos
+            var formData = new FormData(form[0]);
+
             // Realiza la solicitud AJAX
             $.ajax({
                 type: 'POST',
                 url: './update_files/updater.php',
-                data: form.serialize(), // Serializa los datos del formulario
+                data: formData, // Usa el objeto FormData en lugar de form.serialize()
+                enctype: 'multipart/form-data',
+                contentType: false, // Importante: no establezcas el tipo de contenido
+                processData: false, // Importante: no proceses los datos
                 success: function(response) {
                     // Muestra SweetAlert2 en caso de éxito
                     Swal.fire({
@@ -272,13 +526,14 @@ include 'navbar.php';
         });
     });
 </script>
+
 <script>
     // Obtener datos desde PHP
     fetch('getData.php')
         .then(response => response.json())
         .then(data => {
             // Preparar datos para Chart.js
-            var configuracionGrafica = function (canvasId, data) {
+            var configuracionGrafica = function(canvasId, data) {
                 var labels = Object.keys(data);
                 var values = Object.values(data);
 
@@ -296,7 +551,7 @@ include 'navbar.php';
                                 'rgba(255, 206, 86, 0.7)',
                                 'rgba(182, 182, 255, 0.7)', // Lavanda
                                 // 'rgba(75, 0, 130, 0.7)',   // Indigo
-                                'rgba(139, 69, 19, 0.7)',  // Café
+                                'rgba(139, 69, 19, 0.7)', // Café
                             ],
                             borderColor: [
                                 'rgba(255, 99, 132, 1)',
@@ -304,7 +559,7 @@ include 'navbar.php';
                                 'rgba(255, 206, 86, 1)',
                                 'rgba(182, 182, 255, 1)', // Lavanda
                                 // 'rgba(75, 0, 130, 1)',   // Indigo
-                                'rgba(139, 69, 19, 1)',  // Café
+                                'rgba(139, 69, 19, 1)', // Café
                             ],
                             borderWidth: 1
                         }]
@@ -316,4 +571,110 @@ include 'navbar.php';
             configuracionGrafica('chartEstado', data.estado);
         })
         .catch(error => console.error('Error al obtener datos:', error));
+</script>
+
+<script>
+    // Espera a que se cargue el DOM
+    $(document).ready(function() {
+        // Captura el evento submit del formulario
+        $('#formcrearreporte').submit(function(e) {
+            e.preventDefault(); // Evita que se envíe el formulario de la manera convencional
+
+
+            // Agregar el folio al formulario
+            $(this).append('<input type="hidden" name="folio_js">');
+
+            // Muestra el Sweet Alert con el folio generado
+            Swal.fire({
+                title: '¡Éxito!',
+                text: 'Tu reporte se ha generado exitosamente.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                // Verifica si el botón "Aceptar" fue presionado
+                if (result.isConfirmed) {
+                    // Recarga la página
+                    location.reload();
+                }
+            });
+
+            // Realiza la petición AJAX
+            $.ajax({
+                type: 'POST',
+                url: 'enviar_formulario.php', // Ruta a tu script PHP
+                data: $(this).serialize(), // Serializa los datos del formulario
+                success: function(response) {
+                    // Maneja la respuesta del servidor
+                    console.log(response);
+                },
+                error: function(error) {
+                    // Maneja el error en caso de que la petición AJAX falle
+                    console.log('Error:', error);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    // Función para obtener la fecha y hora actual en la zona horaria de México
+    function obtenerFechaHoraActual() {
+        var fechaHora = new Date();
+        var opcionesFechaHora = {
+            timeZone: 'America/Mexico_City',
+            hour12: false,
+            hour: 'numeric',
+            minute: 'numeric'
+        };
+        var formatoHora = fechaHora.toLocaleTimeString('es-MX', opcionesFechaHora);
+        var formatoFechaHora = fechaHora.toISOString().slice(0, 10) + 'T' + formatoHora;
+        document.getElementById("fecha").value = formatoFechaHora;
+    }
+
+    // Función para actualizar la fecha y hora cada 5 segundos
+    function actualizarFechaHora() {
+        obtenerFechaHoraActual();
+    }
+
+    // Iniciar la actualización automática al cargar la página
+    window.onload = function() {
+        actualizarFechaHora();
+        setInterval(actualizarFechaHora, 5000); // 5000 milisegundos = 5 segundos
+    };
+
+    // Manejar la actualización cuando se hace clic en el botón
+    document.getElementById("btnActualizarHora").addEventListener("click", function() {
+        actualizarFechaHora();
+    });
+</script>
+<script>
+    function abrirImagen(imagen) {
+        if (imagen) {
+            var rutaCompleta = 'DCR/' + imagen; // Concatena la ruta base 'DCR/' con la ruta de la imagen
+            window.open(rutaCompleta, '_blank');
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se encontró imagen',
+            });
+        }
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Selecciona todas las filas con la clase "completado"
+    const completados = document.querySelectorAll('tr.completado');
+
+    completados.forEach(function(row) {
+        // Selecciona todas las celdas dentro de la fila, excepto la primera
+        const cells = row.querySelectorAll('td:not(:first-child)');
+
+        cells.forEach(function(cell) {
+            // Deshabilita la celda (puedes ajustar según tus necesidades)
+            cell.style.pointerEvents = 'none';
+            cell.style.opacity = '0.5'; // Opcional: añade un estilo visual para indicar que está deshabilitado
+        });
+    });
+});
+
 </script>

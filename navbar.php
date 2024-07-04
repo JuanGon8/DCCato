@@ -27,9 +27,13 @@ $sql2 = "SELECT * FROM reclutamiento_repse";
 $resultado12 = $mysqli->query($sql2);
 $sql3 = "SELECT * FROM alta_reportes ORDER BY fecha DESC";
 $resultado13 = $mysqli->query($sql3);
+$sql4 = "SELECT * FROM alta_quejas ORDER BY fecha DESC";
+$resultado14 = $mysqli->query($sql4);
+
 
 $tipo_usuario = $_SESSION['tipo_usuario'];
 $depto = $_SESSION['depto'];
+$puesto = $_SESSION['puesto'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +74,7 @@ $depto = $_SESSION['depto'];
             </div>
         </form>
         <!-- Navbar-->
-        <a href="reporte_form.php"><button class="btn btn-success mr-2">Alta de reportes</button></a>
+        <!-- <a href="reporte_form.php"><button class="btn btn-success mr-2">Alta de reportes</button></a> -->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
@@ -86,107 +90,27 @@ $depto = $_SESSION['depto'];
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Módulos de registro</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdmin" aria-expanded="false" aria-controls="collapseAdmin">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-cogs"></i></div>
-                                Registrar nómina
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseAdmin" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="registro_nominas.php"><i class="fa-solid fa-landmark"></i> &nbsp;CATO</a>
-                                    <a class="nav-link" href="registro_arrendador.php"><i class="fa-brands fa-stack-overflow"></i> &nbsp;Arrendador</a>
-                                </nav>
-                            </div>
-                        <!-- <a class="nav-link" href="registro_nominas.php">
-                            <div class="sb-nav-link-icon">
-                                <i class="fa-solid fa-landmark"></i>
-                            </div>
-                            Registro nóminas
-                        </a> -->
-                        <a class="nav-link" href="registro_candidatos.php">
+                        <a class="nav-link" href="reportes.php">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-table"></i>
                             </div>
-                            Registro candidatos
+                            Reportes
                         </a>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdminn" aria-expanded="false" aria-controls="collapseAdmin">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-delete-left"></i></div>
-                                Bajas
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseAdminn" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="bajas.php"><i class="fa-solid fa-trash"></i> &nbsp;Bajas CATO</a>
-                                    <a class="nav-link" href="bajas_a.php"><i class="fa-solid fa-trash-can"></i> &nbsp;Bajas Arrendador</a>
-                                </nav>
+                        <a class="nav-link" href="quejas.php">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-book"></i>
                             </div>
-                        
+                            Quejas
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Módulos de registro</div>
+                        <a class="nav-link" href="survey.php">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-table"></i>
+                            </div>
+                            Encuesta
+                        </a>
+                       
 
-                        <?php if ($depto == "Recursos humanos" || $depto == "Sistemas") { ?>
-                            <div class="sb-sidenav-menu-heading">Recursos humanos</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseGestion" aria-expanded="false" aria-controls="collapseGestion">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
-                                Gestión de personal
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseGestion" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="control_expedientes.php"><i class="fa-solid fa-check"></i>&nbsp; Control de expedientes</a>
-                                    <a class="nav-link" href="uniformes.php"><i class="fa-solid fa-person-military-rifle"></i>&nbsp; Uniformes</a>
-                                    <a class="nav-link" href="repse.php"><i class="fa-solid fa-hammer"></i>&nbsp; REPSE</a>
-                                </nav>
-                            </div>
-                        <?php } ?>
-
-                        <?php if ($tipo_usuario == 1 || $tipo_usuario == 2) { ?>
-                            <div class="sb-sidenav-menu-heading">Alta de catálogos</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAlta" aria-expanded="false" aria-controls="collapseAlta">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-archive"></i></div>
-                                Catálogos
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseAlta" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="bancos.php"><i class="fa-solid fa-money-bill"></i> &nbsp;Bancos</a>
-                                    <a class="nav-link" href="departamentos.php"><i class="fa-solid fa-list"></i> &nbsp;Departamentos</a>
-                                    <a class="nav-link" href="ubicaciones.php"><i class="fa-solid fa-location-dot"></i> &nbsp;Ubicaciones</a>
-                                </nav>
-                            </div>
-                        <?php } ?>
-                        <?php if ($depto == "Sistemas" || $depto == "Almacen" || $depto == "Recursos humanos") { ?>
-                            <div class="sb-sidenav-menu-heading">Inventario</div>
-                            <?php if ($depto == "Sistemas" || $depto == "Almacen") { ?>
-                                <a class="nav-link" href="inventario_al.php">
-                                    <div class="sb-nav-link-icon">
-                                        <i class="fa-solid fa-landmark"></i>
-                                    </div>
-                                    Inv. Almacén
-                                </a>
-                            <?php } ?>
-                            <?php if ($depto == "Sistemas" || $depto == "Recursos humanos") { ?>
-                                <a class="nav-link" href="inventario_rh.php">
-                                    <div class="sb-nav-link-icon">
-                                        <i class="fa-solid fa-shirt"></i>
-                                    </div>
-                                    Inv. Recursos humanos
-                                </a>
-                            <?php } ?>
-                        <?php } ?>
-                        <?php if ($depto == "Sistemas") { ?>
-                            <div class="sb-sidenav-menu-heading">Menú administrador</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdmin" aria-expanded="false" aria-controls="collapseAdmin">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-cogs"></i></div>
-                                Administrador
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseAdmin" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    
-                                    <a class="nav-link" href="usuarios.php"><i class="fa-solid fa-user"></i> &nbsp;Usuarios</a>
-                                    <a class="nav-link" href="reportes.php"><i class="fa-solid fa-book"></i> &nbsp;Reportes</a>
-                                </nav>
-                            </div>
-                        <?php } ?>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
