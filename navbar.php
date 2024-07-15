@@ -102,14 +102,19 @@ $puesto = $_SESSION['puesto'];
                             </div>
                             Quejas
                         </a>
-                        <div class="sb-sidenav-menu-heading">Módulos de registro</div>
+                        <div class="sb-sidenav-menu-heading">Módulos de encuestas</div>
                         <a class="nav-link" href="survey.php">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-table"></i>
                             </div>
                             Encuesta
                         </a>
-                       
+                        <a class="nav-link" href="prefilter.php">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-table"></i>
+                            </div>
+                            Encuesta
+                        </a>
 
                     </div>
                 </div>
