@@ -26,8 +26,8 @@
                     header("Location: reportes.php");
                 } elseif ($_SESSION['depto'] == 'Recursos humanos') {
                     header("Location: reportes.php");
-                } else {
-                    header("Location: registro_nominas.php");
+                } elseif ($_SESSION['depto'] == 'Calidad') {
+                    header("Location: survey.php");
                 }
             } else {
                 echo '<div class="alert alert-danger" role="alert" id="login-alert" style="width: 300px; margin-top: 10px; margin-bottom: 0px; margin-left: auto; margin-right: auto; text-align: center;">La contraseña no coincide</div>';
