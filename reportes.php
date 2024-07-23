@@ -1,6 +1,8 @@
 <?php
 session_start();
 require 'conexion.php';
+$sql3 = "SELECT * FROM alta_reportes ORDER BY fecha DESC";
+$resultado13 = $mysqli->query($sql3);
 
 if (!isset($_SESSION['id'])) {
     header("Location: index.php");
@@ -79,23 +81,22 @@ include 'navbar.php';
                 <!-- <button id="generatePdf">Generar PDF</button> -->
                 <SCRipt>
                     document.getElementById('generatePdf').addEventListener('click', function() {
-  fetch('generatePdf.php')
-    .then(response => response.blob())
-    .then(blob => {
-      // Crea una URL para el blob
-      const url = window.URL.createObjectURL(blob);
-      // Crea un enlace y haz clic en él para descargar el PDF
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = url;
-      a.download = 'archivo.pdf';
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-    })
-    .catch((error) => console.error(error));
-});
-
+                        fetch('generatePdf.php')
+                            .then(response => response.blob())
+                            .then(blob => {
+                                // Crea una URL para el blob
+                                const url = window.URL.createObjectURL(blob);
+                                // Crea un enlace y haz clic en él para descargar el PDF
+                                const a = document.createElement('a');
+                                a.style.display = 'none';
+                                a.href = url;
+                                a.download = 'archivo.pdf';
+                                document.body.appendChild(a);
+                                a.click();
+                                window.URL.revokeObjectURL(url);
+                            })
+                            .catch((error) => console.error(error));
+                    });
                 </SCRipt>
 
                 <!-- Modal -->
@@ -236,7 +237,7 @@ include 'navbar.php';
                                                 <i class="fa-solid fa-pencil"></i>
                                             </button> -->
 
-                                           
+
                                         </td>
                                         <!-- <th>Asignado a</th>
                                 <th>Diagnostico téc</th>
@@ -348,13 +349,7 @@ include 'navbar.php';
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="asignado">Asignado a</label>
-                                                                    <select name="asignado" id="moto" class="form-select">
-                                                                        <option selected value="<?php echo $row['asignado']; ?>"><?php echo $row['asignado']; ?></option>
-                                                                        <option value="Antonio D">Antonio D</option>
-                                                                        <option value="Juan G">Juan G</option>
-                                                                        <option value="Juan P">Juan P</option>
-                                                                        <option value="Gener V">Gener V</option>
-                                                                    </select>
+                                                                    <input type="text" class="form-control" id="asignado" name="asignado" required>
                                                                 </div>
                                                                 <div class="form-group mb-3">
                                                                     <label for="diagnostico_t">Observaciones</label>
@@ -451,7 +446,8 @@ include 'navbar.php';
                                                             </form>
                                                         </div>
                                                     </div>
-                                                </div></td>
+                                                </div>
+                                        </td>
                                     </tr>
                             <?php }
                             } ?>
@@ -662,19 +658,18 @@ include 'navbar.php';
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    // Selecciona todas las filas con la clase "completado"
-    const completados = document.querySelectorAll('tr.completado');
+        // Selecciona todas las filas con la clase "completado"
+        const completados = document.querySelectorAll('tr.completado');
 
-    completados.forEach(function(row) {
-        // Selecciona todas las celdas dentro de la fila, excepto la primera
-        const cells = row.querySelectorAll('td:not(:first-child)');
+        completados.forEach(function(row) {
+            // Selecciona todas las celdas dentro de la fila, excepto la primera
+            const cells = row.querySelectorAll('td:not(:first-child)');
 
-        cells.forEach(function(cell) {
-            // Deshabilita la celda (puedes ajustar según tus necesidades)
-            cell.style.pointerEvents = 'none';
-            cell.style.opacity = '0.5'; // Opcional: añade un estilo visual para indicar que está deshabilitado
+            cells.forEach(function(cell) {
+                // Deshabilita la celda (puedes ajustar según tus necesidades)
+                cell.style.pointerEvents = 'none';
+                cell.style.opacity = '0.5'; // Opcional: añade un estilo visual para indicar que está deshabilitado
+            });
         });
     });
-});
-
 </script>

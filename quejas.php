@@ -1,7 +1,8 @@
 <?php
 session_start();
 require 'conexion.php';
-
+$sql4 = "SELECT * FROM alta_quejas ORDER BY fecha DESC";
+$resultado14 = $mysqli->query($sql4);
 if (!isset($_SESSION['id'])) {
     header("Location: index.php");
 }
@@ -260,138 +261,138 @@ include 'navbar.php';
                     </div>
                 </div>
                 <div class="table-responsive">
-    <table class="table table-striped table-bordered" id="exampler" width="100%" cellspacing="0">
-        <thead class="table-dark">
-            <tr class="tdh">
-                <th class="acciones">Más información</th>
-                <th class="acciones">Acciones</th>
-                <th>Folio</th>
-                <th>Tipo</th>
-                <th>Fecha (alta)</th>
-                <th>Prioridad</th>
-                <th>Nombre del cliente</th>
-                <th>Ubicación</th>
-                <th>Tel o cel</th>
-                <th>Correo electrónico</th>
-                <th>Tipo de servicio</th>
-                <th>Descripción</th>
-                <th>Departamento</th>
-                <th>Departamento receptor</th>
-                <th>Asignado a</th>
-                <th>Estado</th>
-                <th>Trabajo realizado</th>
-                <th>Etapa</th>
-                <th>Fecha en proceso</th>
-                <th>Fecha concluido</th>
-                <th>Tiempo realizado</th>
-                <th>Evidencia</th>
-                <th hidden>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($row = $resultado14->fetch_assoc()) {
-                if ($depto === "Sistemas" || $row['departamento'] === $depto) {
-                    $completado = ($row['estado'] === 'Completado') ? 'completado' : '';
-            ?>
-                <tr id="row_<?php echo $row['folio']; ?>" class="<?php echo $completado; ?>">
-                    <td class="tdh"></td>
-                    <td class="tdh">
-                        <!-- <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['folio']; ?>">
+                    <table class="table table-striped table-bordered" id="exampler" width="100%" cellspacing="0">
+                        <thead class="table-dark">
+                            <tr class="tdh">
+                                <th class="acciones">Más información</th>
+                                <th class="acciones">Acciones</th>
+                                <th>Folio</th>
+                                <th>Tipo</th>
+                                <th>Fecha (alta)</th>
+                                <th>Prioridad</th>
+                                <th>Nombre del cliente</th>
+                                <th>Ubicación</th>
+                                <th>Tel o cel</th>
+                                <th>Correo electrónico</th>
+                                <th>Tipo de servicio</th>
+                                <th>Descripción</th>
+                                <th>Departamento</th>
+                                <th>Departamento receptor</th>
+                                <th>Asignado a</th>
+                                <th>Estado</th>
+                                <th>Trabajo realizado</th>
+                                <th>Etapa</th>
+                                <th>Fecha en proceso</th>
+                                <th>Fecha concluido</th>
+                                <th>Tiempo realizado</th>
+                                <th>Evidencia</th>
+                                <th hidden>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($row = $resultado14->fetch_assoc()) {
+                                if ($depto === "Sistemas" || $row['departamento'] === $depto) {
+                                    $completado = ($row['estado'] === 'Completado') ? 'completado' : '';
+                            ?>
+                                    <tr id="row_<?php echo $row['folio']; ?>" class="<?php echo $completado; ?>">
+                                        <td class="tdh"></td>
+                                        <td class="tdh">
+                                            <!-- <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['folio']; ?>">
                             <i class="fa-solid fa-pencil"></i>
                         </button> -->
-                    </td>
-                    <td><?php echo $row['folio']; ?></td>
-                    <td><?php echo $row['tipo_qs']; ?></td>
-                    <td><?php echo $row['fecha']; ?></td>
-                    <td>
-                        <?php
-                        $prioridad = $row['prioridad'];
-                        if ($prioridad == "Alta") {
-                            echo '<span class="badge bg-danger">' . $prioridad . '</span>';
-                        } elseif ($prioridad == "Media") {
-                            echo '<span class="badge bg-warning text-dark">' . $prioridad . '</span>';
-                        } elseif ($prioridad == "Baja") {
-                            echo '<span class="badge bg-success">' . $prioridad . '</span>';
-                        } else {
-                            echo '<span class="badge bg-secondary">' . $prioridad . '</span>';
-                        }
-                        ?>
-                    </td>
-                    <td><?php echo $row['nombre_cliente']; ?></td>
-                    <td><?php echo $row['ubicacion']; ?></td>
-                    <td><?php echo $row['tel']; ?></td>
-                    <td><?php echo $row['correo_corporativo']; ?></td>
-                    <td><?php echo $row['tipo_servicio']; ?></td>
-                    <td><?php echo $row['descripcion']; ?></td>
-                    <td><?php echo $row['departamento']; ?></td>
-                    <td><?php echo $row['departamento_receptor']; ?></td>
-                    <td><?php echo $row['asignado']; ?></td>
-                    <td><?php echo $row['estado']; ?></td>
-                    <td><?php echo $row['diagnostico_t']; ?></td>
-                    <td><?php echo $row['estado_g']; ?></td>
-                    <td><?php echo $row['fecha_proceso']; ?></td>
-                    <td><?php echo $row['hora_concluido']; ?></td>
-                    <td>
-                        <?php
-                        // Cálculo del tiempo transcurrido
-                        $fechaInicio = strtotime($row['fecha']);
-                        $horaConcluido = $row['hora_concluido'] ?? null;
+                                        </td>
+                                        <td><?php echo $row['folio']; ?></td>
+                                        <td><?php echo $row['tipo_qs']; ?></td>
+                                        <td><?php echo $row['fecha']; ?></td>
+                                        <td>
+                                            <?php
+                                            $prioridad = $row['prioridad'];
+                                            if ($prioridad == "Alta") {
+                                                echo '<span class="badge bg-danger">' . $prioridad . '</span>';
+                                            } elseif ($prioridad == "Media") {
+                                                echo '<span class="badge bg-warning text-dark">' . $prioridad . '</span>';
+                                            } elseif ($prioridad == "Baja") {
+                                                echo '<span class="badge bg-success">' . $prioridad . '</span>';
+                                            } else {
+                                                echo '<span class="badge bg-secondary">' . $prioridad . '</span>';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td><?php echo $row['nombre_cliente']; ?></td>
+                                        <td><?php echo $row['ubicacion']; ?></td>
+                                        <td><?php echo $row['tel']; ?></td>
+                                        <td><?php echo $row['correo_corporativo']; ?></td>
+                                        <td><?php echo $row['tipo_servicio']; ?></td>
+                                        <td><?php echo $row['descripcion']; ?></td>
+                                        <td><?php echo $row['departamento']; ?></td>
+                                        <td><?php echo $row['departamento_receptor']; ?></td>
+                                        <td><?php echo $row['asignado']; ?></td>
+                                        <td><?php echo $row['estado']; ?></td>
+                                        <td><?php echo $row['diagnostico_t']; ?></td>
+                                        <td><?php echo $row['estado_g']; ?></td>
+                                        <td><?php echo $row['fecha_proceso']; ?></td>
+                                        <td><?php echo $row['hora_concluido']; ?></td>
+                                        <td>
+                                            <?php
+                                            // Cálculo del tiempo transcurrido
+                                            $fechaInicio = strtotime($row['fecha']);
+                                            $horaConcluido = $row['hora_concluido'] ?? null;
 
-                        // Verifica si hora_concluido está vacío o no
-                        if (empty($horaConcluido)) {
-                            $tiempoTranscurrido = "Sin concluir";
-                            $badge_color = 'bg-secondary';
-                        } else {
-                            $fechaFin = strtotime($horaConcluido);
+                                            // Verifica si hora_concluido está vacío o no
+                                            if (empty($horaConcluido)) {
+                                                $tiempoTranscurrido = "Sin concluir";
+                                                $badge_color = 'bg-secondary';
+                                            } else {
+                                                $fechaFin = strtotime($horaConcluido);
 
-                            // Calcula la diferencia en segundos
-                            $diferencia = $fechaFin - $fechaInicio;
+                                                // Calcula la diferencia en segundos
+                                                $diferencia = $fechaFin - $fechaInicio;
 
-                            // Calcula días, horas, minutos y segundos
-                            $dias = floor($diferencia / (60 * 60 * 24));
-                            $horas = floor(($diferencia % (60 * 60 * 24)) / (60 * 60));
-                            $minutos = floor(($diferencia % (60 * 60)) / 60);
-                            $segundos = $diferencia % 60;
+                                                // Calcula días, horas, minutos y segundos
+                                                $dias = floor($diferencia / (60 * 60 * 24));
+                                                $horas = floor(($diferencia % (60 * 60 * 24)) / (60 * 60));
+                                                $minutos = floor(($diferencia % (60 * 60)) / 60);
+                                                $segundos = $diferencia % 60;
 
-                            // Formatea el tiempo transcurrido
-                            $tiempoTranscurrido = "{$dias}d {$horas}h {$minutos}m {$segundos}s";
+                                                // Formatea el tiempo transcurrido
+                                                $tiempoTranscurrido = "{$dias}d {$horas}h {$minutos}m {$segundos}s";
 
-                            // Determinar el color de la badge según las horas transcurridas y la prioridad
-                            $horasTranscurridas = $diferencia / (60 * 60);
-                            if ($row['prioridad'] == "Alta") {
-                                if ($horasTranscurridas > 4) {
-                                    $badge_color = 'bg-danger';
-                                } elseif ($horasTranscurridas >= 2 && $horasTranscurridas < 4) {
-                                    $badge_color = 'bg-warning text-dark';
-                                } else {
-                                    $badge_color = 'bg-success';
-                                }
-                            } elseif ($row['prioridad'] == "Media") {
-                                if ($horasTranscurridas > 24) {
-                                    $badge_color = 'bg-danger';
-                                } elseif ($horasTranscurridas >= 12 && $horasTranscurridas < 24) {
-                                    $badge_color = 'bg-warning text-dark';
-                                } else {
-                                    $badge_color = 'bg-success';
-                                }
-                            } elseif ($row['prioridad'] == "Baja") {
-                                if ($horasTranscurridas > 72) {
-                                    $badge_color = 'bg-danger';
-                                } elseif ($horasTranscurridas >= 36 && $horasTranscurridas < 72) {
-                                    $badge_color = 'bg-warning text-dark';
-                                } else {
-                                    $badge_color = 'bg-success';
-                                }
-                            } else {
-                                $badge_color = 'bg-secondary';
-                            }
-                        }
+                                                // Determinar el color de la badge según las horas transcurridas y la prioridad
+                                                $horasTranscurridas = $diferencia / (60 * 60);
+                                                if ($row['prioridad'] == "Alta") {
+                                                    if ($horasTranscurridas > 4) {
+                                                        $badge_color = 'bg-danger';
+                                                    } elseif ($horasTranscurridas >= 2 && $horasTranscurridas < 4) {
+                                                        $badge_color = 'bg-warning text-dark';
+                                                    } else {
+                                                        $badge_color = 'bg-success';
+                                                    }
+                                                } elseif ($row['prioridad'] == "Media") {
+                                                    if ($horasTranscurridas > 24) {
+                                                        $badge_color = 'bg-danger';
+                                                    } elseif ($horasTranscurridas >= 12 && $horasTranscurridas < 24) {
+                                                        $badge_color = 'bg-warning text-dark';
+                                                    } else {
+                                                        $badge_color = 'bg-success';
+                                                    }
+                                                } elseif ($row['prioridad'] == "Baja") {
+                                                    if ($horasTranscurridas > 72) {
+                                                        $badge_color = 'bg-danger';
+                                                    } elseif ($horasTranscurridas >= 36 && $horasTranscurridas < 72) {
+                                                        $badge_color = 'bg-warning text-dark';
+                                                    } else {
+                                                        $badge_color = 'bg-success';
+                                                    }
+                                                } else {
+                                                    $badge_color = 'bg-secondary';
+                                                }
+                                            }
 
-                        // Muestra la badge con el color determinado y el tiempo transcurrido
-                        echo '<span class="badge ' . $badge_color . '">' . $tiempoTranscurrido . '</span>';
-                        ?>
-                    </td>
-                    <td><button onclick="abrirImagen('<?php echo $row['imagen']; ?>')" class="btn btn-secondary btn-sm">Ver Imagen</button></td>
+                                            // Muestra la badge con el color determinado y el tiempo transcurrido
+                                            echo '<span class="badge ' . $badge_color . '">' . $tiempoTranscurrido . '</span>';
+                                            ?>
+                                        </td>
+                                        <td><button onclick="abrirImagen('<?php echo $row['imagen']; ?>')" class="btn btn-secondary btn-sm">Ver Imagen</button></td>
 
                                         <td> <!-- Modal -->
                                             <div class="modal fade" id="exampleModal_<?php echo $row['folio']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -409,13 +410,7 @@ include 'navbar.php';
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="asignado">Asignado a</label>
-                                                                    <select name="asignado" id="moto" class="form-select">
-                                                                        <option selected value="<?php echo $row['asignado']; ?>"><?php echo $row['asignado']; ?></option>
-                                                                        <option value="Antonio D">Antonio D</option>
-                                                                        <option value="Juan G">Juan G</option>
-                                                                        <option value="Juan P">Juan P</option>
-                                                                        <option value="Gener V">Gener V</option>
-                                                                    </select>
+                                                                    <input type="text" class="form-control" id="asignado" name="asignado" required>
                                                                 </div>
                                                                 <div class="form-group mb-3">
                                                                     <label for="diagnostico_t">Trabajo realizado</label>
@@ -711,19 +706,18 @@ include 'navbar.php';
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    // Selecciona todas las filas con la clase "completado"
-    const completados = document.querySelectorAll('tr.completado');
+        // Selecciona todas las filas con la clase "completado"
+        const completados = document.querySelectorAll('tr.completado');
 
-    completados.forEach(function(row) {
-        // Selecciona todas las celdas dentro de la fila, excepto la primera
-        const cells = row.querySelectorAll('td:not(:first-child)');
+        completados.forEach(function(row) {
+            // Selecciona todas las celdas dentro de la fila, excepto la primera
+            const cells = row.querySelectorAll('td:not(:first-child)');
 
-        cells.forEach(function(cell) {
-            // Deshabilita la celda (puedes ajustar según tus necesidades)
-            cell.style.pointerEvents = 'none';
-            cell.style.opacity = '0.5'; // Opcional: añade un estilo visual para indicar que está deshabilitado
+            cells.forEach(function(cell) {
+                // Deshabilita la celda (puedes ajustar según tus necesidades)
+                cell.style.pointerEvents = 'none';
+                cell.style.opacity = '0.5'; // Opcional: añade un estilo visual para indicar que está deshabilitado
+            });
         });
     });
-});
-
 </script>

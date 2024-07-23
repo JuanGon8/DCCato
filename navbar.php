@@ -1,34 +1,4 @@
 <?php
-$sql = "SELECT * FROM usuarios";
-$resultado = $mysqli->query($sql);
-$sql2 = "SELECT * FROM reclutamiento";
-$resultado2 = $mysqli->query($sql2);
-$sql3 = "SELECT * FROM candidatos";
-$resultado3 = $mysqli->query($sql3);
-$sql4 = "SELECT * FROM ubicaciones";
-$resultado4 = $mysqli->query($sql4);
-$sql5 = "SELECT * FROM departamento";
-$resultado5 = $mysqli->query($sql5);
-$sql6 = "SELECT * FROM bancos";
-$resultado6 = $mysqli->query($sql6);
-$sql7 = "SELECT * FROM reclutamiento_baja";
-$resultado7 = $mysqli->query($sql7);
-$sql7a = "SELECT * FROM reclutamiento_baja_a";
-$resultado7a = $mysqli->query($sql7a);
-$sql8 = "SELECT * FROM usuarios";
-$resultado8 = $mysqli->query($sql8);
-$sql9 = "SELECT * FROM reclutamiento_16340";
-$resultado9 = $mysqli->query($sql9);
-$sql10 = "SELECT codigo, ap_pat, ap_mat, nombre, puesto, camisa, pantalon, gorra, cor_mando, fornitura, impermeable, lampara, bata FROM reclutamiento WHERE puesto IN ('VIGILANTE', 'SUPERVISOR DE VIGILANCIA', 'GERENTE VIGILANCIA', 'CAPITAN', 'GERENTE LIMPIEZA', 'SUPERVISOR DE LIMPIEZA', 'AFANADOR')";
-$resultado10 = $mysqli->query($sql10);
-$sql1 = "SELECT * FROM repse";
-$resultado11 = $mysqli->query($sql1);
-$sql2 = "SELECT * FROM reclutamiento_repse";
-$resultado12 = $mysqli->query($sql2);
-$sql3 = "SELECT * FROM alta_reportes ORDER BY fecha DESC";
-$resultado13 = $mysqli->query($sql3);
-$sql4 = "SELECT * FROM alta_quejas ORDER BY fecha DESC";
-$resultado14 = $mysqli->query($sql4);
 
 
 $tipo_usuario = $_SESSION['tipo_usuario'];
@@ -107,14 +77,20 @@ $puesto = $_SESSION['puesto'];
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-table"></i>
                             </div>
-                            Encuesta
+                            Encuesta permanencia
                         </a>
-                        <a class="nav-link" href="prefilter.php">
+                        <a class="nav-link" href="survey_q.php">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-table"></i>
+                            </div>
+                            Encuesta calida de servicio
+                        </a>
+                        <!-- <a class="nav-link" href="prefilter.php">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-table"></i>
                             </div>
                             Encuesta
-                        </a>
+                        </a> -->
 
                     </div>
                 </div>

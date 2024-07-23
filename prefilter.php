@@ -36,6 +36,7 @@ $depto = $_SESSION['depto'];
                                 <th>Nombre</th>
                                 <th>Edad</th>
                                 <th>Resultado</th>
+                                <th>Aptitud</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,36 +56,51 @@ $depto = $_SESSION['depto'];
                             }
 
                             // Consulta SQL para obtener los datos
-                            $sql = "SELECT name, age, 
-                                    CASE 
-                                        WHEN question1 = 1 AND question2 = 1 THEN 'Apto'
-                                        ELSE 'No apto'
-                                    END AS resultado
-                                    FROM survey_pref";
+                            $sql = "SELECT name, age, question4, question14, question20 
+            FROM survey_pref";
 
                             $result = $conn->query($sql);
 
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
+                                    // Calcular el porcentaje de aptitud
+                                    $totalQuestions = 3;
+                                    $positiveAnswers = 0;
+
+                                    if ($row['question4'] == 1) {
+                                        $positiveAnswers++;
+                                    }
+                                    if ($row['question14'] == 1) {
+                                        $positiveAnswers++;
+                                    }
+                                    if ($row['question20'] == 1) {
+                                        $positiveAnswers++;
+                                    }
+
+                                    $aptitudePercentage = ($positiveAnswers / $totalQuestions) * 100;
+
                                     echo "<tr>";
                                     echo "<td>" . $row['name'] . "</td>";
                                     echo "<td>" . $row['age'] . "</td>";
-                                    echo "<td>" . $row['resultado'] . "</td>";
+                                    echo "<td>" . ($aptitudePercentage == 100 ? 'Apto' : 'No apto') . "</td>";
+                                    echo "<td>" . $aptitudePercentage . "%</td>";
                                     echo "</tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='3'>No hay resultados para mostrar.</td></tr>";
+                                echo "<tr><td colspan='4'>No hay resultados para mostrar.</td></tr>";
                             }
+
                             $conn->close();
                             ?>
                         </tbody>
+
                     </table>
                 </div>
             </div>
         </div>
 
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#tabla_resultados').DataTable();
             });
         </script>
