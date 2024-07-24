@@ -5,13 +5,24 @@
     if ($_POST) {
         $usuario = $_POST['usuario'];
         $password = $_POST['password'];
+        
+        // Consulta en la tabla usuarios
+        $sql_usuarios = "SELECT id, password, nombre, tipo_usuario, depto, puesto FROM usuarios WHERE usuario='$usuario'";
+        $resultado_usuarios = $mysqli->query($sql_usuarios);
+        $num_usuarios = $resultado_usuarios->num_rows;
 
-        $sql = "SELECT id, password, nombre, tipo_usuario, depto, puesto FROM usuarios WHERE usuario='$usuario'";
-        $resultado = $mysqli->query($sql);
-        $num = $resultado->num_rows;
+        // Consulta en la tabla usuarios_auxiliares
+        $sql_auxiliares = "SELECT id, password, nombre, tipo_usuario, depto, puesto FROM usuarios_auxiliares WHERE usuario='$usuario'";
+        $resultado_auxiliares = $mysqli->query($sql_auxiliares);
+        $num_auxiliares = $resultado_auxiliares->num_rows;
 
-        if ($num > 0) {
-            $row = $resultado->fetch_assoc();
+        if ($num_usuarios > 0 || $num_auxiliares > 0) {
+            if ($num_usuarios > 0) {
+                $row = $resultado_usuarios->fetch_assoc();
+            } else {
+                $row = $resultado_auxiliares->fetch_assoc();
+            }
+
             $password_bd = $row['password'];
             $pass_c = sha1($password);
 
@@ -28,6 +39,8 @@
                     header("Location: reportes.php");
                 } elseif ($_SESSION['depto'] == 'Calidad') {
                     header("Location: survey.php");
+                } else {
+                    header("Location: reportes.php");
                 }
             } else {
                 echo '<div class="alert alert-danger" role="alert" id="login-alert" style="width: 300px; margin-top: 10px; margin-bottom: 0px; margin-left: auto; margin-right: auto; text-align: center;">La contraseña no coincide</div>';
@@ -37,6 +50,7 @@
         }
     }
 ?>
+
 
 
 

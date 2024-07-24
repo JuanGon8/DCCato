@@ -11,23 +11,23 @@ if ($conn->connect_error) {
 $usuario = $_POST['usuario'];
 $password = $_POST['password'];
 $nombre = $_POST['nombre'];
-$tipo_usuario = 2;
-$depto = $_POST['depto'];
-$puesto = 'Gerente';
+$tipo_usuario = 3;
+$depto =$_POST['depto'];
+$puesto = 'Auxiliar';
 
 // Validar si la consulta ya existe en la base de datos
-$consulta_existente = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
+$consulta_existente = "SELECT * FROM usuarios_auxiliares WHERE usuario = '$usuario'";
 $resultado = $conn->query($consulta_existente);
 
 if ($resultado->num_rows > 0) {
     // Mostrar alerta de error y redirigir a la página candidatos.php
-    echo "<script>alert('La consulta ya existe en la base de datos.'); window.location.href = 'bancos.php';</script>";
+    echo "<script>alert('La consulta ya existe en la base de datos.'); window.location.href = 'usuarios_auxiliares.php';</script>";
 } else {
     // Cifrar la contraseña en SHA-1
     $password_hashed = sha1($password);
 
     // Preparar la consulta SQL para insertar los datos
-    $sql = "INSERT INTO usuarios (usuario, password, nombre, tipo_usuario, depto, puesto)
+    $sql = "INSERT INTO usuarios_auxiliares (usuario, password, nombre, tipo_usuario, depto, puesto)
             VALUES ('$usuario', '$password_hashed', '$nombre', '$tipo_usuario', '$depto', '$puesto')";
             
     // Ejecutar la consulta y verificar si se guardaron los datos

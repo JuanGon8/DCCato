@@ -15,6 +15,7 @@ include 'navbar.php';
 ?>
 <div id="layoutSidenav_content">
     <main>
+        <script src="js/main_r.js"></script>
         <link href="datatables/DataTables-1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
         <link href="datatables/AutoFill-2.6.0/css/autoFill.bootstrap5.css" rel="stylesheet">
         <link href="datatables/Buttons-2.4.2/css/buttons.bootstrap5.min.css" rel="stylesheet">

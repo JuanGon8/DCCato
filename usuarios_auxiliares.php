@@ -1,12 +1,13 @@
 <?php
 session_start();
 require 'conexion.php';
-$sql8 = "SELECT * FROM usuarios";
+$sql8 = "SELECT * FROM usuarios_auxiliares";
 $resultado8 = $mysqli->query($sql8);
 if (!isset($_SESSION['id'])) {
     header("Location: index.php");
 }
 $tipo_usuario = $_SESSION['tipo_usuario'];
+$depto = $_SESSION['depto'];
 ?>
 <?php
 include 'navbar.php';
@@ -17,18 +18,18 @@ include 'navbar.php';
 
         <script src="main.js"></script>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Registro de gerentes</h1>
+            <h1 class="mt-4">Registro de auxiliares</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="">Módulo de usuarios</a></li>
-                <li class="breadcrumb-item active">Registro de gerentes</li>
+                <li class="breadcrumb-item active">Registro de auxiliares</li>
         </div>
         <div class="card mx-4 mb-4">
             <div class="card">
                 <div class="card-body">
                     <table width="100%">
                         <tr>
-                            <td width="25%" valign="top"> <!-- Esto hace que la celda ocupe la mitad de la tabla -->
-                                <form method="POST" action="guardar_usuario.php" enctype="multipart/form-data">
+                            <td width="25%" valign="top">
+                                <form method="POST" action="guardar_usuario_auxiliares.php" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-11">
                                             <label for="nombre">Nombre</label>
@@ -37,7 +38,9 @@ include 'navbar.php';
                                             <input class="form-control inputwidth" type="text" name="usuario" required><br>
                                             <label for="password">Contraseña</label>
                                             <input class="form-control inputwidth" type="password" name="password" required><br>
-                                            <div class="form-group">
+                                            <label hidden for="depto">Contraseña</label>
+                                            <input type="hidden" value="<?php echo $depto; ?>" name="depto">
+                                            <!-- <div class="form-group">
                                                 <label for="depto">Departamento</label>
                                                 <select name="depto" id="depto" class="form-select" required>
                                                     <option selected disabled value="">Elige una opción</option>
@@ -60,7 +63,7 @@ include 'navbar.php';
                                                     <option value="Sistemas">Sistemas</option>
                                                     <option value="Ventas">Ventas</option>
                                                 </select> <br>
-                                            </div>
+                                            </div> -->
                                             <!-- <label for="tipo_usuario">Nivel de usuario</label>
                                             <input class="form-control inputwidth" type="text" name="tipo_usuario" required> -->
                                         </div>
@@ -75,33 +78,22 @@ include 'navbar.php';
                                     <table class="table table-striped table-bordered" id="example6" width="100%" cellspacing="0">
                                         <thead class="table-dark">
                                             <tr>
-                                                <!-- <th>Acciones</th> -->
-
                                                 <th>ID</th>
-                                             
                                                 <th>Nombre</th>
                                                 <th>Departamento</th>
                                                 <th>Usuario</th>
-                                                <!-- <th>Contraseña</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php while ($row = $resultado8->fetch_assoc()) { ?>
+                                            <?php while ($row = $resultado8->fetch_assoc()) { 
+                                                if ($depto === "Sistemas" || $row['depto'] === $depto) {?>
                                                 <tr id="row_<?php echo $row['id']; ?>">
-                                                    <!-- <td align="center">
-                                                                    <button class="delete-button" onclick="deleteRow(<?php echo $row['id']; ?>)">
-                                                                        <i class="fas fa-trash"></i>
-                                                                    </button>
-                                                                </td> -->
                                                     <td><?php echo $row['id']; ?></td>
-                                                    
                                                     <td><?php echo $row['nombre']; ?></td>
                                                     <td><?php echo $row['depto']; ?></td>
                                                     <td><?php echo $row['usuario']; ?></td>
-                                                    <!-- <td><?php echo $row['password']; ?></td> -->
-
                                                 </tr>
-                                            <?php } ?>
+                                            <?php }} ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -124,7 +116,7 @@ include 'navbar.php';
             // Realiza la solicitud AJAX
             $.ajax({
                 type: 'POST',
-                url: './register_files/guardar_usuario.php',
+                url: './register_files/guardar_usuario_auxiliares.php',
                 data: form.serialize(), // Serializa los datos del formulario
                 success: function(response) {
                     // Muestra SweetAlert2 en caso de éxito
