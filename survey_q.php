@@ -1,6 +1,9 @@
 <?php
 session_start();
 require 'conexion2.php';
+require 'conexion.php';
+$sql1 = "SELECT * FROM survey_emp2";
+$resultado1 = $mysqli->query($sql1);
 
 if (!isset($_SESSION['id'])) {
     header("Location: index.php");
@@ -8,6 +11,7 @@ if (!isset($_SESSION['id'])) {
 
 $tipo_usuario = $_SESSION['tipo_usuario'];
 $depto = $_SESSION['depto'];
+
 
 // Función para contar las respuestas
 function getCounts($conn, $question)
@@ -91,6 +95,7 @@ $data_json = json_encode([
     <script src="datatables/StateRestore-1.3.0/js/dataTables.stateRestore.min.js"></script>
     <script src="datatables/StateRestore-1.3.0/js/stateRestore.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="main.js"></script>
 </head>
 
 <body>
@@ -108,10 +113,39 @@ $data_json = json_encode([
 
             <div class="card mx-4 mb-4">
                 <div class="card-body">
-                    <button class="btn btn-primary mb-1" id="copyButton">Copiar enlace de encuesta</button>
+                <button class="btn btn-primary mb-1" id="copyButton">Copiar enlace de encuesta</button>
                     <div id="alertContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">
                         <!-- Alert will be appended here -->
                     </div>
+                    <table class="table table-striped table-bordered" id="example6" width="100%" cellspacing="0">
+                        <thead class="table-dark">
+                            <tr class="tdh">
+                                <th>Nombre</th>
+                                <th>Departamento</th>
+                                <th>Cumplimiento de consignas</th>
+                                <th>Supervisión</th>
+                                <th>Actitud de servicio</th>
+                                <th>Cobertura</th>
+                                <th>Presentación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($row = $resultado1->fetch_assoc()) { ?>
+                                <tr>
+                                    <td><?php echo $row['nombreCliente']; ?></td>
+                                    <td><?php echo $row['ubicacion']; ?></td>
+                                    <td><?php echo $row['question1']; ?></td>
+                                    <td><?php echo $row['question2']; ?></td>
+                                    <td><?php echo $row['question3']; ?></td>
+                                    <td><?php echo $row['question4']; ?></td>
+                                    <td><?php echo $row['question5']; ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+
+
+                    
                     <h2>CUMPLIMIENTO DE CONSIGNAS</h2>
                     <canvas id="chartQuestion1" width="3vh" height="1vh"></canvas>
 
