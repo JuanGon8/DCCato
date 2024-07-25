@@ -121,7 +121,7 @@ $data_json = json_encode([
                         <thead class="table-dark">
                             <tr class="tdh">
                                 <th>Nombre</th>
-                                <th>Departamento</th>
+                                <th>Ubicación</th>
                                 <th>Cumplimiento de consignas</th>
                                 <th>Supervisión</th>
                                 <th>Actitud de servicio</th>
