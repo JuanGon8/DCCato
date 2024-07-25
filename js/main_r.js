@@ -57,3 +57,23 @@ $(document).ready(function () {
   });
   
   });
+  $(document).ready(function() {
+    $.ajax({
+        url: 'get_usuarios_auxiliares.php',
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            var select = $('#asignado');
+            select.empty(); // Clear any existing options
+            $.each(response, function(index, usuario) {
+                select.append($('<option>', {
+                    value: usuario.id,
+                    text: usuario.nombre
+                }));
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching usuarios auxiliares:', error);
+        }
+    });
+});

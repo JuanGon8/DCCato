@@ -36,6 +36,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $estado_g = $_POST['estado_g'];
     $fecha_proceso = $_POST['fecha_proceso'];
 
+    // Obtener las observaciones adicionales del formulario
+    $additional_observations = isset($_POST['additional_observations']) ? $_POST['additional_observations'] : [];
+
+    // Obtener el diagnóstico original desde la base de datos
+    $sqlOriginal = "SELECT diagnostico_t FROM alta_reportes WHERE folio=$folio";
+    $result = $conn->query($sqlOriginal);
+
+    if ($result && $row = $result->fetch_assoc()) {
+        $existing_diagnostico_t = $row['diagnostico_t'];
+
+        // Contar las observaciones existentes en el campo
+        $existingObservations = explode("\n", $existing_diagnostico_t);
+        $existingObservations = array_filter($existingObservations, function($line) {
+            return !empty(trim($line)) && preg_match('/^Observación \d+/', trim($line));
+        });
+        $currentObservationCount = count($existingObservations);
+
+        // Añadir las nuevas observaciones con numeración
+        foreach ($additional_observations as $observation) {
+            if (!empty(trim($observation))) {
+                $currentObservationCount++;
+                $existing_diagnostico_t .= "\nObservación {$currentObservationCount}\n" . trim($observation);
+            }
+        }
+
+        // Actualizar el campo diagnostico_t con el contenido concatenado
+        $sqlUpdate = "UPDATE alta_reportes SET diagnostico_t = ? WHERE folio = ?";
+        if ($stmt = $conn->prepare($sqlUpdate)) {
+            $stmt->bind_param("si", $existing_diagnostico_t, $folio);
+            if (!$stmt->execute()) {
+                echo "Error al actualizar la información: " . $stmt->error;
+            }
+            $stmt->close();
+        } else {
+            echo "Error al preparar la consulta: " . $conn->error;
+        }
+    } else {
+        echo "Error al obtener el diagnóstico original.";
+    }
+
     // Código para manejar la carga de archivos
     if (isset($_FILES['file'])) {
         $file = $_FILES['file'];
@@ -72,8 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Actualizar los campos en la base de datos
-    $sql = "UPDATE alta_reportes SET asignado='$asignado', diagnostico_t='$diagnostico_t', tipo_servicio='$tipo_servicio', hora_concluido='$hora_concluido', estado='$estado', materiales='$materiales', estado_g='$estado_g', fecha_proceso='$fecha_proceso' WHERE folio=$folio";
+    // Actualizar los otros campos en la base de datos
+    $sql = "UPDATE alta_reportes SET asignado='$asignado', tipo_servicio='$tipo_servicio', hora_concluido='$hora_concluido', estado='$estado', materiales='$materiales', estado_g='$estado_g', fecha_proceso='$fecha_proceso' WHERE folio=$folio";
 
     if ($conn->query($sql) === TRUE) {
         // Configurar PHPMailer

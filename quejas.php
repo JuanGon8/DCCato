@@ -410,12 +410,21 @@ include 'navbar.php';
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="asignado">Asignado a</label>
-                                                                    <input type="text" class="form-control" id="asignado" name="asignado" required>
+                                                                    <select class="form-control" id="asignado" name="asignado" required>
+                                                                        <!-- Opciones serán llenadas por JavaScript -->
+                                                                    </select>
                                                                 </div>
+
                                                                 <div class="form-group mb-3">
-                                                                    <label for="diagnostico_t">Trabajo realizado</label>
-                                                                    <textarea class="form-control" type="text" name="diagnostico_t"><?php echo $row['diagnostico_t']; ?></textarea>
+                                                                    <label for="diagnostico_t">Observaciones</label>
+                                                                    <textarea class="form-control" id="diagnostico_t" name="diagnostico_t" <?php if (!empty($row['diagnostico_t'])) echo 'disabled'; ?>><?php echo htmlspecialchars($row['diagnostico_t']); ?></textarea>
                                                                 </div>
+
+                                                                <div id="additional-observations-container"></div>
+
+                                                                <button type="button" class="btn btn-secondary mb-3" id="add-observation-button">Más observaciones</button>
+
+
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="materiales">Materiales utilizados</label>
@@ -440,28 +449,34 @@ include 'navbar.php';
                                                                 </div>
                                                                 <script>
                                                                     $(document).ready(function() {
-                                                                        function toggleContainers(folio) {
-                                                                            if ($('#estado_' + folio).val() === 'En proceso') {
+                                                                        function toggleContainersAndObservations(folio) {
+                                                                            const estado = $('#estado_' + folio).val();
+                                                                            const diagnostico_t = $('#diagnostico_t_' + folio);
+
+                                                                            if (estado === 'En proceso') {
                                                                                 $('#fecha-container_' + folio).show();
                                                                                 $('#hora-container_' + folio).hide();
                                                                                 $('#hora_concluido_' + folio).val('');
-                                                                            } else if ($('#estado_' + folio).val() === 'Completado') {
+                                                                                diagnostico_t.prop('disabled', true);
+                                                                            } else if (estado === 'Completado') {
                                                                                 $('#fecha-container_' + folio).show();
                                                                                 $('#hora-container_' + folio).show();
+                                                                                diagnostico_t.prop('disabled', false);
                                                                             } else {
                                                                                 $('#fecha-container_' + folio).hide();
                                                                                 $('#hora-container_' + folio).hide();
                                                                                 $('#fecha_proceso_' + folio).val('');
                                                                                 $('#hora_concluido_' + folio).val('');
+                                                                                diagnostico_t.prop('disabled', false);
                                                                             }
                                                                         }
 
-                                                                        // Inicializar contenedores según el estado inicial
-                                                                        toggleContainers(<?php echo $row['folio']; ?>);
+                                                                        // Inicializar contenedores y campo Observaciones según el estado inicial
+                                                                        toggleContainersAndObservations(<?php echo $row['folio']; ?>);
 
-                                                                        // Cambiar contenedores al cambiar el estado
+                                                                        // Cambiar contenedores y campo Observaciones al cambiar el estado
                                                                         $('#estado_<?php echo $row['folio']; ?>').change(function() {
-                                                                            toggleContainers(<?php echo $row['folio']; ?>);
+                                                                            toggleContainersAndObservations(<?php echo $row['folio']; ?>);
                                                                         });
                                                                     });
                                                                 </script>
@@ -720,4 +735,57 @@ include 'navbar.php';
             });
         });
     });
+</script>
+<script>
+    
+  $(document).ready(function() {
+    $.ajax({
+        url: 'get_usuarios_auxiliares.php',
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            var select = $('#asignado');
+            select.empty(); // Clear any existing options
+            $.each(response, function(index, usuario) {
+                select.append($('<option>', {
+                    value: usuario.id,
+                    text: usuario.nombre
+                }));
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching usuarios auxiliares:', error);
+        }
+    });
+});
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    let observationCount = 1;
+
+    document.getElementById('add-observation-button').addEventListener('click', function() {
+        observationCount++;
+
+        // Create a new label for the observation
+        let newLabel = document.createElement('label');
+        newLabel.innerHTML = `Observación ${observationCount}`;
+        newLabel.setAttribute('for', `additional_observation_${observationCount}`);
+        newLabel.className = 'form-label mt-3';
+
+        // Create a new textarea for the additional observation
+        let newObservation = document.createElement('textarea');
+        newObservation.className = 'form-control mb-3';
+        newObservation.name = 'additional_observations[]';
+        newObservation.id = `additional_observation_${observationCount}`;
+        newObservation.placeholder = 'Más observaciones';
+
+        // Append the new label and textarea to the container
+        let container = document.getElementById('additional-observations-container');
+        container.appendChild(newLabel);
+        container.appendChild(newObservation);
+    });
+});
+
 </script>
