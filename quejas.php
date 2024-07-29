@@ -489,7 +489,7 @@ include 'navbar.php';
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="file">Subir imagen</label>
-                                                                    <input type="file" name="file" class="form-control">
+                                                                    <input type="file" name="file" class="form-control" required>
                                                                 </div>
 
 
@@ -498,12 +498,12 @@ include 'navbar.php';
                                                                         <label for="estado_g">Etapa</label>
                                                                         <select class="form-select" name="estado_g" id="estado_g" required>
                                                                             <option disabled selected value="">Selecciona la etapa</option>
+                                                                            <option selected value="<?php echo $row['estado_g']; ?>"><?php echo $row['estado_g']; ?></option>
                                                                             <option value="Activo">Activo</option>
                                                                             <option value="Finalizado">Finalizado</option>
                                                                         </select>
                                                                     </div>
                                                                 <?php } ?>
-
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                                                     <input type="submit" value="Guardar" class="btn btn-primary submitbutton" id="liveAlertBtn" name="submit">
