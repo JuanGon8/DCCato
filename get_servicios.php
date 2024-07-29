@@ -6,7 +6,7 @@ session_start();
 $servername = "localhost"; // Cambia esto según tu configuración
 $username = "root"; // Cambia esto según tu configuración
 $password = ""; // Cambia esto según tu configuración
-$dbname = "sistema"; // Cambia esto según tu configuración
+$dbname = "sistema3"; // Cambia esto según tu configuración
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);

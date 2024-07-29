@@ -10,7 +10,7 @@ $depto = $_SESSION['depto'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "sistema";
+$dbname = "sistema3";
 
 // Crear conexión
 $conexion = new mysqli($servername, $username, $password, $dbname);

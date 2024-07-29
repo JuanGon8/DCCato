@@ -1,7 +1,7 @@
 <?php
 
 // Crear conexión
-$conn = new mysqli("localhost", "root", "", "sistema"); 
+$conn = new mysqli("localhost", "root", "", "sistema3"); 
 
 // Verificar la conexión
 if ($conn->connect_error) {

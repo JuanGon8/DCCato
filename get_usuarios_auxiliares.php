@@ -5,7 +5,7 @@ $depto = $_SESSION['depto'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "sistema";
+$dbname = "sistema3";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

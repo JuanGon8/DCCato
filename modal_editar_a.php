@@ -36,7 +36,7 @@
                             <option selected value="<?php echo $row['ubicacion']; ?>"><?php echo $row['ubicacion']; ?></option>
                             <?php
                             // Conexión a la base de datos (debes configurar tus propias credenciales)
-                            $conexion = new mysqli("localhost", "root", "", "sistema");
+                            $conexion = new mysqli("localhost", "root", "", "sistema3");
 
                             // Verificar si la conexión es exitosa
                             if ($conexion->connect_error) {
@@ -76,7 +76,7 @@
                                 <option selected value="<?php echo $row['departamento']; ?>"><?php echo $row['departamento']; ?></option>
                                 <?php
                                 // Conexión a la base de datos (debes configurar tus propias credenciales)
-                                $conexion = new mysqli("localhost", "root", "", "sistema");
+                                $conexion = new mysqli("localhost", "root", "", "sistema3");
 
                                 // Verificar si la conexión es exitosa
                                 if ($conexion->connect_error) {
@@ -242,7 +242,7 @@
                                 <option selected value="<?php echo $row['e_banco']; ?>"><?php echo $row['e_banco']; ?></option>
                                 <?php
                                 // Conexión a la base de datos (debes configurar tus propias credenciales)
-                                $conexion = new mysqli("localhost", "root", "", "sistema");
+                                $conexion = new mysqli("localhost", "root", "", "sistema3");
 
                                 // Verificar si la conexión es exitosa
                                 if ($conexion->connect_error) {
