@@ -113,6 +113,8 @@ $puesto = $_SESSION['puesto'];
                             </div>
                             Reportes
                         </a>
+
+                        <?php if ($depto == "Calidad" || $tipo_usuario == 1) { ?>
                         <a class="nav-link" href="quejas.php">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-book"></i>
@@ -132,19 +134,33 @@ $puesto = $_SESSION['puesto'];
                             </div>
                             Encuesta calida de servicio
                         </a>
+                        <?php } ?>
+                        <?php if ($puesto == "Gerente") { ?>
                         <div class="sb-sidenav-menu-heading">Módulos de usuarios</div>
+                        <?php } ?>
+                        <?php if ($puesto == "Gerente" && $tipo_usuario == 1) { ?>
                         <a class="nav-link" href="usuarios.php">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-table"></i>
                             </div>
                             Registro de gerentes
                         </a>
+                        <?php } ?>
+
+                        <?php if ($puesto == "Gerente" && $tipo_usuario == 2 || $puesto == "Gerente" && $tipo_usuario == 1) { ?>
                         <a class="nav-link" href="usuarios_auxiliares.php">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-table"></i>
                             </div>
                             Registro de auxiliares
                         </a>
+                        <a class="nav-link" href="tipo_servicios.php">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-table"></i>
+                            </div>
+                            Registro de tipo de servicio
+                        </a>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">

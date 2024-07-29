@@ -28,52 +28,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $folio = $_POST['folio'];
     $asignado = $_POST['asignado'];
     $diagnostico_t = $_POST['diagnostico_t'];
+    $new_observation = $_POST['new_observation'] ?? '';
     $tipo_servicio = $_POST['tipo_servicio'];
     $hora_concluido = $_POST['hora_concluido'];
     $estado = $_POST['estado'];
     $materiales = $_POST['materiales'];
-    $correo_corporativo = $_POST['correo_corporativo']; // Agregado para obtener el correo corporativo
+    $correo_corporativo = $_POST['correo_corporativo'];
     $estado_g = $_POST['estado_g'];
     $fecha_proceso = $_POST['fecha_proceso'];
 
-    // Obtener las observaciones adicionales del formulario
-    $additional_observations = isset($_POST['additional_observations']) ? $_POST['additional_observations'] : [];
-
-    // Obtener el diagnóstico original desde la base de datos
-    $sqlOriginal = "SELECT diagnostico_t FROM alta_reportes WHERE folio=$folio";
-    $result = $conn->query($sqlOriginal);
-
-    if ($result && $row = $result->fetch_assoc()) {
-        $existing_diagnostico_t = $row['diagnostico_t'];
-
-        // Contar las observaciones existentes en el campo
-        $existingObservations = explode("\n", $existing_diagnostico_t);
-        $existingObservations = array_filter($existingObservations, function($line) {
-            return !empty(trim($line)) && preg_match('/^Observación \d+/', trim($line));
-        });
-        $currentObservationCount = count($existingObservations);
-
-        // Añadir las nuevas observaciones con numeración
-        foreach ($additional_observations as $observation) {
-            if (!empty(trim($observation))) {
-                $currentObservationCount++;
-                $existing_diagnostico_t .= "\nObservación {$currentObservationCount}\n" . trim($observation);
-            }
-        }
-
-        // Actualizar el campo diagnostico_t con el contenido concatenado
-        $sqlUpdate = "UPDATE alta_reportes SET diagnostico_t = ? WHERE folio = ?";
-        if ($stmt = $conn->prepare($sqlUpdate)) {
-            $stmt->bind_param("si", $existing_diagnostico_t, $folio);
-            if (!$stmt->execute()) {
-                echo "Error al actualizar la información: " . $stmt->error;
-            }
-            $stmt->close();
-        } else {
-            echo "Error al preparar la consulta: " . $conn->error;
-        }
-    } else {
-        echo "Error al obtener el diagnóstico original.";
+    // Concatenar la nueva observación si existe
+    if (!empty($new_observation)) {
+        $numero_observaciones = substr_count($diagnostico_t, 'Observación') + 1;
+        $diagnostico_t .= "\nObservación #{$numero_observaciones}: {$new_observation}";
     }
 
     // Código para manejar la carga de archivos
@@ -113,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Actualizar los otros campos en la base de datos
-    $sql = "UPDATE alta_reportes SET asignado='$asignado', tipo_servicio='$tipo_servicio', hora_concluido='$hora_concluido', estado='$estado', materiales='$materiales', estado_g='$estado_g', fecha_proceso='$fecha_proceso' WHERE folio=$folio";
+    $sql = "UPDATE alta_reportes SET asignado='$asignado', diagnostico_t='$diagnostico_t', tipo_servicio='$tipo_servicio', hora_concluido='$hora_concluido', estado='$estado', materiales='$materiales', estado_g='$estado_g', fecha_proceso='$fecha_proceso' WHERE folio=$folio";
 
     if ($conn->query($sql) === TRUE) {
         // Configurar PHPMailer
@@ -122,16 +89,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             // Configuración del servidor SMTP
             $mail->isSMTP();
-            $mail->Host       = 'mail.gruposvm.com'; // Cambiar por el servidor SMTP de tu empresa
+            $mail->Host       = 'mail.gruposvm.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'reportes.sistemas@gruposvm.com'; // Cambiar por tu correo electrónico
-            $mail->Password   = 'svm@2019'; // Cambiar por tu contraseña
+            $mail->Username   = 'reportes.sistemas@gruposvm.com';
+            $mail->Password   = 'svm@2019';
             $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
 
             // Destinatario y remitente
             $mail->setFrom('reportes.sistemas@gruposvm.com', 'Reportes de sistemas');
-            $mail->addAddress($correo_corporativo); // Utiliza el correo corporativo almacenado en la columna "correo_corporativo"
+            $mail->addAddress($correo_corporativo);
 
             // Contenido del correo
             $mail->isHTML(true);
@@ -158,4 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header("Location: reportes.php");
     exit();
 }
+?>
+
 ?>

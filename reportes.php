@@ -231,8 +231,9 @@ include 'navbar.php';
                             <?php while ($row = $resultado13->fetch_assoc()) {
                                 if ($depto === "Sistemas" || $row['departamento'] === $depto) {
                                     $completado = ($row['estado'] === 'Completado') ? 'completado' : '';
+                                    $completado_g = ($row['estado_g'] === 'Finalizado') ? 'finalizado' : '';
                             ?>
-                                    <tr id="row_<?php echo $row['folio']; ?>" class="<?php echo $completado; ?>">
+                                    <tr id="row_<?php echo $row['folio']; ?>" class="<?php echo $completado; ?> <?php echo $completado_g; ?> ">
                                         <td class="tdh"></td>
                                         <td class="tdh">
                                             <!-- <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['folio']; ?>">
@@ -241,11 +242,6 @@ include 'navbar.php';
 
 
                                         </td>
-                                        <!-- <th>Asignado a</th>
-                                <th>Diagnostico téc</th>
-                                <th>Tipo servicio</th>
-                                <th>Hora concluido</th>
-                                <th>Estado</th> -->
                                         <td><?php echo $row['folio']; ?></td>
                                         <td><?php echo $row['nombre']; ?></td>
                                         <td><?php echo $row['departamento']; ?></td>
@@ -351,20 +347,21 @@ include 'navbar.php';
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="asignado">Asignado a</label>
-                                                                    <select class="form-control" id="asignado" name="asignado" required>
-                                                                        <!-- Opciones serán llenadas por JavaScript -->
+                                                                    <select name="asignado" class="form-select asignado">
+                                                                        <!-- Las opciones se llenarán aquí -->
                                                                     </select>
                                                                 </div>
 
                                                                 <div class="form-group mb-3">
-                                                                    <label for="diagnostico_t">Observaciones</label>
-                                                                    <textarea class="form-control" id="diagnostico_t" name="diagnostico_t" <?php if (!empty($row['diagnostico_t'])) echo 'disabled'; ?>><?php echo htmlspecialchars($row['diagnostico_t']); ?></textarea>
+                                                                    <label for="diagnostico_t">Trabajo realizado</label>
+                                                                    <textarea class="form-control" name="diagnostico_t" rows="4" <?php echo !empty($row['diagnostico_t']) ? 'readonly' : ''; ?>><?php echo $row['diagnostico_t']; ?></textarea>
                                                                 </div>
-
-                                                                <div id="additional-observations-container"></div>
-
-                                                                <button type="button" class="btn btn-secondary mb-3" id="add-observation-button">Más observaciones</button>
-
+                                                                <div class="form-group mb-3" id="additionalObservation" style="display: none;">
+                                                                    <label for="new_observation">Nueva Observación</label>
+                                                                    <input class="form-control" type="text" name="new_observation" id="new_observation">
+                                                                </div>
+                                                                <button type="button" id="addObservationBtn" class="btn btn-primary">Más observaciones</button>
+                                                                
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="materiales">Materiales utilizados</label>
@@ -373,16 +370,11 @@ include 'navbar.php';
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="tipo_servicio">Tipo de servicio</label>
-                                                                    <select name="tipo_servicio" id="moto" class="form-select">
-                                                                        <option selected value="<?php echo $row['tipo_servicio']; ?>"><?php echo $row['tipo_servicio']; ?></option>
-                                                                        <option value="Mantanimiento">Mantanimiento</option>
-                                                                        <option value="Reparación">Reparación</option>
-                                                                        <option value="Revisión">Revisión</option>
-                                                                        <option value="Soporte">Soporte</option>
-                                                                        <option value="Configuración">Configuración</option>
-                                                                        <option value="Instalación">Instalación</option>
+                                                                    <select name="tipo_servicio" class="form-select tipo-servicio">
+                                                                        <!-- Las opciones se llenarán aquí -->
                                                                     </select>
                                                                 </div>
+
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="estado">Estado</label>
@@ -404,23 +396,23 @@ include 'navbar.php';
                                                                     $(document).ready(function() {
                                                                         function toggleContainersAndObservations(folio) {
                                                                             const estado = $('#estado_' + folio).val();
-                                                                            const diagnostico_t = $('#diagnostico_t_' + folio);
+
 
                                                                             if (estado === 'En proceso') {
                                                                                 $('#fecha-container_' + folio).show();
                                                                                 $('#hora-container_' + folio).hide();
                                                                                 $('#hora_concluido_' + folio).val('');
-                                                                                diagnostico_t.prop('disabled', true);
+
                                                                             } else if (estado === 'Completado') {
                                                                                 $('#fecha-container_' + folio).show();
                                                                                 $('#hora-container_' + folio).show();
-                                                                                diagnostico_t.prop('disabled', false);
+
                                                                             } else {
                                                                                 $('#fecha-container_' + folio).hide();
                                                                                 $('#hora-container_' + folio).hide();
                                                                                 $('#fecha_proceso_' + folio).val('');
                                                                                 $('#hora_concluido_' + folio).val('');
-                                                                                diagnostico_t.prop('disabled', false);
+
                                                                             }
                                                                         }
 
@@ -673,11 +665,12 @@ include 'navbar.php';
     }
 </script>
 <script>
+    const puesto = "<?php echo $puesto; ?>";
+</script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Obtiene el valor del puesto desde la variable JavaScript
-        var puesto = "<?php echo $_SESSION['puesto']; ?>";
-
-        if (puesto === "Auxiliar") {
+        // Solo ejecuta el script si el puesto es "Auxiliar"
+        if (puesto === 'Auxiliar') {
             // Selecciona todas las filas con la clase "completado"
             const completados = document.querySelectorAll('tr.completado');
 
@@ -692,68 +685,83 @@ include 'navbar.php';
                 });
             });
         }
-        // Si el puesto es Gerente, no se aplica ningún estilo adicional
     });
 </script>
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    let observationCount = 1;
+        // Solo ejecuta el script si el puesto es "Auxiliar"
+        if (puesto === 'Gerente') {
+            // Selecciona todas las filas con la clase "completado"
+            const finalizado = document.querySelectorAll('tr.finalizado');
 
-    document.getElementById('add-observation-button').addEventListener('click', function() {
-        observationCount++;
+            finalizado.forEach(function(row) {
+                // Selecciona todas las celdas dentro de la fila, excepto la primera
+                const cells = row.querySelectorAll('td:not(:first-child)');
 
-        // Create a new label for the observation
-        let newLabel = document.createElement('label');
-        newLabel.innerHTML = `Observación ${observationCount}`;
-        newLabel.setAttribute('for', `additional_observation_${observationCount}`);
-        newLabel.className = 'form-label mt-3';
-
-        // Create a new textarea for the additional observation
-        let newObservation = document.createElement('textarea');
-        newObservation.className = 'form-control mb-3';
-        newObservation.name = 'additional_observations[]';
-        newObservation.id = `additional_observation_${observationCount}`;
-        newObservation.placeholder = 'Más observaciones';
-
-        // Append the new label and textarea to the container
-        let container = document.getElementById('additional-observations-container');
-        container.appendChild(newLabel);
-        container.appendChild(newObservation);
-    });
-});
-
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var puesto = "<?php echo $_SESSION['puesto']; ?>";
-
-        if (puesto === "Gerente") {
-            var estadoSelect = document.getElementById('estado_g');
-
-            estadoSelect.addEventListener('change', function() {
-                var selectedValue = estadoSelect.value;
-
-                if (selectedValue === "Finalizado") {
-                    // Selecciona todas las filas del registro que quieres deshabilitar
-                    var rows = document.querySelectorAll('tr.registro');
-
-                    rows.forEach(function(row) {
-                        // Selecciona todas las celdas dentro de la fila, excepto la primera
-                        var cells = row.querySelectorAll('td:not(:first-child)');
-
-                        cells.forEach(function(cell, index) {
-                            // Si no es la celda en el índice 0, deshabilita la celda
-                            if (index !== 0) {
-                                cell.style.pointerEvents = 'none';
-                                cell.style.opacity = '0.5'; // Opcional: añade un estilo visual para indicar que está deshabilitado
-                            }
-                        });
-                    });
-                }
+                cells.forEach(function(cell) {
+                    // Deshabilita la celda (puedes ajustar según tus necesidades)
+                    cell.style.pointerEvents = 'none';
+                    cell.style.opacity = '0.5'; // Opcional: añade un estilo visual para indicar que está deshabilitado
+                });
             });
         }
+    });
+</script>
+<script>
+    function cargarDatos() {
+        // Cargar usuarios auxiliares
+        $.ajax({
+            url: 'get_usuarios_auxiliares.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                $('.asignado').each(function() {
+                    var $select = $(this);
+                    $select.empty(); // Limpiar opciones existentes
+                    $.each(response, function(index, usuario) {
+                        $select.append($('<option>', {
+                            value: usuario.nombre,
+                            text: usuario.nombre
+                        }));
+                    });
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching usuarios auxiliares:', error);
+            }
+        });
+
+        // Cargar tipos de servicio
+        $.ajax({
+            url: 'get_servicios.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                $('.tipo-servicio').each(function() {
+                    var $select = $(this);
+                    $select.empty(); // Limpiar opciones existentes
+                    if (data.length > 0) {
+                        $.each(data, function(index, value) {
+                            $select.append('<option value="' + value + '">' + value + '</option>');
+                        });
+                    } else {
+                        $select.append('<option value="">No hay servicios disponibles</option>');
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al cargar los servicios:', error);
+            }
+        });
+    }
+
+    // Llama a la función para cargar los datos al cargar la página
+    $(document).ready(function() {
+        cargarDatos();
+    });
+</script>
+<script>
+    document.getElementById('addObservationBtn').addEventListener('click', function() {
+        document.getElementById('additionalObservation').style.display = 'block';
     });
 </script>
