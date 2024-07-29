@@ -292,7 +292,7 @@ $data_json = json_encode([
         document.getElementById('copyButton').addEventListener('click', function() {
             // Crear un elemento de texto temporal
             var tempInput = document.createElement('input');
-            tempInput.value = 'http://dccato.ddns.net:84/DCCato-survey/survey_q.php';
+            tempInput.value = 'https://dccato.dyndns.org:84/DCCato-survey/survey_q.php';
             document.body.appendChild(tempInput);
 
             // Seleccionar el texto del elemento

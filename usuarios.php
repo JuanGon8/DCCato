@@ -78,7 +78,7 @@ include 'navbar.php';
                                                 <!-- <th>Acciones</th> -->
 
                                                 <th>ID</th>
-                                             
+
                                                 <th>Nombre</th>
                                                 <th>Departamento</th>
                                                 <th>Usuario</th>
@@ -94,7 +94,7 @@ include 'navbar.php';
                                                                     </button>
                                                                 </td> -->
                                                     <td><?php echo $row['id']; ?></td>
-                                                    
+
                                                     <td><?php echo $row['nombre']; ?></td>
                                                     <td><?php echo $row['depto']; ?></td>
                                                     <td><?php echo $row['usuario']; ?></td>
@@ -131,9 +131,14 @@ include 'navbar.php';
                     Swal.fire({
                         icon: 'success',
                         title: 'Éxito',
-                        text: 'Usuario registrado exitosamente',
-                        showConfirmButton: false,
-                        timer: 1500 // Cierra automáticamente después de 1.5 segundos
+                        text: 'Gerente registrado exitosamente',
+                        confirmButtonText: 'Aceptar',
+                    }).then((result) => {
+                        // Si el usuario hace clic en el botón "Aceptar"
+                        if (result.isConfirmed) {
+                            // Recarga la página
+                            location.reload();
+                        }
                     });
 
                     // Puedes agregar más lógica aquí según la respuesta del servidor
