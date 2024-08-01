@@ -93,7 +93,7 @@ try {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $database = "sistema";
+    $database = "sistema3";
 
     // Crear la conexión a la base de datos
     $conn = new mysqli($servername, $username, $password, $database);
