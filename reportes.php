@@ -134,7 +134,7 @@ include 'navbar.php';
                                             <option value="Contabilidad">Contabilidad</option>
                                             <option value="Cuentas por pagar">Cuentas por pagar</option>
                                             <option value="Facturación">Facturación</option>
-                                            <option value="Gerencia general">Gerencia general</option>
+                                            <option value="Gerencia calidad">Gerencia calidad</option>
                                             <option value="Gerencia general">Gerencia general</option>
                                             <option value="Gerencia limpieza">Gerencia limpieza</option>
                                             <option value="Gerencia vigilancia">Gerencia vigilancia</option>
