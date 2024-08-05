@@ -341,9 +341,9 @@ include 'navbar.php';
                                                         </div>
                                                         <div class="modal-body">
                                                             <form method="POST" enctype="multipart/form-data" id="formenviar">
-                                                                <input type="hidden" name="nombreu" id="nombreu" value="<?php echo $_SESSION['nombre']; ?>">
-                                                                <input type="hidden" name="hora_registro" id="hora_registro">
-                                                                <input type="hidden" name="folio" value="<?php echo $row['folio']; ?>">
+                                                                <input type="text" name="nombreu" id="nombreu" value="<?php echo $_SESSION['nombre']; ?>">
+                                                                
+                                                                <input type="text" name="folio" value="<?php echo $row['folio']; ?>">
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="asignado">Asignado a</label>
@@ -489,48 +489,49 @@ include 'navbar.php';
 </script>
 <script>
     $(document).ready(function() {
-        $('#formenviar').submit(function(e) {
-            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+    $(document).on('submit', '#formenviar', function(e) {
+        e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
 
-            // Guarda una referencia al formulario para usarla dentro de la función de éxito
-            var form = $(this);
+        // Guarda una referencia al formulario para usarla dentro de la función de éxito
+        var form = $(this);
 
-            // Crea un objeto FormData para enviar datos de formulario y archivos
-            var formData = new FormData(form[0]);
+        // Crea un objeto FormData para enviar datos de formulario y archivos
+        var formData = new FormData(form[0]);
 
-            // Realiza la solicitud AJAX
-            $.ajax({
-                type: 'POST',
-                url: './update_files/updater.php',
-                data: formData, // Usa el objeto FormData en lugar de form.serialize()
-                enctype: 'multipart/form-data',
-                contentType: false, // Importante: no establezcas el tipo de contenido
-                processData: false, // Importante: no proceses los datos
-                success: function(response) {
-                    // Muestra SweetAlert2 en caso de éxito
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Éxito',
-                        text: 'Reporte actualizado exitosamente',
-                        showConfirmButton: true, // Muestra el botón de confirmación
-                        confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
-                    }).then((result) => {
-                        // Si el usuario hace clic en el botón "Aceptar"
-                        if (result.isConfirmed) {
-                            // Recarga la página
-                            location.reload();
-                        }
-                    });
+        // Realiza la solicitud AJAX
+        $.ajax({
+            type: 'POST',
+            url: './update_files/updater.php',
+            data: formData, // Usa el objeto FormData en lugar de form.serialize()
+            enctype: 'multipart/form-data',
+            contentType: false, // Importante: no establezcas el tipo de contenido
+            processData: false, // Importante: no proceses los datos
+            success: function(response) {
+                // Muestra SweetAlert2 en caso de éxito
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Reporte actualizado exitosamente',
+                    showConfirmButton: true, // Muestra el botón de confirmación
+                    confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+                }).then((result) => {
+                    // Si el usuario hace clic en el botón "Aceptar"
+                    if (result.isConfirmed) {
+                        // Recarga la página
+                        location.reload(); // Recarga la página
+                    }
+                });
 
-                    // Puedes agregar más lógica aquí según la respuesta del servidor
-                    console.log(response);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
+                // Puedes agregar más lógica aquí según la respuesta del servidor
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
         });
     });
+});
+
 </script>
 
 <script>
