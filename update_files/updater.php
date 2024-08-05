@@ -40,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Concatenar la nueva observación si existe
     if (!empty($new_observation)) {
         $numero_observaciones = substr_count($diagnostico_t, 'Observación') + 1;
-        $diagnostico_t .= "\nObservación #{$numero_observaciones}: {$new_observation}";
+        $fecha_hora_actual = date('Y-m-d H:i:s');
+        $diagnostico_t .= "\nObservación #{$numero_observaciones} ({$fecha_hora_actual}): \n{$new_observation}";
     }
 
     // Código para manejar la carga de archivos
@@ -125,6 +126,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header("Location: reportes.php");
     exit();
 }
-?>
-
 ?>
