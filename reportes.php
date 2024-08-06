@@ -340,158 +340,158 @@ include 'navbar.php';
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                        <form method="POST" enctype="multipart/form-data" id="formenviar_<?php echo $row['folio']; ?>">
-                    <input type="hidden" name="nombreu" id="nombreu" value="<?php echo $_SESSION['nombre']; ?>">
-                    <input type="hidden" name="folio" value="<?php echo $row['folio']; ?>">
-                    <div class="form-group mb-3">
-                        <label for="asignado">Asignado a</label>
-                        <select name="asignado" class="form-select asignado">
-                            <!-- Las opciones se llenarán aquí -->
-                        </select>
-                    </div>
+                                                            <form method="POST" enctype="multipart/form-data" id="formenviar_<?php echo $row['folio']; ?>">
+                                                                <input type="hidden" name="nombreu" id="nombreu" value="<?php echo $_SESSION['nombre']; ?>">
+                                                                <input type="hidden" name="folio" value="<?php echo $row['folio']; ?>">
+                                                                <div class="form-group mb-3">
+                                                                    <label for="asignado">Asignado a</label>
+                                                                    <select name="asignado" class="form-select asignado">
+                                                                        <!-- Las opciones se llenarán aquí -->
+                                                                    </select>
+                                                                </div>
 
-                    <div class="form-group mb-3">
-                        <label for="diagnostico_t">Trabajo realizado</label>
-                        <textarea class="form-control" name="diagnostico_t" rows="4" <?php echo !empty($row['diagnostico_t']) ? 'readonly' : ''; ?>><?php echo $row['diagnostico_t']; ?></textarea>
-                    </div>
-                    <div class="form-group mb-3" id="additionalObservation_<?php echo $row['folio']; ?>" style="display: none;">
-                        <label for="new_observation">Nueva Observación</label>
-                        <input class="form-control" type="text" name="new_observation" id="new_observation_<?php echo $row['folio']; ?>">
-                    </div>
-                    <button type="button" id="addObservationBtn_<?php echo $row['folio']; ?>" class="btn btn-primary">Más observaciones</button>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="diagnostico_t">Trabajo realizado</label>
+                                                                    <textarea class="form-control" name="diagnostico_t" rows="4" <?php echo !empty($row['diagnostico_t']) ? 'readonly' : ''; ?>><?php echo $row['diagnostico_t']; ?></textarea>
+                                                                </div>
+                                                                <div class="form-group mb-3" id="additionalObservation_<?php echo $row['folio']; ?>" style="display: none;">
+                                                                    <label for="new_observation">Nueva Observación</label>
+                                                                    <input class="form-control" type="text" name="new_observation" id="new_observation_<?php echo $row['folio']; ?>">
+                                                                </div>
+                                                                <button type="button" id="addObservationBtn_<?php echo $row['folio']; ?>" class="btn btn-primary">Más observaciones</button>
 
-                    <div class="form-group mb-3">
-                        <label for="materiales">Materiales utilizados</label>
-                        <input class="form-control" type="text" name="materiales" value="<?php echo $row['materiales']; ?>">
-                    </div>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="materiales">Materiales utilizados</label>
+                                                                    <input class="form-control" type="text" name="materiales" value="<?php echo $row['materiales']; ?>">
+                                                                </div>
 
-                    <div class="form-group mb-3">
-                        <label for="tipo_servicio">Tipo de servicio</label>
-                        <select name="tipo_servicio" class="form-select tipo-servicio">
-                            <!-- Las opciones se llenarán aquí -->
-                        </select>
-                    </div>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="tipo_servicio">Tipo de servicio</label>
+                                                                    <select name="tipo_servicio" class="form-select tipo-servicio">
+                                                                        <!-- Las opciones se llenarán aquí -->
+                                                                    </select>
+                                                                </div>
 
-                    <div class="form-group mb-3">
-                        <label for="estado">Estado</label>
-                        <select name="estado" id="estado_<?php echo $row['folio']; ?>" class="form-select">
-                            <option selected value="<?php echo $row['estado']; ?>"><?php echo $row['estado']; ?></option>
-                            <option value="Completado">Completado</option>
-                            <option value="En proceso">En proceso</option>
-                        </select>
-                    </div>
-                    <div id="fecha-container_<?php echo $row['folio']; ?>" class="form-group mb-3" style="display:none;">
-                        <label for="fecha_proceso">Fecha en proceso</label>
-                        <input type="datetime-local" class="form-control" id="fecha_proceso_<?php echo $row['folio']; ?>" name="fecha_proceso" value="<?php echo date('Y-m-d\TH:i', strtotime($row['fecha_proceso'])); ?>">
-                    </div>
-                    <div id="hora-container_<?php echo $row['folio']; ?>" class="form-group mb-3" style="display:none;">
-                        <label for="hora_concluido">Fecha concluido</label>
-                        <input type="datetime-local" class="form-control" id="hora_concluido_<?php echo $row['folio']; ?>" name="hora_concluido" value="<?php echo date('Y-m-d\TH:i', strtotime($row['hora_concluido'])); ?>">
-                    </div>
-                    <script>
-                        $(document).ready(function() {
-                            function toggleContainersAndObservations(folio) {
-                                const estado = $('#estado_' + folio).val();
+                                                                <div class="form-group mb-3">
+                                                                    <label for="estado">Estado</label>
+                                                                    <select name="estado" id="estado_<?php echo $row['folio']; ?>" class="form-select">
+                                                                        <option selected value="<?php echo $row['estado']; ?>"><?php echo $row['estado']; ?></option>
+                                                                        <option value="Completado">Completado</option>
+                                                                        <option value="En proceso">En proceso</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div id="fecha-container_<?php echo $row['folio']; ?>" class="form-group mb-3" style="display:none;">
+                                                                    <label for="fecha_proceso">Fecha en proceso</label>
+                                                                    <input type="datetime-local" class="form-control" id="fecha_proceso_<?php echo $row['folio']; ?>" name="fecha_proceso" value="<?php echo date('Y-m-d\TH:i', strtotime($row['fecha_proceso'])); ?>">
+                                                                </div>
+                                                                <div id="hora-container_<?php echo $row['folio']; ?>" class="form-group mb-3" style="display:none;">
+                                                                    <label for="hora_concluido">Fecha concluido</label>
+                                                                    <input type="datetime-local" class="form-control" id="hora_concluido_<?php echo $row['folio']; ?>" name="hora_concluido" value="<?php echo date('Y-m-d\TH:i', strtotime($row['hora_concluido'])); ?>">
+                                                                </div>
+                                                                <script>
+                                                                    $(document).ready(function() {
+                                                                        function toggleContainersAndObservations(folio) {
+                                                                            const estado = $('#estado_' + folio).val();
 
-                                if (estado === 'En proceso') {
-                                    $('#fecha-container_' + folio).show();
-                                    $('#hora-container_' + folio).hide();
-                                    $('#hora_concluido_' + folio).val('');
-                                } else if (estado === 'Completado') {
-                                    $('#fecha-container_' + folio).show();
-                                    $('#hora-container_' + folio).show();
-                                } else {
-                                    $('#fecha-container_' + folio).hide();
-                                    $('#hora-container_' + folio).hide();
-                                    $('#fecha_proceso_' + folio).val('');
-                                    $('#hora_concluido_' + folio).val('');
-                                }
-                            }
+                                                                            if (estado === 'En proceso') {
+                                                                                $('#fecha-container_' + folio).show();
+                                                                                $('#hora-container_' + folio).hide();
+                                                                                $('#hora_concluido_' + folio).val('');
+                                                                            } else if (estado === 'Completado') {
+                                                                                $('#fecha-container_' + folio).show();
+                                                                                $('#hora-container_' + folio).show();
+                                                                            } else {
+                                                                                $('#fecha-container_' + folio).hide();
+                                                                                $('#hora-container_' + folio).hide();
+                                                                                $('#fecha_proceso_' + folio).val('');
+                                                                                $('#hora_concluido_' + folio).val('');
+                                                                            }
+                                                                        }
 
-                            // Inicializar contenedores y campo Observaciones según el estado inicial
-                            toggleContainersAndObservations(<?php echo $row['folio']; ?>);
+                                                                        // Inicializar contenedores y campo Observaciones según el estado inicial
+                                                                        toggleContainersAndObservations(<?php echo $row['folio']; ?>);
 
-                            // Cambiar contenedores y campo Observaciones al cambiar el estado
-                            $('#estado_<?php echo $row['folio']; ?>').change(function() {
-                                toggleContainersAndObservations(<?php echo $row['folio']; ?>);
-                            });
+                                                                        // Cambiar contenedores y campo Observaciones al cambiar el estado
+                                                                        $('#estado_<?php echo $row['folio']; ?>').change(function() {
+                                                                            toggleContainersAndObservations(<?php echo $row['folio']; ?>);
+                                                                        });
 
-                            // Manejar el evento del botón "Más observaciones"
-                            $('#addObservationBtn_<?php echo $row['folio']; ?>').click(function() {
-                                $('#additionalObservation_<?php echo $row['folio']; ?>').show();
-                            });
+                                                                        // Manejar el evento del botón "Más observaciones"
+                                                                        $('#addObservationBtn_<?php echo $row['folio']; ?>').click(function() {
+                                                                            $('#additionalObservation_<?php echo $row['folio']; ?>').show();
+                                                                        });
 
-                            // Manejar el envío del formulario con ID único
-                            $('#formenviar_<?php echo $row['folio']; ?>').submit(function(e) {
-                                e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+                                                                        // Manejar el envío del formulario con ID único
+                                                                        $('#formenviar_<?php echo $row['folio']; ?>').submit(function(e) {
+                                                                            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
 
-                                // Guarda una referencia al formulario para usarla dentro de la función de éxito
-                                var form = $(this);
+                                                                            // Guarda una referencia al formulario para usarla dentro de la función de éxito
+                                                                            var form = $(this);
 
-                                // Crea un objeto FormData para enviar datos de formulario y archivos
-                                var formData = new FormData(form[0]);
+                                                                            // Crea un objeto FormData para enviar datos de formulario y archivos
+                                                                            var formData = new FormData(form[0]);
 
-                                // Realiza la solicitud AJAX
-                                $.ajax({
-                                    type: 'POST',
-                                    url: './update_files/updater.php',
-                                    data: formData, // Usa el objeto FormData en lugar de form.serialize()
-                                    enctype: 'multipart/form-data',
-                                    contentType: false, // Importante: no establezcas el tipo de contenido
-                                    processData: false, // Importante: no proceses los datos
-                                    success: function(response) {
-                                        // Muestra SweetAlert2 en caso de éxito
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'Éxito',
-                                            text: 'Reporte actualizado exitosamente',
-                                            showConfirmButton: true, // Muestra el botón de confirmación
-                                            confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
-                                        }).then((result) => {
-                                            // Si el usuario hace clic en el botón "Aceptar"
-                                            if (result.isConfirmed) {
-                                                // Recarga la página
-                                                location.reload(); // Recarga la página
-                                            }
-                                        });
+                                                                            // Realiza la solicitud AJAX
+                                                                            $.ajax({
+                                                                                type: 'POST',
+                                                                                url: './update_files/updater.php',
+                                                                                data: formData, // Usa el objeto FormData en lugar de form.serialize()
+                                                                                enctype: 'multipart/form-data',
+                                                                                contentType: false, // Importante: no establezcas el tipo de contenido
+                                                                                processData: false, // Importante: no proceses los datos
+                                                                                success: function(response) {
+                                                                                    // Muestra SweetAlert2 en caso de éxito
+                                                                                    Swal.fire({
+                                                                                        icon: 'success',
+                                                                                        title: 'Éxito',
+                                                                                        text: 'Reporte actualizado exitosamente',
+                                                                                        showConfirmButton: true, // Muestra el botón de confirmación
+                                                                                        confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+                                                                                    }).then((result) => {
+                                                                                        // Si el usuario hace clic en el botón "Aceptar"
+                                                                                        if (result.isConfirmed) {
+                                                                                            // Recarga la página
+                                                                                            location.reload(); // Recarga la página
+                                                                                        }
+                                                                                    });
 
-                                        // Puedes agregar más lógica aquí según la respuesta del servidor
-                                        console.log(response);
-                                    },
-                                    error: function(error) {
-                                        console.log(error);
-                                    }
-                                });
-                            });
-                        });
-                    </script>
-                    <div class="form-group mb-3">
-                        <label for="correo_corporativo" hidden>Correo corporativo</label>
-                        <input class="form-control" type="hidden" name="correo_corporativo" value="<?php echo $row['correo_corporativo']; ?>">
-                    </div>
+                                                                                    // Puedes agregar más lógica aquí según la respuesta del servidor
+                                                                                    console.log(response);
+                                                                                },
+                                                                                error: function(error) {
+                                                                                    console.log(error);
+                                                                                }
+                                                                            });
+                                                                        });
+                                                                    });
+                                                                </script>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="correo_corporativo" hidden>Correo corporativo</label>
+                                                                    <input class="form-control" type="hidden" name="correo_corporativo" value="<?php echo $row['correo_corporativo']; ?>">
+                                                                </div>
 
-                    <div class="form-group mb-3">
-                        <label for="file">Subir imagen</label>
-                        <input type="file" name="file" class="form-control" required>
-                    </div>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="file">Subir imagen</label>
+                                                                    <input type="file" name="file" class="form-control">
+                                                                </div>
 
-                    <?php if ($puesto == "Gerente") { ?>
-                        <div class="form-group mb-3">
-                            <label for="estado_g">Etapa</label>
-                            <select class="form-select" name="estado_g" id="estado_g" required>
-                                <option disabled selected value="">Selecciona la etapa</option>
-                                <option selected value="<?php echo $row['estado_g']; ?>"><?php echo $row['estado_g']; ?></option>
-                                <option value="Activo">Activo</option>
-                                <option value="Finalizado">Finalizado</option>
-                            </select>
-                        </div>
-                    <?php } ?>
+                                                                <?php if ($puesto == "Gerente") { ?>
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="estado_g">Etapa</label>
+                                                                        <select class="form-select" name="estado_g" id="estado_g" required>
+                                                                            <option disabled selected value="">Selecciona la etapa</option>
+                                                                            <option selected value="<?php echo $row['estado_g']; ?>"><?php echo $row['estado_g']; ?></option>
+                                                                            <option value="Activo">Activo</option>
+                                                                            <option value="Finalizado">Finalizado</option>
+                                                                        </select>
+                                                                    </div>
+                                                                <?php } ?>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <input type="submit" value="Guardar" class="btn btn-primary submitbutton" id="liveAlertBtn" name="submit">
-                    </div>
-                </form>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                    <input type="submit" value="Guardar" class="btn btn-primary submitbutton" id="liveAlertBtn" name="submit">
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -527,49 +527,48 @@ include 'navbar.php';
 </script>
 <script>
     $(document).ready(function() {
-    $(document).on('submit', '#formenviar', function(e) {
-        e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
+        $(document).on('submit', '#formenviar', function(e) {
+            e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
 
-        // Guarda una referencia al formulario para usarla dentro de la función de éxito
-        var form = $(this);
+            // Guarda una referencia al formulario para usarla dentro de la función de éxito
+            var form = $(this);
 
-        // Crea un objeto FormData para enviar datos de formulario y archivos
-        var formData = new FormData(form[0]);
+            // Crea un objeto FormData para enviar datos de formulario y archivos
+            var formData = new FormData(form[0]);
 
-        // Realiza la solicitud AJAX
-        $.ajax({
-            type: 'POST',
-            url: './update_files/updater.php',
-            data: formData, // Usa el objeto FormData en lugar de form.serialize()
-            enctype: 'multipart/form-data',
-            contentType: false, // Importante: no establezcas el tipo de contenido
-            processData: false, // Importante: no proceses los datos
-            success: function(response) {
-                // Muestra SweetAlert2 en caso de éxito
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Éxito',
-                    text: 'Reporte actualizado exitosamente',
-                    showConfirmButton: true, // Muestra el botón de confirmación
-                    confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
-                }).then((result) => {
-                    // Si el usuario hace clic en el botón "Aceptar"
-                    if (result.isConfirmed) {
-                        // Recarga la página
-                        location.reload(); // Recarga la página
-                    }
-                });
+            // Realiza la solicitud AJAX
+            $.ajax({
+                type: 'POST',
+                url: './update_files/updater.php',
+                data: formData, // Usa el objeto FormData en lugar de form.serialize()
+                enctype: 'multipart/form-data',
+                contentType: false, // Importante: no establezcas el tipo de contenido
+                processData: false, // Importante: no proceses los datos
+                success: function(response) {
+                    // Muestra SweetAlert2 en caso de éxito
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Reporte actualizado exitosamente',
+                        showConfirmButton: true, // Muestra el botón de confirmación
+                        confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
+                    }).then((result) => {
+                        // Si el usuario hace clic en el botón "Aceptar"
+                        if (result.isConfirmed) {
+                            // Recarga la página
+                            location.reload(); // Recarga la página
+                        }
+                    });
 
-                // Puedes agregar más lógica aquí según la respuesta del servidor
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
+                    // Puedes agregar más lógica aquí según la respuesta del servidor
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         });
     });
-});
-
 </script>
 
 <script>
