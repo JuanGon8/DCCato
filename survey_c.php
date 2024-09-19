@@ -2,7 +2,7 @@
 session_start();
 require 'conexion2.php';
 require 'conexion.php';
-$sql1 = "SELECT * FROM survey_emp2";
+$sql1 = "SELECT * FROM survey_emp22";
 $resultado1 = $mysqli->query($sql1);
 
 if (!isset($_SESSION['id'])) {
@@ -321,7 +321,7 @@ $data_json = json_encode([
         document.getElementById('copyButton').addEventListener('click', function() {
             // Crear un elemento de texto temporal
             var tempInput = document.createElement('input');
-            tempInput.value = 'https://dccato.dyndns.org/DCCato-survey/survey_q.php';
+            tempInput.value = 'https://dccato.dyndns.org/DCCato-survey/survey_c.php';
             document.body.appendChild(tempInput);
 
             // Seleccionar el texto del elemento

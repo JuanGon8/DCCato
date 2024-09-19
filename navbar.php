@@ -132,7 +132,13 @@ $puesto = $_SESSION['puesto'];
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-table"></i>
                             </div>
-                            Encuesta calidad de servicio
+                            Encuesta calidad de servicio de vigilancia
+                        </a>
+                        <a class="nav-link" href="survey_c.php">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-table"></i>
+                            </div>
+                            Encuesta calidad de servicio de limpieza
                         </a>
                         <?php } ?>
                         <?php if ($puesto == "Gerente") { ?>

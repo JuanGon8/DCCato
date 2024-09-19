@@ -145,7 +145,6 @@ include 'navbar.php';
                                             <option value="Recursos humanos">Recursos humanos</option>
                                             <option value="Sistemas">Sistemas</option>
                                             <option value="Ventas">Ventas</option>
-
                                         </select>
                                         <div class="invalid-feedback">Por favor, selecciona un departamento.</div>
                                     </div>
@@ -170,6 +169,19 @@ include 'navbar.php';
                                             <option value="ventas@gruposvm.com">Ventas</option>
                                         </select>
                                         <div class="invalid-feedback">Por favor, selecciona un departamento receptor.</div>
+                                        <input type="hidden" name="dep_r" id="dep_r" value="" hidden>
+                                        <script>
+                                            // Obtener el select y el input
+                                            const select = document.getElementById('departamento_receptor');
+                                            const input = document.getElementById('dep_r');
+
+                                            // Escuchar el cambio en el select
+                                            select.addEventListener('change', function() {
+                                                // Establecer en el input el texto de la opción seleccionada
+                                                const selectedText = select.options[select.selectedIndex].text;
+                                                input.value = selectedText;
+                                            });
+                                        </script>
                                     </div>
                                     <?php if ($puesto == "Gerente") { ?>
                                         <div class="form-group mb-3">
@@ -229,7 +241,7 @@ include 'navbar.php';
                         </thead>
                         <tbody>
                             <?php while ($row = $resultado13->fetch_assoc()) {
-                                if ($depto === "Sistemas" || $row['departamento'] === $depto) {
+                                if ($depto === "Sistemas" || $row['dep_r'] === $depto) {
                                     $completado = ($row['estado'] === 'Completado') ? 'completado' : '';
                                     $completado_g = ($row['estado_g'] === 'Finalizado') ? 'finalizado' : '';
                             ?>

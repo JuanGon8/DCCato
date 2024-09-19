@@ -218,7 +218,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     document.getElementById('copyButton').addEventListener('click', function() {
         // Crear un elemento de texto temporal
         var tempInput = document.createElement('input');
-        tempInput.value = 'https://dccato.dyndns.org:84/DCCato-survey/';
+        tempInput.value = 'https://dccato.dyndns.org/DCCato-survey/';
         document.body.appendChild(tempInput);
 
         // Seleccionar el texto del elemento

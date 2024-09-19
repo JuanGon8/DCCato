@@ -16,6 +16,7 @@ $fecha = $_POST['fecha'];
 $correo_corporativo = $_POST['correo_corporativo'];
 $departamento_receptor = $_POST['departamento_receptor'];
 $prioridad = $_POST['prioridad'];
+$dep_r = $_POST['dep_r'];
 
 // Obtener el folio desde JavaScript o generarlo si no se recibe
 $folio = isset($_POST['folio_js']) ? $_POST['folio_js'] : mt_rand(10000, 99999);
@@ -100,8 +101,8 @@ try {
     }
 
     // Insertar datos en la base de datos
-    $sql = "INSERT INTO alta_reportes (nombre, descripcion, departamento, fecha, correo_corporativo, prioridad)
-            VALUES ('$nombre', '$descripcion', '$departamento', '$fecha', '$correo_corporativo', '$prioridad')";
+    $sql = "INSERT INTO alta_reportes (nombre, descripcion, departamento, fecha, correo_corporativo, prioridad, dep_r)
+            VALUES ('$nombre', '$descripcion', '$departamento', '$fecha', '$correo_corporativo', '$prioridad', '$dep_r')";
 
     if ($conn->query($sql) === TRUE) {
         echo 'El reporte se ha enviado correctamente y se ha guardado en la base de datos. Folio: ' . $folio;
