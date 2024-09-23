@@ -111,7 +111,13 @@ $puesto = $_SESSION['puesto'];
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-table"></i>
                             </div>
-                            Reportes
+                            Reportes emitidos
+                        </a>
+                        <a class="nav-link" href="reportes_r.php">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-table"></i>
+                            </div>
+                            Reportes recibidos
                         </a>
 
                         <?php if ($depto == "Calidad" || $tipo_usuario == 1) { ?>

@@ -241,7 +241,7 @@ include 'navbar.php';
                         </thead>
                         <tbody>
                             <?php while ($row = $resultado13->fetch_assoc()) {
-                                if ($depto === "Sistemas" || $row['departamento'] === $depto) {
+                                if ($depto === "Sistemas" || $row['dep_r'] === $depto) {
                                     $completado = ($row['estado'] === 'Completado') ? 'completado' : '';
                                     $completado_g = ($row['estado_g'] === 'Finalizado') ? 'finalizado' : '';
                             ?>

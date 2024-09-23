@@ -167,8 +167,8 @@ $data_json = json_encode([
                     <h2>Frecuencia y desempeño</h2>
                     <canvas id="chartQuestion5" width="3vh" height="1vh"></canvas>
 
-                    <h2>Recomendación SVM</h2>
-                    <canvas id="chartQuestion6" width="3vh" height="1vh"></canvas>
+                    <!-- <h2>Recomendación SVM</h2>
+                    <canvas id="chartQuestion6" width="3vh" height="1vh"></canvas> -->
                     
                 </div>
             </div>
