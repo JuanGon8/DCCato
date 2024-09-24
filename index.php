@@ -130,7 +130,7 @@
             particlesJS('particles-js', {
         "particles": {
             "number": {
-            "value": 150,
+            "value": 50,
             "density": {
                 "enable": true,
                 "value_area": 800
@@ -140,7 +140,7 @@
             "value": "#ffffff"
             },
             "shape": {
-            "type": "circle",
+            "type": "image",
             "stroke": {
                 "width": 0,
                 "color": "#000000"
@@ -149,7 +149,7 @@
                 "nb_sides": 5
             },
             "image": {
-                "src": "img/github.svg",
+                "src": "./assets/img/gorro.webp",
                 "width": 100,
                 "height": 100
             }
@@ -165,7 +165,7 @@
             }
             },
             "size": {
-            "value": 3,
+            "value": 50,
             "random": true,
             "anim": {
                 "enable": false,
