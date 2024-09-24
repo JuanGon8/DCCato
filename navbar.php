@@ -150,7 +150,7 @@ $puesto = $_SESSION['puesto'];
                         <?php if ($puesto == "Gerente") { ?>
                         <div class="sb-sidenav-menu-heading">Módulos de usuarios</div>
                         <?php } ?>
-                        <?php if ($puesto == "Gerente" && $tipo_usuario == 1) { ?>
+                        <?php if ($depto == "Admin" || $depto == "Gerencia calidad") { ?>
                         <a class="nav-link" href="usuarios.php">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-table"></i>

@@ -526,6 +526,145 @@ $(document).ready(function () {
   });
 });
 
+
+$(document).ready(function () {
+  $('#examplerr').DataTable({
+      language: {
+          "buttons": {
+              "colvis": "Ocultar / Mostrar",
+              "colvisRestore": "Restablecer filtros"
+          },
+          select: {
+              rows: {
+                  _: "Seleccionó %d filas",
+                  0: "Click a row to select it",
+                  1: "Seleccionó 1 fila"
+              }
+          },
+          url: "https://cdn.datatables.net/plug-ins/1.10.18/i18n/Spanish.json",
+      },
+      responsive: true,
+      dom: 'QBfrtilp',
+      order: [
+          [2, 'desc']
+      ],
+      buttons: [
+          {
+              extend: 'colvis',
+              postfixButtons: ['colvisRestore', 'colvisGroup']
+          },
+          {
+              extend: 'excelHtml5',
+              text: '<i class="fas fa-file-excel"></i> ',
+              titleAttr: 'Exportar a Excel',
+              className: 'btn btn-success',
+              exportOptions: {
+                  columns: ':not(.acciones):visible'
+              }
+          },
+          {
+              extend: 'pdfHtml5',
+              text: '<i class="fas fa-file-pdf"></i> ',
+              titleAttr: 'Exportar a PDF',
+              className: 'btn btn-danger',
+          },
+          {
+              extend: 'print',
+              text: '<i class="fa fa-print"></i> ',
+              titleAttr: 'Imprimir',
+              className: 'btn btn-info'
+          },
+      ],
+      searchBuilder: {
+          conditions: {
+              'date-range': {
+                  id: 'date-range',
+                  name: 'Fecha',
+                  inputs: ['from', 'to'],
+                  value: function (input) {
+                      return input[0] + ' to ' + input[1];
+                  },
+                  isInputValid: function (input) {
+                      return (input.length === 2) && (input[0] !== '') && (input[1] !== '');
+                  },
+              }
+          },
+          i18n: {
+              "add": "Filtrar",
+              "button": {
+                  "0": "Borrar Todo",
+              },
+              "title": {
+                  0: "Condiciones",
+                  "_": "Condiciones",
+              },
+              "logicAnd": "Y",
+              "logicOr": "O",
+              "clearAll": "Borrar todos los filtros",
+              "value": "Valores",
+              "condition": "Condición",
+              "conditions": {
+                  "date": {
+                      "before": "Antes",
+                      "between": "Entre",
+                      "empty": "Vacío",
+                      "equals": "Igual a",
+                      "notBetween": "No entre",
+                      "not": "Diferente de",
+                      "after": "Después",
+                      "notEmpty": "No Vacío"
+                  },
+                  "number": {
+                      "between": "Entre",
+                      "equals": "Igual a",
+                      "gt": "Mayor a",
+                      "gte": "Mayor o igual a",
+                      "lt": "Menor que",
+                      "lte": "Menor o igual que",
+                      "notBetween": "No entre",
+                      "notEmpty": "No vacío",
+                      "not": "Diferente de",
+                      "empty": "Vacío"
+                  },
+                  "string": {
+                      "contains": "Contiene",
+                      "empty": "Vacío",
+                      "endsWith": "Termina en",
+                      "equals": "Igual a",
+                      "startsWith": "Empieza con",
+                      "not": "Diferente de",
+                      "notContains": "No Contiene",
+                      "notStartsWith": "No empieza con",
+                      "notEndsWith": "No termina con",
+                      "notEmpty": "No Vacío"
+                  },
+                  "array": {
+                      "not": "Diferente de",
+                      "equals": "Igual",
+                      "empty": "Vacío",
+                      "contains": "Contiene",
+                      "notEmpty": "No Vacío",
+                      "without": "Sin"
+                  }
+              },
+              "data": "Consultas",
+              "deleteTitle": "Eliminar regla de filtrado",
+          },
+      },
+      columnDefs: [
+          {
+              targets: 1,
+              render: function (data, type, row) {
+                  if (type === 'display') {
+                      var folio = row[2];
+                      return '<button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_' + folio + '" onclick="cargarDatos();"><i class="fa fa-pencil"></i></button>';
+                  }
+                  return data;
+              }
+          }
+      ]
+  });
+});
 $(document).ready(function () {
   $('#exampler').DataTable({
       language: {
@@ -656,7 +795,7 @@ $(document).ready(function () {
               render: function (data, type, row) {
                   if (type === 'display') {
                       var folio = row[2];
-                      return '<button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_' + folio + '" onclick="cargarDatos();"><i class="fa fa-pencil"></i></button>';
+                      return '<button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_' + folio + '" onclick="cargarDatos();"><i class="fa-solid fa-eye"></i></i></button>';
                   }
                   return data;
               }

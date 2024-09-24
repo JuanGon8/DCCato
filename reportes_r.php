@@ -15,7 +15,7 @@ $puesto = $_SESSION['puesto'];
 include 'navbar.php';
 ?>
 <div id="layoutSidenav_content">
-    <main>
+    <main class="">
         <script src="js/main_r.js"></script>
         <link href="datatables/DataTables-1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
         <link href="datatables/AutoFill-2.6.0/css/autoFill.bootstrap5.css" rel="stylesheet">
@@ -215,7 +215,7 @@ include 'navbar.php';
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered" id="exampler" width="100%" cellspacing="0">
+                    <table class="table table-striped table-bordered" id="examplerr" width="100%" cellspacing="0">
                         <thead class="table-dark">
                             <tr class="tdh">
                                 <th class="acciones">Más información</th>
@@ -241,7 +241,10 @@ include 'navbar.php';
                         </thead>
                         <tbody>
                             <?php while ($row = $resultado13->fetch_assoc()) {
-                                if ($depto === "Sistemas" || $row['dep_r'] === $depto) {
+                               if ($depto === "Admin" || 
+                               $row['dep_r'] === $depto || 
+                               ($depto === "Gerencia calidad" && 
+                               ($row['dep_r'] === "Calidad" || $row['dep_r'] === "Gerencia calidad"))) {
                                     $completado = ($row['estado'] === 'Completado') ? 'completado' : '';
                                     $completado_g = ($row['estado_g'] === 'Finalizado') ? 'finalizado' : '';
                             ?>
@@ -357,7 +360,7 @@ include 'navbar.php';
                                                                 <input type="hidden" name="folio" value="<?php echo $row['folio']; ?>">
                                                                 <div class="form-group mb-3">
                                                                     <label for="asignado">Asignado a</label>
-                                                                    <select name="asignado" class="form-select asignado">
+                                                                    <select name="asignado" class="form-select asignado" data-selected="<?php echo isset($row['asignado']) ? htmlspecialchars($row['asignado']) : ''; ?>">
                                                                         <!-- Las opciones se llenarán aquí -->
                                                                     </select>
                                                                 </div>
@@ -379,7 +382,7 @@ include 'navbar.php';
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="tipo_servicio">Tipo de servicio</label>
-                                                                    <select name="tipo_servicio" class="form-select tipo-servicio">
+                                                                    <select name="tipo_servicio" class="form-select tipo-servicio" data-selected="<?php echo isset($row['tipo_servicio']) ? htmlspecialchars($row['tipo_servicio']) : ''; ?>">
                                                                         <!-- Las opciones se llenarán aquí -->
                                                                     </select>
                                                                 </div>
@@ -770,12 +773,21 @@ include 'navbar.php';
                 $('.asignado').each(function() {
                     var $select = $(this);
                     $select.empty(); // Limpiar opciones existentes
+
+                    // Agregar las opciones
                     $.each(response, function(index, usuario) {
-                        $select.append($('<option>', {
+                        var $option = $('<option>', {
                             value: usuario.nombre,
                             text: usuario.nombre
-                        }));
+                        });
+                        $select.append($option);
                     });
+
+                    // Marcar el valor guardado como seleccionado
+                    var selectedValue = $select.data('selected'); // Obtener el valor guardado
+                    if (selectedValue) {
+                        $select.val(selectedValue); // Establecer el valor seleccionado
+                    }
                 });
             },
             error: function(xhr, status, error) {
@@ -792,12 +804,24 @@ include 'navbar.php';
                 $('.tipo-servicio').each(function() {
                     var $select = $(this);
                     $select.empty(); // Limpiar opciones existentes
+
+                    // Agregar las opciones
                     if (data.length > 0) {
                         $.each(data, function(index, value) {
-                            $select.append('<option value="' + value + '">' + value + '</option>');
+                            var $option = $('<option>', {
+                                value: value,
+                                text: value
+                            });
+                            $select.append($option);
                         });
                     } else {
                         $select.append('<option value="">No hay servicios disponibles</option>');
+                    }
+
+                    // Marcar el valor guardado como seleccionado
+                    var selectedValue = $select.data('selected'); // Obtener el valor guardado
+                    if (selectedValue) {
+                        $select.val(selectedValue); // Establecer el valor seleccionado
                     }
                 });
             },
@@ -812,6 +836,8 @@ include 'navbar.php';
         cargarDatos();
     });
 </script>
+
+
 <script>
     document.getElementById('addObservationBtn').addEventListener('click', function() {
         document.getElementById('additionalObservation').style.display = 'block';

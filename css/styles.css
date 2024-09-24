@@ -62,7 +62,7 @@
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
-  --bs-body-bg: #fff;
+  --bs-body-bg: #02284e;
   --bs-border-width: 1px;
   --bs-border-style: solid;
   --bs-border-color: #dee2e6;
@@ -90,6 +90,8 @@
     scroll-behavior: smooth;
   }
 }
+main{
+  background-color: #EFF1F4;}
 
 body {
   margin: 0;
@@ -99,7 +101,7 @@ body {
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
   text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
+  background-color: var(--bs-body-color);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -4221,6 +4223,7 @@ textarea.form-control-lg {
   flex: 1 1 auto;
   padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
   color: var(--bs-card-color);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .card-title {
@@ -11370,4 +11373,7 @@ th{
 }
 .wcanvas{
   width: 300px;
+}
+#main-bg{
+  background-color: transparent;
 }

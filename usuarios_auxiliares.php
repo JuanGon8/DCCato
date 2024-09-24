@@ -86,7 +86,7 @@ include 'navbar.php';
                                         </thead>
                                         <tbody>
                                             <?php while ($row = $resultado8->fetch_assoc()) { 
-                                                if ($depto === "Sistemas" || $row['depto'] === $depto) {?>
+                                                if ($depto === "Admin" || $row['depto'] === $depto) {?>
                                                 <tr id="row_<?php echo $row['id']; ?>">
                                                     <td><?php echo $row['id']; ?></td>
                                                     <td><?php echo $row['nombre']; ?></td>

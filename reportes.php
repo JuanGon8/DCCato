@@ -197,7 +197,7 @@ include 'navbar.php';
                                     <div class="form-group mb-3">
                                         <label for="fecha">Hora del reporte</label>
                                         <div class="input-group">
-                                            <input type="datetime-local" class="form-control" id="fecha" name="fecha">
+                                            <input type="datetime-local" class="form-control" id="fecha" name="fecha" readonly>
                                             <button type="button" class="btn btn-secondary" id="btnActualizarHora"><i class="fa-solid fa-arrows-rotate"></i></button>
                                         </div>
                                     </div>
@@ -241,7 +241,12 @@ include 'navbar.php';
                         </thead>
                         <tbody>
                             <?php while ($row = $resultado13->fetch_assoc()) {
-                                if ($depto === "Sistemas" || $row['departamento'] === $depto) {
+                                if (
+                                    $depto === "Admin" ||
+                                    $row['departamento'] === $depto ||
+                                    ($depto === "Gerencia calidad" &&
+                                        ($row['departamento'] === "Calidad" || $row['departamento'] === "Gerencia calidad"))
+                                ) {
                                     $completado = ($row['estado'] === 'Completado') ? 'completado' : '';
                                     $completado_g = ($row['estado_g'] === 'Finalizado') ? 'finalizado' : '';
                             ?>
@@ -357,7 +362,8 @@ include 'navbar.php';
                                                                 <input type="hidden" name="folio" value="<?php echo $row['folio']; ?>">
                                                                 <div class="form-group mb-3">
                                                                     <label for="asignado">Asignado a</label>
-                                                                    <select name="asignado" class="form-select asignado">
+                                                                    <select name="asignado" class="form-select asignado" disabled>
+                                                                    <option selected value="<?php echo $row['asignado']; ?>"><?php echo $row['asignado']; ?></option>
                                                                         <!-- Las opciones se llenarán aquí -->
                                                                     </select>
                                                                 </div>
@@ -366,27 +372,28 @@ include 'navbar.php';
                                                                     <label for="diagnostico_t">Trabajo realizado</label>
                                                                     <textarea class="form-control" name="diagnostico_t" rows="4" <?php echo !empty($row['diagnostico_t']) ? 'readonly' : ''; ?>><?php echo $row['diagnostico_t']; ?></textarea>
                                                                 </div>
-                                                                <div class="form-group mb-3" id="additionalObservation_<?php echo $row['folio']; ?>" style="display: none;">
+                                                                <!-- <div class="form-group mb-3" id="additionalObservation_<?php echo $row['folio']; ?>" style="display: none;">
                                                                     <label for="new_observation">Nueva Observación</label>
                                                                     <input class="form-control" type="text" name="new_observation" id="new_observation_<?php echo $row['folio']; ?>">
-                                                                </div>
-                                                                <button type="button" id="addObservationBtn_<?php echo $row['folio']; ?>" class="btn btn-primary">Más observaciones</button>
+                                                                </div> -->
+                                                                <!-- <button type="button" id="addObservationBtn_<?php echo $row['folio']; ?>" class="btn btn-primary">Más observaciones</button> -->
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="materiales">Materiales utilizados</label>
-                                                                    <input class="form-control" type="text" name="materiales" value="<?php echo $row['materiales']; ?>">
+                                                                    <input class="form-control" type="text" name="materiales" value="<?php echo $row['materiales']; ?>" readonly>
                                                                 </div>
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="tipo_servicio">Tipo de servicio</label>
-                                                                    <select name="tipo_servicio" class="form-select tipo-servicio">
+                                                                    <select name="tipo_servicio" class="form-select tipo-servicio" disabled>
+                                                                    <option selected value="<?php echo $row['tipo_servicio']; ?>"><?php echo $row['tipo_servicio']; ?></option>
                                                                         <!-- Las opciones se llenarán aquí -->
                                                                     </select>
                                                                 </div>
 
                                                                 <div class="form-group mb-3">
                                                                     <label for="estado">Estado</label>
-                                                                    <select name="estado" id="estado_<?php echo $row['folio']; ?>" class="form-select">
+                                                                    <select name="estado" id="estado_<?php echo $row['folio']; ?>" class="form-select" disabled>
                                                                         <option selected value="<?php echo $row['estado']; ?>"><?php echo $row['estado']; ?></option>
                                                                         <option value="Completado">Completado</option>
                                                                         <option value="En proceso">En proceso</option>
@@ -394,11 +401,11 @@ include 'navbar.php';
                                                                 </div>
                                                                 <div id="fecha-container_<?php echo $row['folio']; ?>" class="form-group mb-3" style="display:none;">
                                                                     <label for="fecha_proceso">Fecha en proceso</label>
-                                                                    <input type="datetime-local" class="form-control" id="fecha_proceso_<?php echo $row['folio']; ?>" name="fecha_proceso" value="<?php echo date('Y-m-d\TH:i', strtotime($row['fecha_proceso'])); ?>">
+                                                                    <input type="datetime-local" class="form-control" id="fecha_proceso_<?php echo $row['folio']; ?>" name="fecha_proceso" value="<?php echo date('Y-m-d\TH:i', strtotime($row['fecha_proceso'])); ?>" readonly>
                                                                 </div>
                                                                 <div id="hora-container_<?php echo $row['folio']; ?>" class="form-group mb-3" style="display:none;">
                                                                     <label for="hora_concluido">Fecha concluido</label>
-                                                                    <input type="datetime-local" class="form-control" id="hora_concluido_<?php echo $row['folio']; ?>" name="hora_concluido" value="<?php echo date('Y-m-d\TH:i', strtotime($row['hora_concluido'])); ?>">
+                                                                    <input type="datetime-local" class="form-control" id="hora_concluido_<?php echo $row['folio']; ?>" name="hora_concluido" value="<?php echo date('Y-m-d\TH:i', strtotime($row['hora_concluido'])); ?>" readonly>
                                                                 </div>
                                                                 <script>
                                                                     $(document).ready(function() {
@@ -444,64 +451,35 @@ include 'navbar.php';
                                                                             var formData = new FormData(form[0]);
 
                                                                             // Realiza la solicitud AJAX
-                                                                            $.ajax({
-                                                                                type: 'POST',
-                                                                                url: './update_files/updater.php',
-                                                                                data: formData, // Usa el objeto FormData en lugar de form.serialize()
-                                                                                enctype: 'multipart/form-data',
-                                                                                contentType: false, // Importante: no establezcas el tipo de contenido
-                                                                                processData: false, // Importante: no proceses los datos
-                                                                                success: function(response) {
-                                                                                    // Muestra SweetAlert2 en caso de éxito
-                                                                                    Swal.fire({
-                                                                                        icon: 'success',
-                                                                                        title: 'Éxito',
-                                                                                        text: 'Reporte actualizado exitosamente',
-                                                                                        showConfirmButton: true, // Muestra el botón de confirmación
-                                                                                        confirmButtonText: 'Aceptar' // Personaliza el texto del botón de confirmación
-                                                                                    }).then((result) => {
-                                                                                        // Si el usuario hace clic en el botón "Aceptar"
-                                                                                        if (result.isConfirmed) {
-                                                                                            // Recarga la página
-                                                                                            location.reload(); // Recarga la página
-                                                                                        }
-                                                                                    });
 
-                                                                                    // Puedes agregar más lógica aquí según la respuesta del servidor
-                                                                                    console.log(response);
-                                                                                },
-                                                                                error: function(error) {
-                                                                                    console.log(error);
-                                                                                }
-                                                                            });
                                                                         });
                                                                     });
                                                                 </script>
                                                                 <div class="form-group mb-3">
                                                                     <label for="correo_corporativo" hidden>Correo corporativo</label>
-                                                                    <input class="form-control" type="hidden" name="correo_corporativo" value="<?php echo $row['correo_corporativo']; ?>">
+                                                                    <input class="form-control" type="hidden" name="correo_corporativo" value="<?php echo $row['correo_corporativo']; ?>" readonly>
                                                                 </div>
 
                                                                 <div class="form-group mb-3">
-                                                                    <label for="file">Subir imagen</label>
-                                                                    <input type="file" name="file" class="form-control">
+                                                                    <label for="file">Subir imagen</label> <br>
+                                                                    <button onclick="abrirImagen('<?php echo $row['imagen']; ?>')" class="btn btn-secondary btn-sm">Ver Imagen</button>
                                                                 </div>
 
-                                                                <?php if ($puesto == "Gerente") { ?>
-                                                                    <div class="form-group mb-3">
-                                                                        <label for="estado_g">Etapa</label>
-                                                                        <select class="form-select" name="estado_g" id="estado_g" required>
-                                                                            <option disabled selected value="">Selecciona la etapa</option>
-                                                                            <option selected value="<?php echo $row['estado_g']; ?>"><?php echo $row['estado_g']; ?></option>
-                                                                            <option value="Activo">Activo</option>
-                                                                            <option value="Finalizado">Finalizado</option>
-                                                                        </select>
-                                                                    </div>
-                                                                <?php } ?>
+
+                                                                <div class="form-group mb-3">
+                                                                    <label for="estado_g">Etapa</label>
+                                                                    <select class="form-select" name="estado_g" id="estado_g" required disabled>
+
+                                                                        <option selected value="<?php echo $row['estado_g']; ?>"><?php echo $row['estado_g']; ?></option>
+                                                                        <option value="Activo">Activo</option>
+                                                                        <option value="Finalizado">Finalizado</option>
+                                                                    </select>
+                                                                </div>
+
 
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                                    <input type="submit" value="Guardar" class="btn btn-primary submitbutton" id="liveAlertBtn" name="submit">
+                                                                    <!-- <input type="submit" value="Guardar" class="btn btn-primary submitbutton" id="liveAlertBtn" name="submit"> -->
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -727,8 +705,8 @@ include 'navbar.php';
             const completados = document.querySelectorAll('tr.completado');
 
             completados.forEach(function(row) {
-                // Selecciona todas las celdas dentro de la fila, excepto la primera
-                const cells = row.querySelectorAll('td:not(:first-child)');
+                // Selecciona todas las celdas dentro de la fila, excepto la primera, segunda y última columna
+                const cells = row.querySelectorAll('td:not(:nth-child(1)):not(:nth-child(2)):not(:last-child)');
 
                 cells.forEach(function(cell) {
                     // Deshabilita la celda (puedes ajustar según tus necesidades)
@@ -739,16 +717,17 @@ include 'navbar.php';
         }
     });
 </script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Solo ejecuta el script si el puesto es "Auxiliar"
+        // Solo ejecuta el script si el puesto es "Gerente"
         if (puesto === 'Gerente') {
-            // Selecciona todas las filas con la clase "completado"
+            // Selecciona todas las filas con la clase "finalizado"
             const finalizado = document.querySelectorAll('tr.finalizado');
 
             finalizado.forEach(function(row) {
-                // Selecciona todas las celdas dentro de la fila, excepto la primera
-                const cells = row.querySelectorAll('td:not(:first-child)');
+                // Selecciona todas las celdas dentro de la fila, excepto la primera, segunda y última columna
+                const cells = row.querySelectorAll('td:not(:nth-child(1)):not(:nth-child(2)):not(:last-child)');
 
                 cells.forEach(function(cell) {
                     // Deshabilita la celda (puedes ajustar según tus necesidades)
@@ -759,59 +738,7 @@ include 'navbar.php';
         }
     });
 </script>
-<script>
-    function cargarDatos() {
-        // Cargar usuarios auxiliares
-        $.ajax({
-            url: 'get_usuarios_auxiliares.php',
-            method: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                $('.asignado').each(function() {
-                    var $select = $(this);
-                    $select.empty(); // Limpiar opciones existentes
-                    $.each(response, function(index, usuario) {
-                        $select.append($('<option>', {
-                            value: usuario.nombre,
-                            text: usuario.nombre
-                        }));
-                    });
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error('Error fetching usuarios auxiliares:', error);
-            }
-        });
 
-        // Cargar tipos de servicio
-        $.ajax({
-            url: 'get_servicios.php',
-            method: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                $('.tipo-servicio').each(function() {
-                    var $select = $(this);
-                    $select.empty(); // Limpiar opciones existentes
-                    if (data.length > 0) {
-                        $.each(data, function(index, value) {
-                            $select.append('<option value="' + value + '">' + value + '</option>');
-                        });
-                    } else {
-                        $select.append('<option value="">No hay servicios disponibles</option>');
-                    }
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error('Error al cargar los servicios:', error);
-            }
-        });
-    }
-
-    // Llama a la función para cargar los datos al cargar la página
-    $(document).ready(function() {
-        cargarDatos();
-    });
-</script>
 <script>
     document.getElementById('addObservationBtn').addEventListener('click', function() {
         document.getElementById('additionalObservation').style.display = 'block';

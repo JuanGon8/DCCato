@@ -71,7 +71,7 @@
     <div id="particles-js"></div>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
-                <main>
+                <main id="main-bg">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
